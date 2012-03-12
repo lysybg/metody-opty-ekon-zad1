@@ -548,7 +548,9 @@ public class NewJFrame extends javax.swing.JFrame {
     	/**
     	 * OBLICZENIA DO RYSOWANIA FUNKCJI
     	 */
-    	//FUNKCJA CELU
+    	//--------------------------------------------------------------------------------------------------------------------
+    	//-------------------------------------------------FUNKCJA CELU-------------------------------------------------------
+    	//--------------------------------------------------------------------------------------------------------------------
     	double[][] tabcelu = new double[2][6];
     	//x1 do wyliczenia x2
     	tabcelu[0][0]=0.0;
@@ -566,44 +568,128 @@ public class NewJFrame extends javax.swing.JFrame {
     	tabcelu[1][4]=(ac/bc)*tabcelu[0][4];
     	tabcelu[1][5]=(ac/bc)*tabcelu[0][5];
     	
-    	//FUNKCJA 1
+    	//---------------------------------------------------------------------------------------------------------------
+    	//----------------------------------------------FUNKCJA 1--------------------------------------------------------
+    	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab1 = new double[2][6];
+    	tab1[0][0]=0.0;
+    	tab1[0][1]=5.0;
+    	tab1[0][2]=10.0;
+    	tab1[0][3]=15.0;
+    	tab1[0][4]=20.0;
+    	tab1[0][5]=25.0;
     	
+    	//wyliczanie x2
+    	if(b1<0){
+    		if(znak1=="<="){
+    			 znak1 = ">=";
+    		}
+    		if(znak1==">="){
+   			 znak1 = "<=";
+    		}
+    	}
+    	tab1[1][0]=(a1/b1)*tab1[0][0]+(c1/b1);
+    	tab1[1][1]=(a1/b1)*tab1[0][1]+(c1/b1);
+    	tab1[1][2]=(a1/b1)*tab1[0][2]+(c1/b1);
+    	tab1[1][3]=(a1/b1)*tab1[0][3]+(c1/b1);
+    	tab1[1][4]=(a1/b1)*tab1[0][4]+(c1/b1);
+    	tab1[1][5]=(a1/b1)*tab1[0][5]+(c1/b1);
     	
-    	//FUNKCJA 2
+    	//---------------------------------------------------------------------------------------------------------------
+    	//---------------------------------------FUNKCJA 2---------------------------------------------------------------
+    	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab2 = new double[2][6];
+    	tab2[0][0]=0.0;
+    	tab2[0][1]=5.0;
+    	tab2[0][2]=10.0;
+    	tab2[0][3]=15.0;
+    	tab2[0][4]=20.0;
+    	tab2[0][5]=25.0;
+    	
+    	//wyliczanie x2
+    	if(b2<0){
+    		if(znak2=="<="){
+    			 znak2 = ">=";
+    		}
+    		if(znak2==">="){
+   			 znak2 = "<=";
+    		}
+    	}
+    	tab2[1][0]=(a2/b2)*tab2[0][0]+(c2/b2);
+    	tab2[1][1]=(a2/b2)*tab2[0][1]+(c2/b2);
+    	tab2[1][2]=(a2/b2)*tab2[0][2]+(c2/b2);
+    	tab2[1][3]=(a2/b2)*tab2[0][3]+(c2/b2);
+    	tab2[1][4]=(a2/b2)*tab2[0][4]+(c2/b2);
+    	tab2[1][5]=(a2/b2)*tab2[0][5]+(c2/b2);
     	
     	
-    	
-    	//FUNKCJA 3
+    	//---------------------------------------------------------------------------------------------------------------
+    	//---------------------------------------FUNKCJA 3---------------------------------------------------------------
+    	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab3 = new double[2][6];
+    	tab3[0][0]=0.0;
+    	tab3[0][1]=5.0;
+    	tab3[0][2]=10.0;
+    	tab3[0][3]=15.0;
+    	tab3[0][4]=20.0;
+    	tab3[0][5]=25.0;
     	
+    	//wyliczanie x2
+    	if(b3<0){
+    		if(znak3=="<="){
+    			 znak3 = ">=";
+    		}
+    		if(znak3==">="){
+   			 znak3 = "<=";
+    		}
+    	}
+    	tab3[1][0]=(a3/b3)*tab3[0][0]+(c3/b3);
+    	tab3[1][1]=(a3/b3)*tab3[0][1]+(c3/b3);
+    	tab3[1][2]=(a3/b3)*tab3[0][2]+(c3/b3);
+    	tab3[1][3]=(a3/b3)*tab3[0][3]+(c3/b3);
+    	tab3[1][4]=(a3/b3)*tab3[0][4]+(c3/b3);
+    	tab3[1][5]=(a3/b3)*tab3[0][5]+(c3/b3);
     
     	/**
     	 * RYSOWANIE WYKRESU
     	 */
-    	XYSeries series = new XYSeries("f1");
-		series.add(0, 2);
-		series.add(1, 0);
-		series.add(2, -2);
+    	XYSeries series = new XYSeries("funkcja 1");
+		series.add(tab1[0][0], tab1[1][0]);
+		series.add(tab1[0][1], tab1[1][1]);
+		series.add(tab1[0][2], tab1[1][2]);
+		series.add(tab1[0][3], tab1[1][3]);
+		series.add(tab1[0][4], tab1[1][4]);
+		series.add(tab1[0][5], tab1[1][5]);
 		
-		XYSeries series2 = new XYSeries("f2");
-		series2.add(0, 6);
-		series2.add(6, 0);
-		series2.add(8,-2);
+		XYSeries series2 = new XYSeries("funkcja 2");
+		series2.add(tab2[0][0], tab2[1][0]);
+		series2.add(tab2[0][1], tab2[1][1]);
+		series2.add(tab2[0][2], tab2[1][2]);
+		series2.add(tab2[0][3], tab2[1][3]);
+		series2.add(tab2[0][4], tab2[1][4]);
+		series2.add(tab2[0][5], tab2[1][5]);
 		
-		XYSeries series3 = new XYSeries("funkcja celu");
-		series3.add(tabcelu[0][0], tabcelu[1][0]);
-		series3.add(tabcelu[0][1], tabcelu[1][1]);
-		series3.add(tabcelu[0][2], tabcelu[1][2]);
-		series3.add(tabcelu[0][3], tabcelu[1][3]);
-		series3.add(tabcelu[0][4], tabcelu[1][4]);
-		series3.add(tabcelu[0][5], tabcelu[1][5]);
+		XYSeries series3 = new XYSeries("funkcja 3");
+		series3.add(tab3[0][0], tab3[1][0]);
+		series3.add(tab3[0][1], tab3[1][1]);
+		series3.add(tab3[0][2], tab3[1][2]);
+		series3.add(tab3[0][3], tab3[1][3]);
+		series3.add(tab3[0][4], tab3[1][4]);
+		series3.add(tab3[0][5], tab3[1][5]);
+		
+		XYSeries seriesCEL = new XYSeries("funkcja celu");
+		seriesCEL.add(tabcelu[0][0], tabcelu[1][0]);
+		seriesCEL.add(tabcelu[0][1], tabcelu[1][1]);
+		seriesCEL.add(tabcelu[0][2], tabcelu[1][2]);
+		seriesCEL.add(tabcelu[0][3], tabcelu[1][3]);
+		seriesCEL.add(tabcelu[0][4], tabcelu[1][4]);
+		seriesCEL.add(tabcelu[0][5], tabcelu[1][5]);
 		
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(series);
 		dataset.addSeries(series2);
 		dataset.addSeries(series3);
+		dataset.addSeries(seriesCEL);
 		
 		//Tworzymy wykres XY
 		JFreeChart chart = ChartFactory.createXYLineChart(

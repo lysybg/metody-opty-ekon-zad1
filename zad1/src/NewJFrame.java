@@ -520,8 +520,68 @@ public class NewJFrame extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+    	/**
+    	 * ZMIENNE FUNKCJI
+    	 */
+    	//funkcja celu
+    	double ac=2.0;
+    	double bc=-6.0;
+    	
+    	//funkcja 1
+    	double a1=3.0;
+    	double b1=2.0;
+    	double c1=6.0;
+    	String znak1 = "<=";
+    	
+    	//funkcja 2
+    	double a2=1.0;
+    	double b2=-1.0;
+    	double c2=-1.0;
+    	String znak2 = ">=";
+    	
+    	//funkcja 3
+    	double a3=-1.0;
+    	double b3=-2.0;
+    	double c3=1.0;
+    	String znak3 = ">=";
+    	
+    	/**
+    	 * OBLICZENIA DO RYSOWANIA FUNKCJI
+    	 */
+    	//FUNKCJA CELU
+    	double[][] tabcelu = new double[2][6];
+    	//x1 do wyliczenia x2
+    	tabcelu[0][0]=0.0;
+    	tabcelu[0][1]=5.0;
+    	tabcelu[0][2]=10.0;
+    	tabcelu[0][3]=15.0;
+    	tabcelu[0][4]=20.0;
+    	tabcelu[0][5]=25.0;
+    	
+    	//wyliczanie x2
+    	tabcelu[1][0]=(ac/bc)*tabcelu[0][0];
+    	tabcelu[1][1]=(ac/bc)*tabcelu[0][1];
+    	tabcelu[1][2]=(ac/bc)*tabcelu[0][2];
+    	tabcelu[1][3]=(ac/bc)*tabcelu[0][3];
+    	tabcelu[1][4]=(ac/bc)*tabcelu[0][4];
+    	tabcelu[1][5]=(ac/bc)*tabcelu[0][5];
+    	
+    	//FUNKCJA 1
+    	double[][] tab1 = new double[2][6];
     	
     	
+    	//FUNKCJA 2
+    	double[][] tab2 = new double[2][6];
+    	
+    	
+    	
+    	//FUNKCJA 3
+    	double[][] tab3 = new double[2][6];
+    	
+    
+    	/**
+    	 * RYSOWANIE WYKRESU
+    	 */
     	XYSeries series = new XYSeries("f1");
 		series.add(0, 2);
 		series.add(1, 0);
@@ -533,9 +593,12 @@ public class NewJFrame extends javax.swing.JFrame {
 		series2.add(8,-2);
 		
 		XYSeries series3 = new XYSeries("funkcja celu");
-		series3.add(5, 3);
-		series3.add(6, 0);
-		series3.add(7, -3);
+		series3.add(tabcelu[0][0], tabcelu[1][0]);
+		series3.add(tabcelu[0][1], tabcelu[1][1]);
+		series3.add(tabcelu[0][2], tabcelu[1][2]);
+		series3.add(tabcelu[0][3], tabcelu[1][3]);
+		series3.add(tabcelu[0][4], tabcelu[1][4]);
+		series3.add(tabcelu[0][5], tabcelu[1][5]);
 		
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(series);

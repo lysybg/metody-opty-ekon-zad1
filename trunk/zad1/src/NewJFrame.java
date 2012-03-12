@@ -554,11 +554,11 @@ public class NewJFrame extends javax.swing.JFrame {
     	double[][] tabcelu = new double[2][6];
     	//x1 do wyliczenia x2
     	tabcelu[0][0]=0.0;
-    	tabcelu[0][1]=5.0;
-    	tabcelu[0][2]=10.0;
-    	tabcelu[0][3]=15.0;
-    	tabcelu[0][4]=20.0;
-    	tabcelu[0][5]=25.0;
+    	tabcelu[0][1]=2.0;
+    	tabcelu[0][2]=4.0;
+    	tabcelu[0][3]=6.0;
+    	tabcelu[0][4]=8.0;
+    	tabcelu[0][5]=10.0;
     	
     	//wyliczanie x2
     	tabcelu[1][0]=(ac/bc)*tabcelu[0][0];
@@ -573,11 +573,11 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab1 = new double[2][6];
     	tab1[0][0]=0.0;
-    	tab1[0][1]=5.0;
-    	tab1[0][2]=10.0;
-    	tab1[0][3]=15.0;
-    	tab1[0][4]=20.0;
-    	tab1[0][5]=25.0;
+    	tab1[0][1]=2.0;
+    	tab1[0][2]=4.0;
+    	tab1[0][3]=6.0;
+    	tab1[0][4]=8.0;
+    	tab1[0][5]=10.0;
     	
     	//wyliczanie x2
     	if(b1<0){
@@ -600,11 +600,11 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab2 = new double[2][6];
     	tab2[0][0]=0.0;
-    	tab2[0][1]=5.0;
-    	tab2[0][2]=10.0;
-    	tab2[0][3]=15.0;
-    	tab2[0][4]=20.0;
-    	tab2[0][5]=25.0;
+    	tab2[0][1]=2.0;
+    	tab2[0][2]=4.0;
+    	tab2[0][3]=6.0;
+    	tab2[0][4]=8.0;
+    	tab2[0][5]=10.0;
     	
     	//wyliczanie x2
     	if(b2<0){
@@ -628,11 +628,11 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab3 = new double[2][6];
     	tab3[0][0]=0.0;
-    	tab3[0][1]=5.0;
-    	tab3[0][2]=10.0;
-    	tab3[0][3]=15.0;
-    	tab3[0][4]=20.0;
-    	tab3[0][5]=25.0;
+    	tab3[0][1]=2.0;
+    	tab3[0][2]=4.0;
+    	tab3[0][3]=6.0;
+    	tab3[0][4]=8.0;
+    	tab3[0][5]=10.0;
     	
     	//wyliczanie x2
     	if(b3<0){

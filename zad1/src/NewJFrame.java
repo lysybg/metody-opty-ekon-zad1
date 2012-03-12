@@ -1,4 +1,11 @@
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -513,6 +520,45 @@ public class NewJFrame extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+    	
+    	
+    	XYSeries series = new XYSeries("f1");
+		series.add(0, 2);
+		series.add(1, 0);
+		series.add(2, -2);
+		
+		XYSeries series2 = new XYSeries("f2");
+		series2.add(0, 6);
+		series2.add(6, 0);
+		series2.add(8,-2);
+		
+		XYSeries series3 = new XYSeries("funkcja celu");
+		series3.add(5, 3);
+		series3.add(6, 0);
+		series3.add(7, -3);
+		
+		XYSeriesCollection dataset = new XYSeriesCollection();
+		dataset.addSeries(series);
+		dataset.addSeries(series2);
+		dataset.addSeries(series3);
+		
+		//Tworzymy wykres XY
+		JFreeChart chart = ChartFactory.createXYLineChart(
+			"Metoda graficzna zadanie 1",//Tytu³
+			"OŒ x1", // x-axis Opis
+			"OŒ x2", // y-axis Opis
+			dataset, // Dane
+			PlotOrientation.VERTICAL, // Orjentacja wykresu /HORIZONTAL
+			true, // pozka¿ legende
+			true, // podpowiedzi tooltips
+			false
+		);
+ 
+		//Dodanie wykresu do okna
+		ChartFrame frame1=new ChartFrame("METODA GRAFICZNA",chart);
+		frame1.setVisible(true);
+		frame1.setSize(700,700);
+    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

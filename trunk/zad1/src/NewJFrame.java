@@ -83,7 +83,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jComboBox15 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea1 = new javax.swing.JTextArea(20,5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,8 +283,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton1.setText("Narysuj i oblicz");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
+        /*jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);*/
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -551,12 +551,13 @@ public class NewJFrame extends javax.swing.JFrame {
     	 */
     	boolean f1 =true,
     			f2 = true,
-    			f3=true;//flagi do sprawdzenia czy sa punkty przeciecia dwoch prostych
+    			f3=true,
+    			brakRozwiazan=false;//flagi do sprawdzenia czy sa punkty przeciecia dwoch prostych
     	
     	//funkcja celu
     	double ac=2.0;
     	double bc=-6.0;
-    	boolean max=true;
+    	boolean max=true;//czy nasza funkcja jest do max czy do min
     	//funkcja 1
     	double a1=3.0;
     	double b1=2.0;
@@ -731,50 +732,141 @@ public class NewJFrame extends javax.swing.JFrame {
 		double tablicaPrzeciecProstych [][]= new double[3][2];
 		//przeciecie 1 z 2
 		if(a1!=a2){
-		tablicaPrzeciecProstych[0][0]=((b2*c1)-(b1*c2))/(a1*b2-a2*b1);
-		tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1;
+		tablicaPrzeciecProstych[0][0]=((b2*c1)-(b1*c2))/(a1*b2-a2*b1); //x
+		tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1; //y
 		}
 		else { f1=false;}
 		//przeciecie 1 z 3
 		if(a1!=a3){
-		tablicaPrzeciecProstych[1][0]=((b3*c1)-(b1*c3))/(a1*b3-a3*b1);
-		tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1;
+		tablicaPrzeciecProstych[1][0]=((b3*c1)-(b1*c3))/(a1*b3-a3*b1);//x
+		tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1;//y
 		}
 		else { f2=false;}
 		//przeciecie 2 z 3
 		if(a2!=a3){
-		tablicaPrzeciecProstych[2][0]=((b2*c3)-(b3*c2))/(a3*b2-a2*b3);
-		tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2;
+		tablicaPrzeciecProstych[2][0]=((b2*c3)-(b3*c2))/(a3*b2-a2*b3); //x
+		tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2; //y
 		}
 		else { f3=false;}
+		
 		double tablicaPrzeciecOsiOXOY [][]= new double[6][2];
 		//przeciecie 1 z OX i OY
-		tablicaPrzeciecOsiOXOY[0][0]=0;
-		tablicaPrzeciecOsiOXOY[0][1]=c1/b1;
-		tablicaPrzeciecOsiOXOY[1][0]=c1/a1;
-		tablicaPrzeciecOsiOXOY[1][1]=0;
+		tablicaPrzeciecOsiOXOY[0][0]=0;//x
+		tablicaPrzeciecOsiOXOY[0][1]=c1/b1;//y
+		tablicaPrzeciecOsiOXOY[1][0]=c1/a1;//x
+		tablicaPrzeciecOsiOXOY[1][1]=0;//y
 		//przeciecie 2 z OX i OY
-		tablicaPrzeciecOsiOXOY[2][0]=0;
-		tablicaPrzeciecOsiOXOY[2][1]=c2/b2;
-		tablicaPrzeciecOsiOXOY[3][0]=c2/a2;
-		tablicaPrzeciecOsiOXOY[3][1]=0;
+		tablicaPrzeciecOsiOXOY[2][0]=0;//x
+		tablicaPrzeciecOsiOXOY[2][1]=c2/b2;//y
+		tablicaPrzeciecOsiOXOY[3][0]=c2/a2;//x
+		tablicaPrzeciecOsiOXOY[3][1]=0;//y
 		//przeciecie 3 z OX i OY
-		tablicaPrzeciecOsiOXOY[4][0]=0;
-		tablicaPrzeciecOsiOXOY[4][1]=c3/b3;
-		tablicaPrzeciecOsiOXOY[5][0]=c3/a3;
-		tablicaPrzeciecOsiOXOY[5][1]=0;
+		tablicaPrzeciecOsiOXOY[4][0]=0;//x
+		tablicaPrzeciecOsiOXOY[4][1]=c3/b3;//y
+		tablicaPrzeciecOsiOXOY[5][0]=c3/a3;//x
+		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
-		if(znak1!=znak2){
+		
+		//-------------------------------------ROZWIAZANIE----------------------------------//
+		int i=0;//wskazniki
+		double tablicaRozwiazan [][]= new double [9][3];
+		
+		if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*bc+tablicaPrzeciecProstych[0][1]*ac;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
+			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
+			i+=1;
+		}
+		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*bc+tablicaPrzeciecProstych[2][1]*ac;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
+			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
+			i+=1;
+		}
+		if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*bc+tablicaPrzeciecProstych[2][1]*ac;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
+			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
+			i+=1;
+		}
+		if(tablicaPrzeciecOsiOXOY[0][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*ac;
+			tablicaRozwiazan[i][1]=0;
+			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1];
+			i+=1;
+		}
+		if(tablicaPrzeciecOsiOXOY[1][0]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*bc;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
+			tablicaRozwiazan[i][2]=0;
+			i+=1;
+		}if(tablicaPrzeciecOsiOXOY[2][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[2][1]*ac;
+			tablicaRozwiazan[i][1]=0;
+			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[2][1];
+			i+=1;
+		}if(tablicaPrzeciecOsiOXOY[3][0]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[3][0]*bc;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[3][0];
+			tablicaRozwiazan[i][2]=0;
+			i+=1;
+		}if(tablicaPrzeciecOsiOXOY[4][1]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[4][1]*ac;
+			tablicaRozwiazan[i][1]=0;
+			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[4][1];
+			i+=1;
+		}if(tablicaPrzeciecOsiOXOY[5][0]>0){
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[5][0]*bc;
+			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[5][0];
+			tablicaRozwiazan[i][2]=0;
+			i+=1;
+		}
+		
+		double temp=tablicaRozwiazan[0][0];
+		double rozwiazania [] = new double [2] ;
+		if(max==true){
+		for (int j=0;j<i;j++){
+			if (temp < tablicaRozwiazan[j][0]){
+				temp = tablicaRozwiazan[j][0];
+			rozwiazania[0]=tablicaRozwiazan[j][1];//wspolrzedne x
+			rozwiazania[1]=tablicaRozwiazan[j][2];//wspolrzedne y
+		}}}
+		else
+		{
+			for (int j=0;j<i;j++){
+				if (temp > tablicaRozwiazan[j][0]){
+					temp = tablicaRozwiazan[j][0];
+				rozwiazania[0]=tablicaRozwiazan[j][1];//wspolrzedne x
+				rozwiazania[1]=tablicaRozwiazan[j][2];//wspolrzedne y
+			}}
+		}
+		System.out.println(temp);
+		System.out.println(rozwiazania[0]);
+		System.out.println(rozwiazania[1]);
+		
+		//-----------------------OGRANICZENIA--------------------------------------//
+		/*if(znak1!=znak2){
 			if(f1==false){
 				if((c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
 					
 				}
 			}
 		}
-		else if(1==2){
+		else if(znak3=="<="){
+			if((c3<0 && b3>0) || (c3>0 && b3<0)){
+				if((a3>0 && b3>0) || (a3<0 && b3<0)){
+					jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
+					//System.out.println("nima");
+					}/*
+					else if(znak2=="<=" && c2<0 && a2>0){
+						jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce");
+					}
+					else if(znak3=="<=" && c3<0 && a3>0){
+						jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce");
+					}
+				}
+			}*/
 			
-		}
-		
 		
 		//Tworzymy wykres XY
 		JFreeChart chart = ChartFactory.createXYLineChart(
@@ -859,7 +951,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;

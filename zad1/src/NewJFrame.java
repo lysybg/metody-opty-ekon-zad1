@@ -10,16 +10,11 @@ import org.jfree.data.xy.XYSeriesCollection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 //package javaapplication3;
 
 /**
  *
- * @author Darek
+ * @author Darek & Kasia
  */
 public class NewJFrame extends javax.swing.JFrame {
     public static String komunikat;
@@ -559,25 +554,25 @@ public class NewJFrame extends javax.swing.JFrame {
     	
 
     	//funkcja celu
-    	    	double ac=2.0;
+    	    	double ac=1.0;
     	    	double bc=-6.0;
     	    	boolean max=true;//czy nasza funkcja jest do max czy do min
     	//funkcja 1
-    	    	double a1=3.0;
-    	    	double b1=2.0;
+    	    	double a1=1.0;
+    	    	double b1=-6.0;
     	    	double c1=6.0;
     	    	String znak1 = "<=";
     	    	
     	//funkcja 2
-    	    	double a2=1.0;
-    	    	double b2=-1.0;
-    	    	double c2=-1.0;
+    	    	double a2=2.0;
+    	    	double b2=4.0;
+    	    	double c2=8.0;
     	    	String znak2 = ">=";
     	    	
     	//funkcja 3
-    	    	double a3=-1.0;
-    	    	double b3=-2.0;
-    	    	double c3=1.0;
+    	    	double a3=1.0;
+    	    	double b3=-3.0;
+    	    	double c3=-6.0;
     	    	String znak3 = ">=";
     	    	
     	/**
@@ -941,7 +936,8 @@ public class NewJFrame extends javax.swing.JFrame {
 				System.out.println(rozwiazania[0]);
 				System.out.println(rozwiazania[1]);
 				//Tu bêdzie jTextArea lub komunikat, jakie to jest to nasze rozwi¹zanie
-				NewJFrame.komunikat="JEST ROZWIAZANIE";
+				
+				NewJFrame.komunikat="Wartoœæ rozwi¹zania to "+Double.toString(temp)+" dla punktów x1="+Double.toString(rozwiazania[0])+"  i  x2="+Double.toString(rozwiazania[1]);
 		 }
 		 
 		System.out.println(NewJFrame.komunikat);

@@ -10,13 +10,17 @@
 
 1:
 znaki sa przeciwne jesli chodzi o zakresy
+
 f(x1)>f(x2)<=>f(x1)>=C^f(x2)<=C1
+
 brak wspolnych punktow jesli chodzi o rozwiazania
 
 
 2:
 znak rownania to <=
+
 wartosc przy x1 jest dodatnia bo jak zmienimy strony to bedzie ujemna na wykresie
+
 C jest ujemne
 
 

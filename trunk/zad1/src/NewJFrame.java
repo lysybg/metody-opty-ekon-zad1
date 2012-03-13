@@ -1,3 +1,5 @@
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -5,6 +7,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 /*
@@ -18,14 +22,23 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author Darek
  */
 public class NewJFrame extends javax.swing.JFrame {
+    public static String komunikat;
+    
 
-    /**
-     * Creates new form NewJFrame
-     */
-    public NewJFrame() {
+
+	public static String getKomunikat() {
+		return komunikat;
+	}
+
+	public static void setKomunikat(String komunikat) {
+		NewJFrame.komunikat = komunikat;
+	}
+
+	
+	public NewJFrame() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +95,14 @@ public class NewJFrame extends javax.swing.JFrame {
         jComboBox14 = new javax.swing.JComboBox();
         jComboBox15 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        //=============================================================KLIKAMY W BUTTON================================================
+        //=============================================================================================================================
+        jButton1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		jTextArea1.setText(NewJFrame.komunikat);
+        	}
+        });
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea(20,5);
 
@@ -477,81 +498,59 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {
         int a = jComboBox8.getSelectedIndex();
         System.out.print(a);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox8ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox11ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
-    private void jTextArea1ActionPerformed1(java.awt.event.ActionEvent evt){
 
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jTextArea1ActionPerformed1(java.awt.event.ActionEvent evt){
     }
 
     /**
      * @param args the command line arguments
+     * @throws InterruptedException 
+     * @throws InvocationTargetException 
      */
-    public static void main(String args[]) {
-    	/*Integer liczba= new Integer (null);
-    	liczba = Integer.parseInt(jTextField1.getText());
-    	System.out.print("Cos ashdiuasnfdckjsdnfiubdsaiuhf" + liczba);
-    	*/
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+    public static void main(String args[]) throws InvocationTargetException, InterruptedException {
+
     	/**
-    	 * ZMIENNE FUNKCJI
+    	 *================================================== ZMIENNE FUNKCJI==================================================
     	 */
     	boolean f1 =true,
     			f2 = true,
@@ -563,26 +562,26 @@ public class NewJFrame extends javax.swing.JFrame {
     	    	double ac=2.0;
     	    	double bc=-6.0;
     	    	boolean max=true;//czy nasza funkcja jest do max czy do min
-    	    	//funkcja 1
+    	//funkcja 1
     	    	double a1=3.0;
     	    	double b1=2.0;
     	    	double c1=6.0;
     	    	String znak1 = "<=";
     	    	
-    	    	//funkcja 2
+    	//funkcja 2
     	    	double a2=1.0;
     	    	double b2=-1.0;
     	    	double c2=-1.0;
     	    	String znak2 = ">=";
     	    	
-    	    	//funkcja 3
+    	//funkcja 3
     	    	double a3=-1.0;
     	    	double b3=-2.0;
     	    	double c3=1.0;
     	    	String znak3 = ">=";
     	    	
     	/**
-    	 * OBLICZENIA DO RYSOWANIA FUNKCJI
+    	 * ===========================================OBLICZENIA DO RYSOWANIA FUNKCJI========================================
     	 */
     	//--------------------------------------------------------------------------------------------------------------------
     	//-------------------------------------------------FUNKCJA CELU-------------------------------------------------------
@@ -694,7 +693,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab3[1][5]=(-a3/b3)*tab3[0][5]+(c3/b3);
     
     	/**
-    	 * RYSOWANIE WYKRESU
+    	 * ====================================RYSOWANIE WYKRESU===============================================
     	 */
     	XYSeries series = new XYSeries("funkcja 1");
 		series.add(tab1[0][0], tab1[1][0]);
@@ -734,6 +733,10 @@ public class NewJFrame extends javax.swing.JFrame {
 		dataset.addSeries(series3);
 		dataset.addSeries(seriesCEL);
 		
+		/**
+    	 * ====================================OBLICZANIE PUNKTÓW PRZECIÊÆ===============================================
+    	 */
+		
 		double tablicaPrzeciecProstych [][]= new double[3][2];
 		//przeciecie 1 z 2
 		if(a1!=a2){
@@ -771,8 +774,9 @@ public class NewJFrame extends javax.swing.JFrame {
 		tablicaPrzeciecOsiOXOY[5][0]=c3/a3;//x
 		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
-		
+		//-----------------------------------------------------------------------------------//
 		//-------------------------------------ROZWIAZANIE----------------------------------//
+		//---------------------------------------------------------------------------------//
 		int i=0;//wskazniki
 		double tablicaRozwiazan [][]= new double [9][3];
 		
@@ -783,7 +787,7 @@ public class NewJFrame extends javax.swing.JFrame {
 			i+=1;
 		}
 		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;  // ?????? nie powinno byæ  tablicaPrzeciecProstych[1][1]*ac    ??????? by³o [2][1]
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
 			i+=1;
@@ -795,13 +799,13 @@ public class NewJFrame extends javax.swing.JFrame {
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[0][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*bc; // jesli x1=0 to wzór tu nie powinien byc : bc * x2???
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*bc; 
 			tablicaRozwiazan[i][1]=0;    //x
-			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1]; //y  czyli x2
+			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1];
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[1][0]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*ac;  // tu zak³adamy ze y czyli x2=0 wiec wzór to chyba ac *x1?? i w linijkacj nizej tez??
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
@@ -846,9 +850,10 @@ public class NewJFrame extends javax.swing.JFrame {
 			}}
 		}
 		
-		
+		//==========================================================================//
 		//-----------------------OGRANICZENIA--------------------------------------//
-		String komunikat = new String("");
+		//========================================================================//
+		
 		if(znak1!=znak2){
 			if(f1==false){
 				if((b1>0 && b2>0) && (c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
@@ -928,7 +933,7 @@ public class NewJFrame extends javax.swing.JFrame {
 										}}}}
 			
 		 if(brakRozwiazan==true){
-			 komunikat="Brak rozwiazañ";
+			 NewJFrame.komunikat="Brak rozwi¹zañ";
 		 }
 		 else
 		 {
@@ -936,13 +941,19 @@ public class NewJFrame extends javax.swing.JFrame {
 				System.out.println(rozwiazania[0]);
 				System.out.println(rozwiazania[1]);
 				//Tu bêdzie jTextArea lub komunikat, jakie to jest to nasze rozwi¹zanie
+				NewJFrame.komunikat="JEST ROZWIAZANIE";
 		 }
+		 
+		System.out.println(NewJFrame.komunikat);
+
 		
-		//Tworzymy wykres XY
+		//=============================================================================//
+		//----------------------------Tworzymy wykres XY------------------------------//
+		//===========================================================================//
 		JFreeChart chart = ChartFactory.createXYLineChart(
 			"Metoda graficzna zadanie 1",//Tytu³
-			"OŒ x1", // x-axis Opis
-			"OŒ x2", // y-axis Opis
+			"OŒ x1", // x Opis
+			"OŒ x2", // y-Opis
 			dataset, // Dane
 			PlotOrientation.VERTICAL, // Orjentacja wykresu /HORIZONTAL
 			true, // pozka¿ legende
@@ -950,11 +961,13 @@ public class NewJFrame extends javax.swing.JFrame {
 			false
 		);
  
-		//Dodanie wykresu do okna
+		//--------------------------------Dodanie wykresu do okna----------------------
 		ChartFrame frame1=new ChartFrame("METODA GRAFICZNA",chart);
 		frame1.setVisible(true);
 		frame1.setSize(700,700);
-    	
+    	//-----------------------------------------------------------------------------
+		
+		//wygenerowane **
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -976,7 +989,7 @@ public class NewJFrame extends javax.swing.JFrame {
         /*
          * Create and display the form
          */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeAndWait (new Runnable() {
 
             public void run() {
                 new NewJFrame().setVisible(true);

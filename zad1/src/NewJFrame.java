@@ -558,28 +558,29 @@ public class NewJFrame extends javax.swing.JFrame {
     			f3=true,
     			brakRozwiazan=false;//flagi do sprawdzenia czy sa punkty przeciecia dwoch prostych
     	
+
     	//funkcja celu
-    	double ac=2.0;
-    	double bc=3.0;
-    	boolean max=true;//czy nasza funkcja jest do max czy do min
-    	//funkcja 1
-    	double a1=1.0;
-    	double b1=-5.0;
-    	double c1=5.0;
-    	String znak1 = "<=";
-    	
-    	//funkcja 2
-    	double a2=1.0;
-    	double b2=-1.0;
-    	double c2=-4.0;
-    	String znak2 = ">=";
-    	
-    	//funkcja 3
-    	double a3=1.0;
-    	double b3=1.0;
-    	double c3=8.0;
-    	String znak3 = "<=";
-    	
+    	    	double ac=2.0;
+    	    	double bc=-6.0;
+    	    	boolean max=true;//czy nasza funkcja jest do max czy do min
+    	    	//funkcja 1
+    	    	double a1=3.0;
+    	    	double b1=2.0;
+    	    	double c1=6.0;
+    	    	String znak1 = "<=";
+    	    	
+    	    	//funkcja 2
+    	    	double a2=1.0;
+    	    	double b2=-1.0;
+    	    	double c2=-1.0;
+    	    	String znak2 = ">=";
+    	    	
+    	    	//funkcja 3
+    	    	double a3=-1.0;
+    	    	double b3=-2.0;
+    	    	double c3=1.0;
+    	    	String znak3 = ">=";
+    	    	
     	/**
     	 * OBLICZENIA DO RYSOWANIA FUNKCJI
     	 */

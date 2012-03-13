@@ -560,25 +560,25 @@ public class NewJFrame extends javax.swing.JFrame {
     	
     	//funkcja celu
     	double ac=2.0;
-    	double bc=-6.0;
+    	double bc=3.0;
     	boolean max=true;//czy nasza funkcja jest do max czy do min
     	//funkcja 1
-    	double a1=3.0;
-    	double b1=2.0;
-    	double c1=6.0;
+    	double a1=1.0;
+    	double b1=-5.0;
+    	double c1=5.0;
     	String znak1 = "<=";
     	
     	//funkcja 2
     	double a2=1.0;
     	double b2=-1.0;
-    	double c2=-1.0;
+    	double c2=-4.0;
     	String znak2 = ">=";
     	
     	//funkcja 3
-    	double a3=-1.0;
-    	double b3=-2.0;
-    	double c3=1.0;
-    	String znak3 = ">=";
+    	double a3=1.0;
+    	double b3=1.0;
+    	double c3=8.0;
+    	String znak3 = "<=";
     	
     	/**
     	 * OBLICZENIA DO RYSOWANIA FUNKCJI
@@ -776,51 +776,51 @@ public class NewJFrame extends javax.swing.JFrame {
 		double tablicaRozwiazan [][]= new double [9][3];
 		
 		if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*bc+tablicaPrzeciecProstych[0][1]*ac;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*ac+tablicaPrzeciecProstych[0][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
 			i+=1;
 		}
 		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*bc+tablicaPrzeciecProstych[1][1]*ac;  // ?????? nie powinno byæ  tablicaPrzeciecProstych[1][1]*ac    ??????? by³o [2][1]
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;  // ?????? nie powinno byæ  tablicaPrzeciecProstych[1][1]*ac    ??????? by³o [2][1]
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
 			i+=1;
 		}
 		if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*bc+tablicaPrzeciecProstych[2][1]*ac;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*ac+tablicaPrzeciecProstych[2][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[0][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*ac; // jesli x1=0 to wzór tu nie powinien byc : bc * x2???
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*bc; // jesli x1=0 to wzór tu nie powinien byc : bc * x2???
 			tablicaRozwiazan[i][1]=0;    //x
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1]; //y  czyli x2
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[1][0]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*bc;  // tu zak³adamy ze y czyli x2=0 wiec wzór to chyba ac *x1?? i w linijkacj nizej tez??
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*ac;  // tu zak³adamy ze y czyli x2=0 wiec wzór to chyba ac *x1?? i w linijkacj nizej tez??
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
 		}if(tablicaPrzeciecOsiOXOY[2][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[2][1]*ac;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[2][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[2][1];
 			i+=1;
 		}if(tablicaPrzeciecOsiOXOY[3][0]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[3][0]*bc;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[3][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[3][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
 		}if(tablicaPrzeciecOsiOXOY[4][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[4][1]*ac;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[4][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[4][1];
 			i+=1;
 		}if(tablicaPrzeciecOsiOXOY[5][0]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[5][0]*bc;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[5][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[5][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
@@ -844,38 +844,98 @@ public class NewJFrame extends javax.swing.JFrame {
 				rozwiazania[1]=tablicaRozwiazan[j][2];//wspolrzedne y
 			}}
 		}
-		System.out.println(temp);
-		System.out.println(rozwiazania[0]);
-		System.out.println(rozwiazania[1]);
+		
 		
 		//-----------------------OGRANICZENIA--------------------------------------//
 		String komunikat = new String("");
 		if(znak1!=znak2){
 			if(f1==false){
-				if((c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
-					
+				if((b1>0 && b2>0) && (c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1<0 && b2>0) && (-c1>c2 && znak1==">=") || (-c1<c2 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1>0 && b2<0) && (c1>-c2 && znak1==">=") || (c1<-c2 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1<0 && b2<0) && (c1<c2 && znak1==">=") || (c1>c2 && znak1=="<=")){
+					brakRozwiazan=true;
 				}
 			}
-			komunikat="ROZWI¥ZANIE JEST!";
 		}
-		else if(znak3=="<="){
-			if((c3<0 && b3>0) || (c3>0 && b3<0)){
-				if((a3>0 && b3>0) || (a3<0 && b3<0)){
-					komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce";
-					//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
-					//System.out.println("nima");
-					}
-					else if(znak2=="<=" && c2<0 && a2>0){
-						komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce";
-						//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce");
-					}
-					else if(znak3=="<=" && c3<0 && a3>0){
-						komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce";
-						//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce");
-					}
+		if(brakRozwiazan=false){
+		if(znak1!=znak3){
+			if(f2==false){
+				if((b1>0 && b3>0) && (c1>c3 && znak1==">=") || (c1<c3 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1<0 && b3>0) && (-c1>c3 && znak1==">=") || (-c1<c3 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1>0 && b3<0) && (c1>-c3 && znak1==">=") || (c1<-c3 && znak1=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b1<0 && b3<0) && (c1<c3 && znak1==">=") || (c1>c3 && znak1=="<=")){
+					brakRozwiazan=true;
 				}
 			}
-		 
+		}}
+		if(brakRozwiazan==false){
+		if(znak2!=znak3){
+			if(f3==false){
+				if((b2>0 && b3>0) && (c2>c3 && znak2==">=") || (c2<c3 && znak2=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b2<0 && b3>0) && (-c2>c3 && znak2==">=") || (-c2<c3 && znak2=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b2>0 && b3<0) && (c2>-c3 && znak2==">=") || (c2<-c3 && znak2=="<=")){
+					brakRozwiazan=true;
+				}
+				else if((b2<0 && b3<0) && (c2<c3 && znak2==">=") || (c2>c3 && znak2=="<=")){
+					brakRozwiazan=true;
+				}
+			}
+		}}
+		if(brakRozwiazan==false){
+			if(znak1=="<="){
+				if((c1<0 && b1>0) || (c1>0 && b1<0)){
+					if((a1>0 && b1>0) || (a1<0 && b1<0)){
+						brakRozwiazan=true;
+						//komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce";
+						//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
+						//System.out.println("nima");
+						}}}}
+				if(brakRozwiazan==false){
+					if(znak2=="<="){
+						if((c2<0 && b2>0) || (c2>0 && b2<0)){
+							if((a2>0 && b2>0) || (a2<0 && b2<0)){
+								brakRozwiazan=true;
+								//komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce";
+								//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
+								//System.out.println("nima");
+								}}}}
+						if(brakRozwiazan==false){
+							if(znak3=="<="){
+								if((c3<0 && b3>0) || (c3>0 && b3<0)){
+									if((a3>0 && b3>0) || (a3<0 && b3<0)){
+										brakRozwiazan=true;
+										//komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce";
+										//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
+										//System.out.println("nima");
+										}}}}
+			
+		 if(brakRozwiazan==true){
+			 komunikat="Brak rozwiazañ";
+		 }
+		 else
+		 {
+			 System.out.println(temp);
+				System.out.println(rozwiazania[0]);
+				System.out.println(rozwiazania[1]);
+				//Tu bêdzie jTextArea lub komunikat, jakie to jest to nasze rozwi¹zanie
+		 }
 		
 		//Tworzymy wykres XY
 		JFreeChart chart = ChartFactory.createXYLineChart(

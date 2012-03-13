@@ -9,6 +9,9 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 //package javaapplication3;
 
@@ -18,17 +21,9 @@ import java.awt.event.MouseEvent;
  */
 public class NewJFrame extends javax.swing.JFrame {
     public static String komunikat;
-    
-
-
-	public static String getKomunikat() {
-		return komunikat;
-	}
-
-	public static void setKomunikat(String komunikat) {
-		NewJFrame.komunikat = komunikat;
-	}
-
+    static public double AC,BC, A1,B1,C1, A2, B2, C2, A3, B3, C3;
+    static public String Znak1, Znak2, Znak3;
+    static public boolean MAX;
 	
 	public NewJFrame() {
         initComponents();
@@ -90,11 +85,55 @@ public class NewJFrame extends javax.swing.JFrame {
         jComboBox14 = new javax.swing.JComboBox();
         jComboBox15 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        
+        //=============================================================================================================================
         //=============================================================KLIKAMY W BUTTON================================================
         //=============================================================================================================================
+        
+        
         jButton1.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
+        		NewJFrame.AC=Double.parseDouble(jTextField1.getText());
+        		NewJFrame.A1=Double.parseDouble(jTextField4.getText());
+        		NewJFrame.A2=Double.parseDouble(jTextField8.getText());
+        		NewJFrame.A3=Double.parseDouble(jTextField11.getText());
+        		
+        		NewJFrame.BC=Double.parseDouble(jTextField2.getText());
+        		NewJFrame.B1=Double.parseDouble(jTextField3.getText());
+        		NewJFrame.B2=Double.parseDouble(jTextField7.getText());
+        		NewJFrame.B3=Double.parseDouble(jTextField10.getText());
+        		
+        		NewJFrame.C1=Double.parseDouble(jTextField5.getText());
+        		NewJFrame.C2=Double.parseDouble(jTextField6.getText());
+        		NewJFrame.C3=Double.parseDouble(jTextField9.getText());
+        		
+
+        		if( (jComboBox6.getSelectedIndex())==0){
+        			NewJFrame.Znak1=">=";
+        		}else{
+        			NewJFrame.Znak1="<=";
+        		}
+        		
+        		if( (jComboBox7.getSelectedIndex())==0){
+        			NewJFrame.Znak2=">=";
+        		}else{
+        			NewJFrame.Znak2="<=";
+        		}
+        		
+        		if( (jComboBox10.getSelectedIndex())==0){
+        			NewJFrame.Znak3=">=";
+        		}else{
+        			NewJFrame.Znak3="<=";
+        		}
+        		
+        		if( (jComboBox3.getSelectedIndex())==0){
+        			NewJFrame.MAX=true;
+        		}else{
+        			NewJFrame.MAX=false;
+        		}
+        		
+        		LICZ();
         		jTextArea1.setText(NewJFrame.komunikat);
         	}
         });
@@ -133,7 +172,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField2.setText("6");
+        jTextField2.setText("-6");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -204,7 +243,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField6.setText("1");
+        jTextField6.setText("-1");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel13.setText("x");
@@ -219,7 +258,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField7.setText("1");
+        jTextField7.setText("-1");
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
@@ -263,7 +302,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField10.setText("2");
+        jTextField10.setText("-2");
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
@@ -277,7 +316,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel19.setText("1");
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField11.setText("1");
+        jTextField11.setText("-1");
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
@@ -304,246 +343,198 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel19)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField10))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel15)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel16)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel20)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jTextField9))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(63, 63, 63)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jButton1)))
-                .addGap(0, 75, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(63)
+        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addGroup(layout.createSequentialGroup()
+        								.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jComboBox12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jTextField11, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel18, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel19)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jComboBox11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jTextField10))
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jComboBox9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jTextField8, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel14, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel15)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jComboBox8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jTextField7, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jLabel13)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel16)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jComboBox7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jLabel17)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jLabel20)
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addComponent(jComboBox10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jComboBox15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addGap(12)
+        										.addComponent(jTextField9))
+        									.addGroup(layout.createSequentialGroup()
+        										.addComponent(jComboBox14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        										.addComponent(jTextField6, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))))
+        							.addComponent(jLabel8)
+        							.addGroup(layout.createSequentialGroup()
+        								.addComponent(jComboBox5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jLabel10, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jLabel11)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jComboBox4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jLabel9)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jLabel12)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jComboBox6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(jComboBox13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addGap(12)
+        								.addComponent(jTextField5, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)))
+        						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 721, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(357)
+        					.addComponent(jButton1))
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel2)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jLabel4)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(jLabel5)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(jLabel6)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(jLabel7)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(jComboBox3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(265)
+        					.addComponent(jLabel1)))
+        			.addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1)
-                        .addComponent(jLabel3)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField3)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel12)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField5)
-                        .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14)
-                        .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15)
-                        .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel16)
-                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField8)
-                    .addComponent(jTextField7)
-                    .addComponent(jTextField6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18)
-                    .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel20)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jLabel1)
+        			.addGap(35)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel2)
+        				.addComponent(jLabel8))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel3)
+        					.addComponent(jLabel4)
+        					.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel5)
+        					.addComponent(jLabel6)
+        					.addComponent(jLabel7)
+        					.addComponent(jComboBox3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(jLabel10)
+        					.addComponent(jComboBox5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel11)
+        					.addComponent(jComboBox4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel9)
+        					.addComponent(jLabel12)
+        					.addComponent(jComboBox6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jTextField5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jComboBox13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(jLabel14)
+        					.addComponent(jComboBox9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel15)
+        					.addComponent(jComboBox8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jLabel13)
+        					.addComponent(jLabel16)
+        					.addComponent(jComboBox7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(jComboBox14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jTextField8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jTextField7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jTextField6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jTextField11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel18)
+        				.addComponent(jComboBox12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel19)
+        				.addComponent(jComboBox11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jTextField10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel17)
+        				.addComponent(jLabel20)
+        				.addComponent(jComboBox10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jTextField9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jComboBox15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+        			.addComponent(jButton1)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+        			.addGap(35))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {
-        int a = jComboBox8.getSelectedIndex();
-        System.out.print(a);
-    }
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-    
-    private void jTextArea1ActionPerformed1(java.awt.event.ActionEvent evt){
-    }
-
     /**
-     * @param args the command line arguments
-     * @throws InterruptedException 
-     * @throws InvocationTargetException 
-     */
-    public static void main(String args[]) throws InvocationTargetException, InterruptedException {
-
+     *============================================================================================================================
+	 *==================================================G£ÓWNA FUNKCJA PROGRAMU ==================================================
+	 **============================================================================================================================
+	 *
+	 */   
+    public void LICZ(){
     	/**
     	 *================================================== ZMIENNE FUNKCJI==================================================
     	 */
@@ -554,26 +545,26 @@ public class NewJFrame extends javax.swing.JFrame {
     	
 
     	//funkcja celu
-    	    	double ac=1.0;
-    	    	double bc=-6.0;
-    	    	boolean max=true;//czy nasza funkcja jest do max czy do min
+    	    	double ac=NewJFrame.AC;//1.0;
+    	    	double bc=NewJFrame.BC;//-6.0;
+    	    	boolean max=NewJFrame.MAX;//true;//czy nasza funkcja jest do max czy do min
     	//funkcja 1
-    	    	double a1=1.0;
-    	    	double b1=-6.0;
-    	    	double c1=6.0;
-    	    	String znak1 = "<=";
+    	    	double a1=NewJFrame.A1;//1.0;
+    	    	double b1=NewJFrame.B1;//-6.0;
+    	    	double c1=NewJFrame.C1;//6.0;
+    	    	String znak1 = NewJFrame.Znak1;//"<=";
     	    	
     	//funkcja 2
-    	    	double a2=2.0;
-    	    	double b2=4.0;
-    	    	double c2=8.0;
-    	    	String znak2 = ">=";
+    	    	double a2=NewJFrame.A2;//2.0;
+    	    	double b2=NewJFrame.B2;//4.0;
+    	    	double c2=NewJFrame.C2;//8.0;
+    	    	String znak2 = NewJFrame.Znak2;// ">=";
     	    	
     	//funkcja 3
-    	    	double a3=1.0;
-    	    	double b3=-3.0;
-    	    	double c3=-6.0;
-    	    	String znak3 = ">=";
+    	    	double a3=NewJFrame.A3;//1.0;
+    	    	double b3=NewJFrame.B3;//-3.0;
+    	    	double c3=NewJFrame.C3;//-6.0;
+    	    	String znak3 = NewJFrame.Znak3;//">=";
     	    	
     	/**
     	 * ===========================================OBLICZENIA DO RYSOWANIA FUNKCJI========================================
@@ -618,12 +609,12 @@ public class NewJFrame extends javax.swing.JFrame {
    			 znak1 = "<=";
     		}
     	}
-    	tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
+    	/*tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
     	tab1[1][1]=(-a1*tab1[0][1]+c1)/b1;
     	tab1[1][2]=(-a1*tab1[0][2]+c1)/b1;
     	tab1[1][3]=(-a1*tab1[0][3]+c1)/b1;
     	tab1[1][4]=(-a1*tab1[0][4]+c1)/b1;
-    	tab1[1][5]=(-a1*tab1[0][5]+c1)/b1;
+    	tab1[1][5]=(-a1*tab1[0][5]+c1)/b1;*/
     	tab1[1][0]=(-a1/b1)*tab1[0][0]+(c1/b1);
     	tab1[1][1]=(-a1/b1)*tab1[0][1]+(c1/b1);
     	tab1[1][2]=(-a1/b1)*tab1[0][2]+(c1/b1);
@@ -941,7 +932,9 @@ public class NewJFrame extends javax.swing.JFrame {
 		 }
 		 
 		System.out.println(NewJFrame.komunikat);
-
+		System.out.println(NewJFrame.A1);
+		System.out.println(NewJFrame.Znak1);
+		System.out.println(NewJFrame.MAX);
 		
 		//=============================================================================//
 		//----------------------------Tworzymy wykres XY------------------------------//
@@ -962,6 +955,65 @@ public class NewJFrame extends javax.swing.JFrame {
 		frame1.setVisible(true);
 		frame1.setSize(700,700);
     	//-----------------------------------------------------------------------------
+    	
+    	
+    	
+    }
+    
+    
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {
+        int a = jComboBox8.getSelectedIndex();
+        System.out.print(a);
+    }
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jTextArea1ActionPerformed1(java.awt.event.ActionEvent evt){
+    }
+
+    /**
+     * @param args the command line arguments
+     * @throws InterruptedException 
+     * @throws InvocationTargetException 
+     */
+    public static void main(String args[]) throws InvocationTargetException, InterruptedException {
+
+    	
 		
 		//wygenerowane **
         try {
@@ -1042,5 +1094,4 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    // End of variables declaration//GEN-END:variables
 }

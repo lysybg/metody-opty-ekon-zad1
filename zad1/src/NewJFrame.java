@@ -529,6 +529,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+    private void jTextArea1ActionPerformed1(java.awt.event.ActionEvent evt){
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -778,7 +782,7 @@ public class NewJFrame extends javax.swing.JFrame {
 			i+=1;
 		}
 		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*bc+tablicaPrzeciecProstych[2][1]*ac;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*bc+tablicaPrzeciecProstych[1][1]*ac;  // ?????? nie powinno byæ  tablicaPrzeciecProstych[1][1]*ac    ??????? by³o [2][1]
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
 			i+=1;
@@ -790,13 +794,13 @@ public class NewJFrame extends javax.swing.JFrame {
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[0][1]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*ac;
-			tablicaRozwiazan[i][1]=0;
-			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1];
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*ac; // jesli x1=0 to wzór tu nie powinien byc : bc * x2???
+			tablicaRozwiazan[i][1]=0;    //x
+			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1]; //y  czyli x2
 			i+=1;
 		}
 		if(tablicaPrzeciecOsiOXOY[1][0]>0){
-			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*bc;
+			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*bc;  // tu zak³adamy ze y czyli x2=0 wiec wzór to chyba ac *x1?? i w linijkacj nizej tez??
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
@@ -845,28 +849,33 @@ public class NewJFrame extends javax.swing.JFrame {
 		System.out.println(rozwiazania[1]);
 		
 		//-----------------------OGRANICZENIA--------------------------------------//
-		/*if(znak1!=znak2){
+		String komunikat = new String("");
+		if(znak1!=znak2){
 			if(f1==false){
 				if((c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
 					
 				}
 			}
+			komunikat="ROZWI¥ZANIE JEST!";
 		}
 		else if(znak3=="<="){
 			if((c3<0 && b3>0) || (c3>0 && b3<0)){
 				if((a3>0 && b3>0) || (a3<0 && b3<0)){
-					jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
+					komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce";
+					//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
 					//System.out.println("nima");
-					}/*
+					}
 					else if(znak2=="<=" && c2<0 && a2>0){
-						jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce");
+						komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce";
+						//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 2 nie zawiera siê w 1. æwiartce");
 					}
 					else if(znak3=="<=" && c3<0 && a3>0){
-						jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce");
+						komunikat="Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce";
+						//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 3 nie zawiera siê w 1. æwiartce");
 					}
 				}
-			}*/
-			
+			}
+		 
 		
 		//Tworzymy wykres XY
 		JFreeChart chart = ChartFactory.createXYLineChart(
@@ -912,7 +921,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 new NewJFrame().setVisible(true);
             }
         });
-    }
+    }	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;

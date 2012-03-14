@@ -564,6 +564,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	if(b1<0){
     		if(znak1=="<="){
     			 znak1 = ">=";
+    			 
     			 System.out.println("zmieniam znak");
     		}
     		else{

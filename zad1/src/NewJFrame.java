@@ -159,7 +159,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("-6");
+        jTextField2.setText("3");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -185,7 +185,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setText("2");
+        jTextField3.setText("-5");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -200,7 +200,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("3");
+        jTextField4.setText("1");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -210,19 +210,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel12.setText("2");
 
-        jComboBox6.setMaximumRowCount(2);
+        
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
         jComboBox6.setSelectedIndex(1);
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("6");
+        jTextField5.setText("5");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("-1");
+        jTextField6.setText("-4");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel13.setText("x");
@@ -255,17 +255,18 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel16.setText("2");
 
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
-
+        jComboBox10.setSelectedIndex(1);
+        
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("1");
+        jTextField9.setText("8");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel17.setText("x");
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField10.setText("-2");
+        jTextField10.setText("1");
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
@@ -280,7 +281,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField11.setText("-1");
+        jTextField11.setText("1");
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
@@ -557,15 +558,21 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab1[0][4]=8.0;
     	tab1[0][5]=10.0;
     	
+    	System.out.println(znak1);
+    	System.out.println("------ przed if");
     	//wyliczanie x2
     	if(b1<0){
     		if(znak1=="<="){
     			 znak1 = ">=";
+    			 System.out.println("zmieniam znak");
     		}
-    		if(znak1==">="){
+    		else{
    			 znak1 = "<=";
     		}
     	}
+    	System.out.println(znak1);
+    	System.out.println(b1);
+    	System.out.println("yyyyyyyyyy");
     	/*tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
     	tab1[1][1]=(-a1*tab1[0][1]+c1)/b1;
     	tab1[1][2]=(-a1*tab1[0][2]+c1)/b1;
@@ -682,23 +689,23 @@ public class NewJFrame extends javax.swing.JFrame {
 		
 		double tablicaPrzeciecProstych [][]= new double[3][2];
 		//przeciecie 1 z 2
-		if(a1!=a2){
-		tablicaPrzeciecProstych[0][0]=((b2*c1)-(b1*c2))/(a1*b2-a2*b1); //x
+		//if(a1!=a2){
+		tablicaPrzeciecProstych[0][0]=(b2*c1)-(b1*c2)/(a1*b2-a2*b1); //x
 		tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1; //y
-		}
-		else { f1=false;}
+		//}
+		//else { f1=false;}
 		//przeciecie 1 z 3
-		if(a1!=a3){
-		tablicaPrzeciecProstych[1][0]=((b3*c1)-(b1*c3))/(a1*b3-a3*b1);//x
+		//if(a1!=a3){
+		tablicaPrzeciecProstych[1][0]=(b3*c1)-(b1*c3)/(a1*b3-a3*b1);//x
 		tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1;//y
-		}
-		else { f2=false;}
+		//}
+		//else { f2=false;}
 		//przeciecie 2 z 3
-		if(a2!=a3){
-		tablicaPrzeciecProstych[2][0]=((b2*c3)-(b3*c2))/(a3*b2-a2*b3); //x
+		//if(a2!=a3){
+		tablicaPrzeciecProstych[2][0]=(b2*c3)-(b3*c2)/(a3*b2-a2*b3); //x
 		tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2; //y
-		}
-		else { f3=false;}
+		//}
+		//else { f3=false;}
 		
 		double tablicaPrzeciecOsiOXOY [][]= new double[6][2];
 		//przeciecie 1 z OX i OY
@@ -717,62 +724,113 @@ public class NewJFrame extends javax.swing.JFrame {
 		tablicaPrzeciecOsiOXOY[5][0]=c3/a3;//x
 		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
+
+		System.out.println(znak2);
+		//-----------------------------------------------------------------------------------//
+		//-------------------------ZMIENNE POMOCNICZE DLA WARUNKÓW----------------------------------//
+		//---------------------------------------------------------------------------------//
+		boolean warunki[]= new boolean [15];
+		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3<=tablicaPrzeciecProstych[0][1] && znak3==">=")
+			warunki[0]=true;
+		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3>=tablicaPrzeciecProstych[0][1] && znak3=="<=")
+			warunki[1]=true;
+		if((-a2*tablicaPrzeciecProstych[1][0]+c2)/b2<=tablicaPrzeciecProstych[1][1] && znak2==">=")
+			warunki[2]=true;
+		if((-a2*tablicaPrzeciecProstych[1][0]+c2)/b2>=tablicaPrzeciecProstych[1][1] && znak2=="<=")
+			warunki[3]=true;
+		if((-a1*tablicaPrzeciecProstych[2][0]+c1)/b1<=tablicaPrzeciecProstych[2][1] && znak1==">=")
+			warunki[4]=true;
+		if((-a1*tablicaPrzeciecProstych[2][0]+c1)/b1>=tablicaPrzeciecProstych[2][1] && znak1=="<=")
+			warunki[5]=true;
+		if(((-a2*tablicaPrzeciecOsiOXOY[1][0]+c2)/b2>=0 && (-a3*tablicaPrzeciecOsiOXOY[1][0]+c3)/b3>=0) && (znak2=="<=" && znak3=="<="))
+			warunki[6]=true;
+		if(((-a1*tablicaPrzeciecOsiOXOY[3][0]+c1)/b1>=0 && (-a3*tablicaPrzeciecOsiOXOY[3][0]+c3)/b3>=0) && (znak1=="<=" && znak3=="<="))
+			warunki[7]=true;
+		if((((-a1*tablicaPrzeciecOsiOXOY[5][0]+c1)/b1>=0 && (-a2*tablicaPrzeciecOsiOXOY[5][0]+c2)/b2>=0)) && (znak2=="<=" && znak1=="<="))
+			warunki[8]=true;
+		if(((tab1[1][0]>=tab2[1][0] && znak2==">=") && (tab1[1][0]>=tab3[1][0] && znak3==">=")) || ((tab1[1][0]<=tab2[1][0] && znak2=="<=") && (tab1[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab1[1][0]>=tab2[1][0] && znak2==">=") && (tab1[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab1[1][0]>=tab3[1][0] && znak3==">=") && (tab1[1][0]<=tab2[1][0] && znak2=="<=")))
+			warunki[9]=true;
+		if(((tab2[1][0]>=tab1[1][0] && znak1==">=") && (tab2[1][0]>=tab3[1][0] && znak3==">=")) || ((tab2[1][0]<=tab1[1][0] && znak1=="<=") && (tab2[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab2[1][0]>=tab1[1][0] && znak1==">=") && (tab2[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab2[1][0]>=tab3[1][0] && znak3==">=") && (tab2[1][0]<=tab1[1][0] && znak1=="<=")))
+			warunki[10]=true;
+		if(((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]>=tab1[1][0] && znak1==">=")) || ((tab3[1][0]<=tab2[1][0] && znak2=="<=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab1[1][0] && znak1==">=") && (tab3[1][0]<=tab2[1][0] && znak2=="<=")))
+			warunki[11]=true;
+		if(a1==a2 && ((b1>0 && b2>0) && (c1>c2 && znak1=="<=") || (c1<c2 && znak1==">=") || ((b1<0 && b2>0) && (-c1>c2 && znak1=="<=") || (-c1<c2 && znak1==">=")) || (b1>0 && b2<0) && (c1>-c2 && znak1=="<=") || (c1<-c2 && znak1==">=") || (b1<0 && b2<0) && (c1<c2 && znak1=="<=") || (c1>c2 && znak1==">=")))
+			warunki[12]=true;
+		if(a3==a2 && ((b3>0 && b2>0) && (c3>c2 && znak3=="<=") || (c3<c2 && znak3==">=") || ((b3<0 && b2>0) && (-c3>c2 && znak3=="<=") || (-c3<c2 && znak3==">=")) || (b3>0 && b2<0) && (c3>-c2 && znak3=="<=") || (c3<-c2 && znak3==">=") || (b3<0 && b2<0) && (c3<c2 && znak3=="<=") || (c3>c2 && znak3==">=")))
+			warunki[13]=true;
+		if(a1==a3 && ((b1>0 && b3>0) && (c1>c3 && znak1=="<=") || (c1<c3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3 && znak1=="<=") || (-c1<c3 && znak1==">=")) || (b1>0 && b3<0) && (c1>-c3 && znak1=="<=") || (c1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1<c3 && znak1=="<=") || (c1>c3 && znak1==">=")))
+			warunki[14]=true;
+		for(int kra=0;kra<15;kra++)
+			System.out.print(kra+":" + warunki[kra]+" ");
 		//-----------------------------------------------------------------------------------//
 		//-------------------------------------ROZWIAZANIE----------------------------------//
 		//---------------------------------------------------------------------------------//
+		System.out.print("x: "+tablicaPrzeciecProstych[0][0]+" y: "+tablicaPrzeciecProstych[0][1]);
 		int i=0;//wskazniki
 		double tablicaRozwiazan [][]= new double [9][3];
-		
+		if(warunki[0]==true || warunki[1]==true){
 		if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*ac+tablicaPrzeciecProstych[0][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
 			i+=1;
-		}
+		}}
+		if(warunki[2]==true || warunki[3]==true){
 		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
 			i+=1;
-		}
+		}}
+		if(warunki[3]==true || warunki[4]==true){
 		if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*ac+tablicaPrzeciecProstych[2][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
 			i+=1;
-		}
+		}}
+		if(warunki[9]==true && warunki[12]==false){
 		if(tablicaPrzeciecOsiOXOY[0][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*bc; 
 			tablicaRozwiazan[i][1]=0;    //x 
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1];
 			i+=1;
-		}
+		}}
+		if(warunki[6]==true){
 		if(tablicaPrzeciecOsiOXOY[1][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
-		}if(tablicaPrzeciecOsiOXOY[2][1]>0){
+		}}
+		if(warunki[10]==true && warunki[13]==false){
+		if(tablicaPrzeciecOsiOXOY[2][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[2][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[2][1];
 			i+=1;
-		}if(tablicaPrzeciecOsiOXOY[3][0]>0){
+		}}
+		if(warunki[7]==true){
+		if(tablicaPrzeciecOsiOXOY[3][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[3][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[3][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
-		}if(tablicaPrzeciecOsiOXOY[4][1]>0){
+		}}
+		if(warunki[11]==true && warunki[14]==false){
+		if(tablicaPrzeciecOsiOXOY[4][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[4][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[4][1];
 			i+=1;
-		}if(tablicaPrzeciecOsiOXOY[5][0]>0){
+		}}
+		if(warunki[8]==true){
+		if(tablicaPrzeciecOsiOXOY[5][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[5][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[5][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
-		}
+		}}
 		for(int k=0;k<i;k++)
 			System.out.println("cos"+tablicaRozwiazan[k][0]+" x "+tablicaRozwiazan[k][1]+" y "+tablicaRozwiazan[k][2]);
 		double temp=tablicaRozwiazan[0][0];
@@ -875,11 +933,38 @@ public class NewJFrame extends javax.swing.JFrame {
 										//jTextArea1.setText("Brak rozwiazañ dla podanych ograniczeñ, poniewa¿, ¿adna waroœæ funkcji 1 nie zawiera siê w 1. æwiartce");
 										//System.out.println("nima");
 										}}}}
+						
+						boolean ograniczenie=false;
+			if(((znak1==">=" && b1>0) || (b1<0 && znak1=="<=")) && ((znak2==">=" && b2>0) || (znak2=="<=" && b2<0)) && ((znak3==">=" && b3>0) || (znak3=="<=" && b3<0))){
+				NewJFrame.komunikat="Rozwi¹zanie nieogranicozne";
+				ograniczenie=true;
+			}
+			
+			double zmiennaPomocnicza[][]=new double [3][2];
+			zmiennaPomocnicza[0][0] = a1/ac;
+			zmiennaPomocnicza[0][1] = b1/bc;
+			zmiennaPomocnicza[1][0] = a2/ac;
+			zmiennaPomocnicza[1][1] = b2/bc;
+			zmiennaPomocnicza[2][0] = a3/ac;
+			zmiennaPomocnicza[2][1] = b3/bc;
+			int zmiennaPom, zmiennaPom1;
+			
+			for(int ij=0;ij<3;ij++){
+				zmiennaPom = (int) zmiennaPomocnicza[ij][0];
+				zmiennaPom1 = (int) zmiennaPomocnicza[ij][1];
+				if(zmiennaPom==zmiennaPomocnicza[ij][0] && zmiennaPom1==zmiennaPomocnicza[ij][0]){
+					NewJFrame.komunikat="Rozwi¹zanie to pó³prosta.";
+					ograniczenie=true;
+			}}
+	/*================================================================================================================
+	 *----------------------------------------Koniec ograniczeñ-------------------------------------------------------- 
+	 *		
+	 */
 			
 		 if(brakRozwiazan==true){
-			 NewJFrame.komunikat="Brak rozwi¹zañ";
+			 NewJFrame.komunikat=("Brak rozwi¹zañ");
 		 }
-		 else
+		 else if(brakRozwiazan==false && ograniczenie==false)
 		 {
 			 System.out.println(temp);
 				System.out.println(rozwiazania[0]);
@@ -891,7 +976,7 @@ public class NewJFrame extends javax.swing.JFrame {
 		 
 		System.out.println(NewJFrame.komunikat);
 		System.out.println(NewJFrame.A1);
-		System.out.println(NewJFrame.Znak1);
+		System.out.println(Znak1);
 		System.out.println(NewJFrame.MAX);
 		
 		//=============================================================================//

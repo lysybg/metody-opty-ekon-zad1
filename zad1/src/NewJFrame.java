@@ -510,8 +510,8 @@ public class NewJFrame extends javax.swing.JFrame {
     	    	double a1=NewJFrame.A1;//1.0;
     	    	double b1=NewJFrame.B1;//-6.0;
     	    	double c1=NewJFrame.C1;//6.0;
-    	    	String znak1 = NewJFrame.Znak1;//"<=";
-    	    	
+    	    	//String znak1 = NewJFrame.Znak1;//"<=";
+    	    	String znak1="<=";
     	//funkcja 2
     	    	double a2=NewJFrame.A2;//2.0;
     	    	double b2=NewJFrame.B2;//4.0;
@@ -524,6 +524,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	    	double c3=NewJFrame.C3;//-6.0;
     	    	String znak3 = NewJFrame.Znak3;//">=";
     	    	
+    	    	System.out.println(b1);
     	/**
     	 * ===========================================OBLICZENIA DO RYSOWANIA FUNKCJI========================================
     	 */
@@ -571,7 +572,7 @@ public class NewJFrame extends javax.swing.JFrame {
    			 znak1 = "<=";
     		}
     	}
-    	System.out.println(znak1);
+    	
     	System.out.println(b1);
     	System.out.println("yyyyyyyyyy");
     	/*tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
@@ -690,23 +691,23 @@ public class NewJFrame extends javax.swing.JFrame {
 		
 		double tablicaPrzeciecProstych [][]= new double[3][2];
 		//przeciecie 1 z 2
-		//if(a1!=a2){
-		tablicaPrzeciecProstych[0][0]=(b2*c1)-(b1*c2)/(a1*b2-a2*b1); //x
+		if(a1/b1!=a2/b2){
+		tablicaPrzeciecProstych[0][0]=((b2*c1)-(b1*c2))/(a1*b2-a2*b1); //x
 		tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1; //y
-		//}
-		//else { f1=false;}
+		}
+		else { f1=false;}
 		//przeciecie 1 z 3
-		//if(a1!=a3){
-		tablicaPrzeciecProstych[1][0]=(b3*c1)-(b1*c3)/(a1*b3-a3*b1);//x
+		if(a1/b1!=a3/b3){
+		tablicaPrzeciecProstych[1][0]=((b3*c1)-(b1*c3))/(a1*b3-a3*b1);//x
 		tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1;//y
-		//}
-		//else { f2=false;}
+		}
+		else { f2=false;}
 		//przeciecie 2 z 3
-		//if(a2!=a3){
-		tablicaPrzeciecProstych[2][0]=(b2*c3)-(b3*c2)/(a3*b2-a2*b3); //x
+		if(a2/b2!=a3/b3){
+		tablicaPrzeciecProstych[2][0]=((b2*c3)-(b3*c2))/(a3*b2-a2*b3); //x
 		tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2; //y
-		//}
-		//else { f3=false;}
+		}
+		else { f3=false;}
 		
 		double tablicaPrzeciecOsiOXOY [][]= new double[6][2];
 		//przeciecie 1 z OX i OY
@@ -726,7 +727,7 @@ public class NewJFrame extends javax.swing.JFrame {
 		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
 
-		System.out.println(znak2);
+		
 		//-----------------------------------------------------------------------------------//
 		//-------------------------ZMIENNE POMOCNICZE DLA WARUNKÓW----------------------------------//
 		//---------------------------------------------------------------------------------//
@@ -873,6 +874,7 @@ public class NewJFrame extends javax.swing.JFrame {
 				}
 			}
 		}
+		
 		if(brakRozwiazan=false){
 		if(znak1!=znak3){
 			if(f2==false){
@@ -977,7 +979,7 @@ public class NewJFrame extends javax.swing.JFrame {
 		 
 		System.out.println(NewJFrame.komunikat);
 		System.out.println(NewJFrame.A1);
-		System.out.println(Znak1);
+		System.out.println(znak1);
 		System.out.println(NewJFrame.MAX);
 		
 		//=============================================================================//

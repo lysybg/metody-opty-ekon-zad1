@@ -159,7 +159,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("3");
+        jTextField2.setText("-6");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -185,7 +185,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setText("-5");
+        jTextField3.setText("2");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -200,7 +200,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("1");
+        jTextField4.setText("3");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -216,13 +216,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("5");
+        jTextField5.setText("6");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("-4");
+        jTextField6.setText("-1");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel13.setText("x");
@@ -255,18 +255,18 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel16.setText("2");
 
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=" }));
-        jComboBox10.setSelectedIndex(1);
+        //jComboBox10.setSelectedIndex(1);
         
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("8");
+        jTextField9.setText("1");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel17.setText("x");
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField10.setText("1");
+        jTextField10.setText("-2");
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
@@ -281,7 +281,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField11.setText("1");
+        jTextField11.setText("-1");
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
@@ -524,7 +524,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	    	double c3=NewJFrame.C3;//-6.0;
     	    	String znak3 = NewJFrame.Znak3;//">=";
     	    	
-    	    	System.out.println(b1);
+    	    	//System.out.println(b1);
     	/**
     	 * ===========================================OBLICZENIA DO RYSOWANIA FUNKCJI========================================
     	 */
@@ -559,22 +559,22 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab1[0][4]=8.0;
     	tab1[0][5]=10.0;
     	
-    	System.out.println(znak1);
-    	System.out.println("------ przed if");
+    	//System.out.println(znak1);
+    	//System.out.println("------ przed if");
     	//wyliczanie x2
     	if(b1<0){
     		if(znak1=="<="){
     			 znak1 = ">=";
     			 
-    			 System.out.println("zmieniam znak");
+    			 //System.out.println("zmieniam znak");
     		}
     		else{
    			 znak1 = "<=";
     		}
     	}
     	
-    	System.out.println(b1);
-    	System.out.println("yyyyyyyyyy");
+    	//System.out.println(b1);
+    	//System.out.println("yyyyyyyyyy");
     	/*tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
     	tab1[1][1]=(-a1*tab1[0][1]+c1)/b1;
     	tab1[1][2]=(-a1*tab1[0][2]+c1)/b1;
@@ -756,18 +756,20 @@ public class NewJFrame extends javax.swing.JFrame {
 			warunki[10]=true;
 		if(((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]>=tab1[1][0] && znak1==">=")) || ((tab3[1][0]<=tab2[1][0] && znak2=="<=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab1[1][0] && znak1==">=") && (tab3[1][0]<=tab2[1][0] && znak2=="<=")))
 			warunki[11]=true;
-		if(a1==a2 && ((b1>0 && b2>0) && (c1>c2 && znak1=="<=") || (c1<c2 && znak1==">=") || ((b1<0 && b2>0) && (-c1>c2 && znak1=="<=") || (-c1<c2 && znak1==">=")) || (b1>0 && b2<0) && (c1>-c2 && znak1=="<=") || (c1<-c2 && znak1==">=") || (b1<0 && b2<0) && (c1<c2 && znak1=="<=") || (c1>c2 && znak1==">=")))
+		if(a1/b1==a2/b2 && ((b1>0 && b2>0) && ((c1>c2 && znak1=="<=") || (c1<c2 && znak1==">=")) || ((b1<0 && b2>0) && ((-c1>c2 && znak1=="<=") || (-c1<c2 && znak1==">="))) || ((b1>0 && b2<0) && ((c1>-c2 && znak1=="<=") || (c1<-c2 && znak1==">="))) || ((b1<0 && b2<0) && ((c1<c2 && znak1=="<=") || (c1>c2 && znak1==">=")))))
 			warunki[12]=true;
-		if(a3==a2 && ((b3>0 && b2>0) && (c3>c2 && znak3=="<=") || (c3<c2 && znak3==">=") || ((b3<0 && b2>0) && (-c3>c2 && znak3=="<=") || (-c3<c2 && znak3==">=")) || (b3>0 && b2<0) && (c3>-c2 && znak3=="<=") || (c3<-c2 && znak3==">=") || (b3<0 && b2<0) && (c3<c2 && znak3=="<=") || (c3>c2 && znak3==">=")))
+		if(a3/b3==a2/b2 && ((b3>0 && b2>0) && (c3>c2 && znak3=="<=") || (c3<c2 && znak3==">=") || ((b3<0 && b2>0) && (-c3>c2 && znak3=="<=") || (-c3<c2 && znak3==">=")) || (b3>0 && b2<0) && (c3>-c2 && znak3=="<=") || (c3<-c2 && znak3==">=") || (b3<0 && b2<0) && (c3<c2 && znak3=="<=") || (c3>c2 && znak3==">=")))
 			warunki[13]=true;
-		if(a1==a3 && ((b1>0 && b3>0) && (c1>c3 && znak1=="<=") || (c1<c3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3 && znak1=="<=") || (-c1<c3 && znak1==">=")) || (b1>0 && b3<0) && (c1>-c3 && znak1=="<=") || (c1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1<c3 && znak1=="<=") || (c1>c3 && znak1==">=")))
+		if(a1/b1==a3/b3 && ((b1>0 && b3>0) && (c1>c3 && znak1=="<=") || (c1<c3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3 && znak1=="<=") || (-c1<c3 && znak1==">=")) || (b1>0 && b3<0) && (c1>-c3 && znak1=="<=") || (c1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1<c3 && znak1=="<=") || (c1>c3 && znak1==">=")))
 			warunki[14]=true;
-		for(int kra=0;kra<15;kra++)
-			System.out.print(kra+":" + warunki[kra]+" ");
+		
+		/*for(int kra=0;kra<15;kra++)
+			System.out.print(kra+":" + warunki[kra]+" ");*/
 		//-----------------------------------------------------------------------------------//
 		//-------------------------------------ROZWIAZANIE----------------------------------//
 		//---------------------------------------------------------------------------------//
-		System.out.print("x: "+tablicaPrzeciecProstych[0][0]+" y: "+tablicaPrzeciecProstych[0][1]);
+		//System.out.print("x: "+tablicaPrzeciecProstych[0][0]+" y: "+tablicaPrzeciecProstych[0][1]);
+		
 		int i=0;//wskazniki
 		double tablicaRozwiazan [][]= new double [9][3];
 		if(warunki[0]==true || warunki[1]==true){
@@ -833,8 +835,10 @@ public class NewJFrame extends javax.swing.JFrame {
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
 		}}
-		for(int k=0;k<i;k++)
-			System.out.println("cos"+tablicaRozwiazan[k][0]+" x "+tablicaRozwiazan[k][1]+" y "+tablicaRozwiazan[k][2]);
+		
+		/*for(int k=0;k<i;k++)
+			System.out.println("cos"+tablicaRozwiazan[k][0]+" x "+tablicaRozwiazan[k][1]+" y "+tablicaRozwiazan[k][2]);*/
+		
 		double temp=tablicaRozwiazan[0][0];
 		double rozwiazania [] = new double [2] ;
 		if(max==true){
@@ -969,9 +973,9 @@ public class NewJFrame extends javax.swing.JFrame {
 		 }
 		 else if(brakRozwiazan==false && ograniczenie==false)
 		 {
-			 System.out.println(temp);
-				System.out.println(rozwiazania[0]);
-				System.out.println(rozwiazania[1]);
+			 //System.out.println(temp);
+				//System.out.println(rozwiazania[0]);
+				//System.out.println(rozwiazania[1]);
 				//Tu bêdzie jTextArea lub komunikat, jakie to jest to nasze rozwi¹zanie
 				
 				NewJFrame.komunikat="Wartoœæ rozwi¹zania to "+Double.toString(temp)+" dla punktów x1="+Double.toString(rozwiazania[0])+"  i  x2="+Double.toString(rozwiazania[1]);
@@ -990,10 +994,10 @@ public class NewJFrame extends javax.swing.JFrame {
                 dataset.addSeries(pomiar);
 		 }
 		 
-		System.out.println(NewJFrame.komunikat);
+		/*System.out.println(NewJFrame.komunikat);
 		System.out.println(NewJFrame.A1);
 		System.out.println(znak1);
-		System.out.println(NewJFrame.MAX);
+		System.out.println(NewJFrame.MAX);*/
 		
 		//=============================================================================//
 		//----------------------------Tworzymy wykres XY------------------------------//

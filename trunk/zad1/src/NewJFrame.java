@@ -975,6 +975,19 @@ public class NewJFrame extends javax.swing.JFrame {
 				//Tu bêdzie jTextArea lub komunikat, jakie to jest to nasze rozwi¹zanie
 				
 				NewJFrame.komunikat="Wartoœæ rozwi¹zania to "+Double.toString(temp)+" dla punktów x1="+Double.toString(rozwiazania[0])+"  i  x2="+Double.toString(rozwiazania[1]);
+				//JESLI JEST PUNKT ZOSTANIE ON ZAZNACZONY NA WYKRESIE JAKO krzyzyk
+				final XYSeries pomiar = new XYSeries("MAX"); 
+				pomiar.add(rozwiazania[0],rozwiazania[1]);
+				pomiar.add(rozwiazania[0],(rozwiazania[1]+0.5));
+                pomiar.add(rozwiazania[0],rozwiazania[1]);
+                pomiar.add((rozwiazania[0]+0.5),rozwiazania[1]);
+                pomiar.add(rozwiazania[0],rozwiazania[1]);
+                pomiar.add(rozwiazania[0],(rozwiazania[1]-0.5));
+                pomiar.add(rozwiazania[0],rozwiazania[1]);
+                pomiar.add((rozwiazania[0]-0.5),rozwiazania[1]);
+                pomiar.add(rozwiazania[0],rozwiazania[1]);
+
+                dataset.addSeries(pomiar);
 		 }
 		 
 		System.out.println(NewJFrame.komunikat);

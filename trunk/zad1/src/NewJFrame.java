@@ -552,13 +552,23 @@ public class NewJFrame extends javax.swing.JFrame {
     	//----------------------------------------------FUNKCJA 1--------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab1 = new double[2][6];
+    	if(b1!=0){
     	tab1[0][0]=0.0;
     	tab1[0][1]=2.0;
     	tab1[0][2]=4.0;
     	tab1[0][3]=6.0;
     	tab1[0][4]=8.0;
     	tab1[0][5]=10.0;
-    	
+    	}
+    	else
+    	{
+    		tab1[0][0]=c1/a1;
+    		tab1[0][1]=c1/a1;
+        	tab1[0][2]=c1/a1;
+        	tab1[0][3]=c1/a1;
+        	tab1[0][4]=c1/a1;
+        	tab1[0][5]=c1/a1;
+    	}
     	//System.out.println(znak1);
     	//System.out.println("------ przed if");
     	//wyliczanie x2
@@ -581,12 +591,23 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab1[1][3]=(-a1*tab1[0][3]+c1)/b1;
     	tab1[1][4]=(-a1*tab1[0][4]+c1)/b1;
     	tab1[1][5]=(-a1*tab1[0][5]+c1)/b1;*/
+    	if(b1!=0){
     	tab1[1][0]=(-a1/b1)*tab1[0][0]+(c1/b1);
     	tab1[1][1]=(-a1/b1)*tab1[0][1]+(c1/b1);
     	tab1[1][2]=(-a1/b1)*tab1[0][2]+(c1/b1);
     	tab1[1][3]=(-a1/b1)*tab1[0][3]+(c1/b1);
     	tab1[1][4]=(-a1/b1)*tab1[0][4]+(c1/b1);
     	tab1[1][5]=(-a1/b1)*tab1[0][5]+(c1/b1);
+    	}
+    	else
+    	{
+    		tab1[1][0]=-5;
+        	tab1[1][1]=-3;
+        	tab1[1][2]=-1;
+        	tab1[1][3]=2;
+        	tab1[1][4]=4;
+        	tab1[1][5]=6;
+    	}
     	    	//tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
     	
     	//---------------------------------------------------------------------------------------------------------------
@@ -756,11 +777,11 @@ public class NewJFrame extends javax.swing.JFrame {
 			warunki[10]=true;
 		if(((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]>=tab1[1][0] && znak1==">=")) || ((tab3[1][0]<=tab2[1][0] && znak2=="<=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab2[1][0] && znak2==">=") && (tab3[1][0]<=tab1[1][0] && znak1=="<=")) || ((tab3[1][0]>=tab1[1][0] && znak1==">=") && (tab3[1][0]<=tab2[1][0] && znak2=="<=")))
 			warunki[11]=true;
-		if(a1/b1==a2/b2 && ((b1>0 && b2>0) && ((c1>c2 && znak1=="<=") || (c1<c2 && znak1==">=")) || ((b1<0 && b2>0) && ((-c1>c2 && znak1=="<=") || (-c1<c2 && znak1==">="))) || ((b1>0 && b2<0) && ((c1>-c2 && znak1=="<=") || (c1<-c2 && znak1==">="))) || ((b1<0 && b2<0) && ((c1<c2 && znak1=="<=") || (c1>c2 && znak1==">=")))))
+		if(a1/b1==a2/b2 && ((b1>0 && b2>0) && ((c1/b1>c2/b2 && znak1=="<=") || (c1/b1<c2/b2 && znak1==">=")) || ((b1<0 && b2>0) && ((-c1/b1>c2/b2 && znak1=="<=") || (-c1/b1<c2/b2 && znak1==">="))) || ((b1>0 && b2<0) && ((c1/b1>-c2/b2 && znak1=="<=") || (c1/b1<-c2/b2 && znak1==">="))) || ((b1<0 && b2<0) && ((c1/b1<c2/b2 && znak1=="<=") || (c1/b1>c2/b2 && znak1==">=")))))
 			warunki[12]=true;
-		if(a3/b3==a2/b2 && ((b3>0 && b2>0) && (c3>c2 && znak3=="<=") || (c3<c2 && znak3==">=") || ((b3<0 && b2>0) && (-c3>c2 && znak3=="<=") || (-c3<c2 && znak3==">=")) || (b3>0 && b2<0) && (c3>-c2 && znak3=="<=") || (c3<-c2 && znak3==">=") || (b3<0 && b2<0) && (c3<c2 && znak3=="<=") || (c3>c2 && znak3==">=")))
+		if(a3/b3==a2/b2 && ((b3>0 && b2>0) && (c3/b3>c2/b2 && znak3=="<=") || (c3/b3<c2/b2 && znak3==">=") || ((b3<0 && b2>0) && (-c3/b3>c2/b2 && znak3=="<=") || (-c3/b3<c2/b2 && znak3==">=")) || (b3>0 && b2<0) && (c3>-c2/b2 && znak3=="<=") || (c3<-c2/b2 && znak3==">=") || (b3<0 && b2<0) && (c3/b3<c2 && znak3=="<=") || (c3/b3>c2 && znak3==">=")))
 			warunki[13]=true;
-		if(a1/b1==a3/b3 && ((b1>0 && b3>0) && (c1>c3 && znak1=="<=") || (c1<c3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3 && znak1=="<=") || (-c1<c3 && znak1==">=")) || (b1>0 && b3<0) && (c1>-c3 && znak1=="<=") || (c1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1<c3 && znak1=="<=") || (c1>c3 && znak1==">=")))
+		if(a1/b1==a3/b3 && ((b1>0 && b3>0) && (c1/b1>c3/b3 && znak1=="<=") || (c1/b1<c3/b3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3/b3 && znak1=="<=") || (-c1<c3/b3 && znak1==">=")) || (b1>0 && b3<0) && (c1/b1>-c3 && znak1=="<=") || (c1/b1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1/b1<c3/b3 && znak1=="<=") || (c1/b1>c3/b3 && znak1==">=")))
 			warunki[14]=true;
 		
 		/*for(int kra=0;kra<15;kra++)
@@ -836,8 +857,8 @@ public class NewJFrame extends javax.swing.JFrame {
 			i+=1;
 		}}
 		
-		/*for(int k=0;k<i;k++)
-			System.out.println("cos"+tablicaRozwiazan[k][0]+" x "+tablicaRozwiazan[k][1]+" y "+tablicaRozwiazan[k][2]);*/
+		for(int k=0;k<i;k++)
+			System.out.println("cos"+tablicaRozwiazan[k][0]+" x "+tablicaRozwiazan[k][1]+" y "+tablicaRozwiazan[k][2]);
 		
 		double temp=tablicaRozwiazan[0][0];
 		double rozwiazania [] = new double [2] ;
@@ -864,34 +885,36 @@ public class NewJFrame extends javax.swing.JFrame {
 		
 		if(znak1!=znak2){
 			if(f1==false){
-				if((b1>0 && b2>0) && (c1>c2 && znak1==">=") || (c1<c2 && znak1=="<=")){
+				if((b1>0 && b2>0) && (c1/b1>c2/b2 && znak1==">=") || (c1/b1<c2/b2 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b1<0 && b2>0) && (-c1>c2 && znak1==">=") || (-c1<c2 && znak1=="<=")){
+				else if((b1<0 && b2>0) && (-c1/b1>c2/b2 && znak1==">=") || (-c1/b1<c2/b2 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b1>0 && b2<0) && (c1>-c2 && znak1==">=") || (c1<-c2 && znak1=="<=")){
+				else if((b1>0 && b2<0) && (c1/b1>-c2/b2 && znak1==">=") || (c1/b1<-c2/b2 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b1<0 && b2<0) && (c1<c2 && znak1==">=") || (c1>c2 && znak1=="<=")){
+				else if((b1<0 && b2<0) && (c1/b1<c2/b2 && znak1==">=") || (c1/b1>c2/b2 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
 			}
 		}
-		
-		if(brakRozwiazan=false){
+		//System.out.print("znak1"+znak1+" c1/b1 "+c1/b1+"c2/b2 "+c3/b3);
+			//System.out.print(f1+" "+f2);
+		if(brakRozwiazan==false){
 		if(znak1!=znak3){
 			if(f2==false){
-				if((b1>0 && b3>0) && (c1>c3 && znak1==">=") || (c1<c3 && znak1=="<=")){
+				//System.out.print("asdhjkashndkj");
+				if((b1>0 && b3>0) && ((c1/b1>c3/b3 && znak1==">=") || (c1/b1<c3/b3 && znak1=="<="))){
 					brakRozwiazan=true;
 				}
-				else if((b1<0 && b3>0) && (-c1>c3 && znak1==">=") || (-c1<c3 && znak1=="<=")){
+				else if((b1<0 && b3>0) && (-c1/b1>c3/b3 && znak1==">=") || (-c1/b1<c3/b3 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b1>0 && b3<0) && (c1>-c3 && znak1==">=") || (c1<-c3 && znak1=="<=")){
+				else if((b1>0 && b3<0) && (c1/b1>-c3/b3 && znak1==">=") || (c1/b1<-c3/b3 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b1<0 && b3<0) && (c1<c3 && znak1==">=") || (c1>c3 && znak1=="<=")){
+				else if((b1<0 && b3<0) && (c1/b1<c3/b3 && znak1==">=") || (c1/b1>c3/b3 && znak1=="<=")){
 					brakRozwiazan=true;
 				}
 			}
@@ -899,16 +922,16 @@ public class NewJFrame extends javax.swing.JFrame {
 		if(brakRozwiazan==false){
 		if(znak2!=znak3){
 			if(f3==false){
-				if((b2>0 && b3>0) && (c2>c3 && znak2==">=") || (c2<c3 && znak2=="<=")){
+				if((b2>0 && b3>0) && (c2/b2>c3/b3 && znak2==">=") || (c2/b2<c3/b3 && znak2=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b2<0 && b3>0) && (-c2>c3 && znak2==">=") || (-c2<c3 && znak2=="<=")){
+				else if((b2<0 && b3>0) && (-c2/b2>c3/b3 && znak2==">=") || (-c2/b2<c3/b3 && znak2=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b2>0 && b3<0) && (c2>-c3 && znak2==">=") || (c2<-c3 && znak2=="<=")){
+				else if((b2>0 && b3<0) && (c2/b2>-c3/b3 && znak2==">=") || (c2/b2<-c3/b3 && znak2=="<=")){
 					brakRozwiazan=true;
 				}
-				else if((b2<0 && b3<0) && (c2<c3 && znak2==">=") || (c2>c3 && znak2=="<=")){
+				else if((b2<0 && b3<0) && (c2/b2<c3/b3 && znak2==">=") || (c2/b2>c3/b3 && znak2=="<=")){
 					brakRozwiazan=true;
 				}
 			}

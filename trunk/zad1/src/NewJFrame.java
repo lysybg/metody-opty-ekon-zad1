@@ -614,13 +614,22 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------FUNKCJA 2---------------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab2 = new double[2][6];
+    	if(b2!=0){
     	tab2[0][0]=0.0;
     	tab2[0][1]=2.0;
     	tab2[0][2]=4.0;
     	tab2[0][3]=6.0;
     	tab2[0][4]=8.0;
     	tab2[0][5]=10.0;
-    	
+    	}
+    	else{
+    		tab2[0][0]=c2/a2;
+		tab2[0][1]=c2/a2;
+    	tab2[0][2]=c2/a2;
+    	tab2[0][3]=c2/a2;
+    	tab2[0][4]=c2/a2;
+    	tab2[0][5]=c2/a2;
+    	}
     	//wyliczanie x2
     	if(b2<0){
     		if(znak2=="<="){
@@ -630,26 +639,45 @@ public class NewJFrame extends javax.swing.JFrame {
    			 znak2 = "<=";
     		}
     	}
+    	if(b2!=0){
     	tab2[1][0]=(-a2/b2)*tab2[0][0]+(c2/b2);
     	tab2[1][1]=(-a2/b2)*tab2[0][1]+(c2/b2);
     	tab2[1][2]=(-a2/b2)*tab2[0][2]+(c2/b2);
     	tab2[1][3]=(-a2/b2)*tab2[0][3]+(c2/b2);
     	tab2[1][4]=(-a2/b2)*tab2[0][4]+(c2/b2);
     	tab2[1][5]=(-a2/b2)*tab2[0][5]+(c2/b2);
-    	
+    	}
+    	else{
+    		tab2[1][0]=-5;
+        	tab2[1][1]=-3;
+        	tab2[1][2]=-1;
+        	tab2[1][3]=2;
+        	tab2[1][4]=4;
+        	tab2[1][5]=6;
+    	}
+    		
     	
     	//---------------------------------------------------------------------------------------------------------------
     	//---------------------------------------FUNKCJA 3---------------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
     	double[][] tab3 = new double[2][6];
+    	if(b3!=0){
     	tab3[0][0]=0.0;
     	tab3[0][1]=2.0;
     	tab3[0][2]=4.0;
     	tab3[0][3]=6.0;
     	tab3[0][4]=8.0;
     	tab3[0][5]=10.0;
-    	
-    	//wyliczanie x2
+    	}
+    	else{
+    		tab3[0][0]=c3/a3;
+    		tab3[0][1]=c3/a3;
+        	tab3[0][2]=c3/a3;
+        	tab3[0][3]=c3/a3;
+        	tab3[0][4]=c3/a3;
+        	tab3[0][5]=c3/a3;
+    	}
+    	//wyliczanie x3
     	if(b3<0){
     		if(znak3=="<="){
     			 znak3 = ">=";
@@ -658,13 +686,22 @@ public class NewJFrame extends javax.swing.JFrame {
    			 znak3 = "<=";
     		}
     	}
+    	if(b3!=0){
     	tab3[1][0]=(-a3/b3)*tab3[0][0]+(c3/b3);
     	tab3[1][1]=(-a3/b3)*tab3[0][1]+(c3/b3);
     	tab3[1][2]=(-a3/b3)*tab3[0][2]+(c3/b3);
     	tab3[1][3]=(-a3/b3)*tab3[0][3]+(c3/b3);
     	tab3[1][4]=(-a3/b3)*tab3[0][4]+(c3/b3);
     	tab3[1][5]=(-a3/b3)*tab3[0][5]+(c3/b3);
-    
+    	}
+    	else{
+    		tab3[1][0]=-5;
+        	tab3[1][1]=-3;
+        	tab3[1][2]=-1;
+        	tab3[1][3]=2;
+        	tab3[1][4]=4;
+        	tab3[1][5]=6;
+    	}
     	/**
     	 * ====================================RYSOWANIE WYKRESU===============================================
     	 */
@@ -713,20 +750,50 @@ public class NewJFrame extends javax.swing.JFrame {
 		double tablicaPrzeciecProstych [][]= new double[3][2];
 		//przeciecie 1 z 2
 		if(a1/b1!=a2/b2){
+			if(b1!=0 && b2!=0){
 		tablicaPrzeciecProstych[0][0]=((b2*c1)-(b1*c2))/(a1*b2-a2*b1); //x
 		tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1; //y
+			}
+			else if (b1==0){
+				tablicaPrzeciecProstych[0][0]=c1/a1; //x
+				tablicaPrzeciecProstych[0][1]=(-a2*tablicaPrzeciecProstych[0][0]+c2)/b2; //y
+			}
+			else if(b2==0){
+				tablicaPrzeciecProstych[0][0]=c2/a2; //x
+				tablicaPrzeciecProstych[0][1]=(-a1*tablicaPrzeciecProstych[0][0]+c1)/b1; //y
+			}
 		}
 		else { f1=false;}
 		//przeciecie 1 z 3
 		if(a1/b1!=a3/b3){
+			if(b1!=0 && b3!=0){
 		tablicaPrzeciecProstych[1][0]=((b3*c1)-(b1*c3))/(a1*b3-a3*b1);//x
 		tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1;//y
+			}
+			else if (b1==0){
+				tablicaPrzeciecProstych[1][0]=c1/a1; //x
+				tablicaPrzeciecProstych[1][1]=(-a3*tablicaPrzeciecProstych[1][0]+c3)/b3; //y
+			}
+			else if(b3==0){
+				tablicaPrzeciecProstych[1][0]=c3/a3; //x
+				tablicaPrzeciecProstych[1][1]=(-a1*tablicaPrzeciecProstych[1][0]+c1)/b1; //y
+			}
 		}
 		else { f2=false;}
 		//przeciecie 2 z 3
 		if(a2/b2!=a3/b3){
+			if(b2!=0 && b3!=0){
 		tablicaPrzeciecProstych[2][0]=((b2*c3)-(b3*c2))/(a3*b2-a2*b3); //x
 		tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2; //y
+		}
+			else if (b2==0){
+				tablicaPrzeciecProstych[2][0]=c2/a2; //x
+				tablicaPrzeciecProstych[2][1]=(-a3*tablicaPrzeciecProstych[2][0]+c3)/b3; //y
+			}
+			else if(b3==0){
+				tablicaPrzeciecProstych[2][0]=c3/a3; //x
+				tablicaPrzeciecProstych[2][1]=(-a2*tablicaPrzeciecProstych[2][0]+c2)/b2; //y
+			}
 		}
 		else { f3=false;}
 		
@@ -748,12 +815,12 @@ public class NewJFrame extends javax.swing.JFrame {
 		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
 
-		
+		//System.out.println("xx: "+tablicaPrzeciecProstych[2][0]+"xx: "+tablicaPrzeciecProstych[2][1]);
 		//-----------------------------------------------------------------------------------//
 		//-------------------------ZMIENNE POMOCNICZE DLA WARUNKÓW----------------------------------//
 		//---------------------------------------------------------------------------------//
 		boolean warunki[]= new boolean [15];
-		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3<=tablicaPrzeciecProstych[0][1] && znak3==">=")
+		if(b1!=0 && b3!=0 && (-a3*tablicaPrzeciecProstych[0][0]+c3)/b3<=tablicaPrzeciecProstych[0][1] && znak3==">=")
 			warunki[0]=true;
 		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3>=tablicaPrzeciecProstych[0][1] && znak3=="<=")
 			warunki[1]=true;

@@ -675,7 +675,9 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------------------------------------------------------------------------------
     	//----------------------------------------------FUNKCJA 1--------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
+    	double[][] gradient1 = new double[2][2];
     	double[][] tab1 = new double[2][6];
+    	//wyliczanie x1
     	if(b1!=0){
     	tab1[0][0]=0.0;
     	tab1[0][1]=2.0;
@@ -693,28 +695,17 @@ public class NewJFrame extends javax.swing.JFrame {
         	tab1[0][4]=c1/a1;
         	tab1[0][5]=c1/a1;
     	}
-    	//System.out.println(znak1);
-    	//System.out.println("------ przed if");
+
     	//wyliczanie x2
     	if(b1<0){
     		if(znak1=="<="){
     			 znak1 = ">=";
-    			 
-    			 //System.out.println("zmieniam znak");
     		}
     		else{
    			 znak1 = "<=";
     		}
     	}
-    	
-    	//System.out.println(b1);
-    	//System.out.println("yyyyyyyyyy");
-    	/*tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
-    	tab1[1][1]=(-a1*tab1[0][1]+c1)/b1;
-    	tab1[1][2]=(-a1*tab1[0][2]+c1)/b1;
-    	tab1[1][3]=(-a1*tab1[0][3]+c1)/b1;
-    	tab1[1][4]=(-a1*tab1[0][4]+c1)/b1;
-    	tab1[1][5]=(-a1*tab1[0][5]+c1)/b1;*/
+
     	if(b1!=0){
     	tab1[1][0]=(-a1/b1)*tab1[0][0]+(c1/b1);
     	tab1[1][1]=(-a1/b1)*tab1[0][1]+(c1/b1);
@@ -722,6 +713,13 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab1[1][3]=(-a1/b1)*tab1[0][3]+(c1/b1);
     	tab1[1][4]=(-a1/b1)*tab1[0][4]+(c1/b1);
     	tab1[1][5]=(-a1/b1)*tab1[0][5]+(c1/b1);
+    		if(b1<0){
+    				gradient1[0][0]=tab1[0][2];   //x dla gradientu
+    				gradient1[1][0]=-1*((-1/a1)*gradient1[0][0]+3);  //y
+    		}else{
+    			gradient1[0][0]=tab1[0][2];   //x dla gradientu
+				gradient1[1][0]=(-1/a1)*gradient1[0][0]+3;  //y
+    		}
     	}
     	else
     	{
@@ -731,12 +729,14 @@ public class NewJFrame extends javax.swing.JFrame {
         	tab1[1][3]=2;
         	tab1[1][4]=4;
         	tab1[1][5]=6;
+
     	}
     	    	//tab1[1][0]=(-a1*tab1[0][0]+c1)/b1;
     	
     	//---------------------------------------------------------------------------------------------------------------
     	//---------------------------------------FUNKCJA 2---------------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
+    	double[][] gradient2 = new double[2][2];
     	double[][] tab2 = new double[2][6];
     	if(b2!=0){
     	tab2[0][0]=0.0;
@@ -770,6 +770,13 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab2[1][3]=(-a2/b2)*tab2[0][3]+(c2/b2);
     	tab2[1][4]=(-a2/b2)*tab2[0][4]+(c2/b2);
     	tab2[1][5]=(-a2/b2)*tab2[0][5]+(c2/b2);
+    		if(b2<0){
+    			gradient2[0][0]=tab2[0][3];   //x dla gradientu
+    			gradient2[1][0]=-1*((-1/a2)*gradient2[0][0]+3);  //y
+    		}else{
+    			gradient2[0][0]=tab2[0][3];   //x dla gradientu
+    			gradient2[1][0]=(-1/a2)*gradient2[0][0]+3;  //y
+    		}
     	}
     	else{
     		tab2[1][0]=-5;
@@ -784,6 +791,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	//---------------------------------------------------------------------------------------------------------------
     	//---------------------------------------FUNKCJA 3---------------------------------------------------------------
     	//---------------------------------------------------------------------------------------------------------------
+    	double[][] gradient3 = new double[2][2];
     	double[][] tab3 = new double[2][6];
     	if(b3!=0){
     	tab3[0][0]=0.0;
@@ -817,6 +825,13 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab3[1][3]=(-a3/b3)*tab3[0][3]+(c3/b3);
     	tab3[1][4]=(-a3/b3)*tab3[0][4]+(c3/b3);
     	tab3[1][5]=(-a3/b3)*tab3[0][5]+(c3/b3);
+    		if(b3<0){
+    			gradient3[0][0]=tab3[0][4];   //x dla gradientu
+    			gradient3[1][0]=-1*((-1/a3)*gradient3[0][0]);  //y
+    		}else{
+    			gradient3[0][0]=tab3[0][4];   //x dla gradientu
+    			gradient3[1][0]=(-1/a3)*gradient3[0][0];  //y
+    		}
     	}
     	else{
     		tab3[1][0]=-5;
@@ -833,15 +848,24 @@ public class NewJFrame extends javax.swing.JFrame {
 		series.add(tab1[0][0], tab1[1][0]);
 		series.add(tab1[0][1], tab1[1][1]);
 		series.add(tab1[0][2], tab1[1][2]);
+		if(b1!=0 && a1!=0){
+			series.add(gradient1[0][0],gradient1[1][0]);
+			series.add(tab1[0][2], tab1[1][2]);
+		}
 		series.add(tab1[0][3], tab1[1][3]);
 		series.add(tab1[0][4], tab1[1][4]);
 		series.add(tab1[0][5], tab1[1][5]);
+		//series.add(gradient1[0][0],gradient1[1][0]);
 		
 		XYSeries series2 = new XYSeries("funkcja 2");
 		series2.add(tab2[0][0], tab2[1][0]);
 		series2.add(tab2[0][1], tab2[1][1]);
 		series2.add(tab2[0][2], tab2[1][2]);
 		series2.add(tab2[0][3], tab2[1][3]);
+		if(b2!=0 && a2!=0){
+			series2.add(gradient2[0][0],gradient2[1][0]);
+			series2.add(tab2[0][3], tab2[1][3]);
+			}
 		series2.add(tab2[0][4], tab2[1][4]);
 		series2.add(tab2[0][5], tab2[1][5]);
 		
@@ -851,6 +875,10 @@ public class NewJFrame extends javax.swing.JFrame {
 		series3.add(tab3[0][2], tab3[1][2]);
 		series3.add(tab3[0][3], tab3[1][3]);
 		series3.add(tab3[0][4], tab3[1][4]);
+		if(b3!=0 && a3!=0){
+			series3.add(gradient3[0][0],gradient3[1][0]);
+			series3.add(tab3[0][4], tab3[1][4]);
+			}
 		series3.add(tab3[0][5], tab3[1][5]);
 		
 		XYSeries seriesCEL = new XYSeries("funkcja celu");

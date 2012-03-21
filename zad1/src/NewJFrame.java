@@ -799,10 +799,18 @@ public class NewJFrame extends javax.swing.JFrame {
 		
 		double tablicaPrzeciecOsiOXOY [][]= new double[6][2];
 		//przeciecie 1 z OX i OY
+		if(b1!=0){
 		tablicaPrzeciecOsiOXOY[0][0]=0;//x
 		tablicaPrzeciecOsiOXOY[0][1]=c1/b1;//y
 		tablicaPrzeciecOsiOXOY[1][0]=c1/a1;//x
 		tablicaPrzeciecOsiOXOY[1][1]=0;//y
+		}
+		/*else if(b1==0){
+			tablicaPrzeciecOsiOXOY[0][0]=0;//x
+			tablicaPrzeciecOsiOXOY[0][1]=c1/b1;//y
+			tablicaPrzeciecOsiOXOY[1][0]=c1/a1;//x
+			tablicaPrzeciecOsiOXOY[1][1]=0;//y
+		}*/
 		//przeciecie 2 z OX i OY
 		tablicaPrzeciecOsiOXOY[2][0]=0;//x
 		tablicaPrzeciecOsiOXOY[2][1]=c2/b2;//y
@@ -814,29 +822,125 @@ public class NewJFrame extends javax.swing.JFrame {
 		tablicaPrzeciecOsiOXOY[5][0]=c3/a3;//x
 		tablicaPrzeciecOsiOXOY[5][1]=0;//y
 		
-
-		//System.out.println("xx: "+tablicaPrzeciecProstych[2][0]+"xx: "+tablicaPrzeciecProstych[2][1]);
+//for(int wer=0; wer<3; wer++)
+	//System.out.println("xx: " + tablicaPrzeciecOsiOXOY[wer][0]+"yyy " + tablicaPrzeciecOsiOXOY[wer][1]);
+		//System.out.println("xx: "+tablicaPrzeciecProstych[wer][0]+"yy: "+tablicaPrzeciecProstych[wer][1]);
 		//-----------------------------------------------------------------------------------//
 		//-------------------------ZMIENNE POMOCNICZE DLA WARUNKÓW----------------------------------//
 		//---------------------------------------------------------------------------------//
-		boolean warunki[]= new boolean [15];
-		if(b1!=0 && b3!=0 && (-a3*tablicaPrzeciecProstych[0][0]+c3)/b3<=tablicaPrzeciecProstych[0][1] && znak3==">=")
+		boolean warunki[]= new boolean [33];
+		//waruenk1
+		if(b3!=0){
+			if(b1!=0 && b2!=0){
+		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3<=tablicaPrzeciecProstych[0][1] && znak3==">="){
 			warunki[0]=true;
+		}
 		if((-a3*tablicaPrzeciecProstych[0][0]+c3)/b3>=tablicaPrzeciecProstych[0][1] && znak3=="<=")
 			warunki[1]=true;
+			}
+			else if(b1==0){
+					if(b3!=0){
+				if((tablicaPrzeciecProstych[0][1]>=tablicaPrzeciecProstych[1][1] && znak3==">=") || (tablicaPrzeciecProstych[0][1]<=tablicaPrzeciecProstych[1][1] && znak3=="<="))
+					warunki[1]=true;
+					}
+					else if(b3==0){
+						if((tab1[0][0]>=tab3[0][0] && znak3==">=") || (tab1[0][0]<=tab3[0][0] && znak3=="<="))
+							warunki[1]=true;
+					}
+			}
+			else if (b2==0){
+				if(b3!=0){
+					if((tablicaPrzeciecProstych[0][1]>=tablicaPrzeciecProstych[2][1] && znak3==">=") || (tablicaPrzeciecProstych[0][1]<=tablicaPrzeciecProstych[2][1] && znak3=="<="))
+						warunki[1]=true;
+						}
+						else if(b3==0){
+							if((tab2[0][0]>=tab3[0][0] && znak3==">=") || (tab2[0][0]<=tab3[0][0] && znak3=="<="))
+								warunki[1]=true;
+						}
+			}
+		}
+		else if(b3==0){
+			if(tablicaPrzeciecProstych[0][0]<=tab3[0][0] && znak3=="<=")
+				warunki[0]=true;
+			else if (tablicaPrzeciecProstych[0][0]>=tab3[0][0] && znak3==">=")
+			warunki[1]=true;			
+		}
+		//warunek2
+		if(b2!=0){
+			if(b1!=0 && b3!=0){
 		if((-a2*tablicaPrzeciecProstych[1][0]+c2)/b2<=tablicaPrzeciecProstych[1][1] && znak2==">=")
 			warunki[2]=true;
 		if((-a2*tablicaPrzeciecProstych[1][0]+c2)/b2>=tablicaPrzeciecProstych[1][1] && znak2=="<=")
 			warunki[3]=true;
+			}
+			else if(b1==0){
+				if(b2!=0){
+			if((tablicaPrzeciecProstych[1][1]>=tablicaPrzeciecProstych[0][1] && znak2==">=") || (tablicaPrzeciecProstych[1][1]<=tablicaPrzeciecProstych[0][1] && znak2=="<="))
+				warunki[2]=true;
+				}
+				else if(b2==0){
+					if((tab1[0][0]>=tab2[0][0] && znak2==">=") || (tab1[0][0]<=tab2[0][0] && znak2=="<="))
+						warunki[3]=true;
+				}
+		}
+		else if (b3==0){
+			if(b2!=0){
+				if((tablicaPrzeciecProstych[1][1]>=tablicaPrzeciecProstych[2][1] && znak2==">=") || (tablicaPrzeciecProstych[1][1]<=tablicaPrzeciecProstych[2][1] && znak2=="<="))
+					warunki[2]=true;
+					}
+					else if(b2==0){
+						if((tab3[0][0]>=tab2[0][0] && znak2==">=") || (tab3[0][0]<=tab2[0][0] && znak2=="<="))
+							warunki[3]=true;
+					}
+		}
+		}
+		else if(b2==0){
+			if(tablicaPrzeciecProstych[1][0]<=tab2[0][0] && znak2=="<=")
+				warunki[2]=true;
+			else if (tablicaPrzeciecProstych[1][0]>=tab2[0][0] && znak2==">=")
+			warunki[3]=true;
+		}
+		//warunek3
+		if(b1!=0){
+			if(b2!=0 && b3!=0){
 		if((-a1*tablicaPrzeciecProstych[2][0]+c1)/b1<=tablicaPrzeciecProstych[2][1] && znak1==">=")
 			warunki[4]=true;
 		if((-a1*tablicaPrzeciecProstych[2][0]+c1)/b1>=tablicaPrzeciecProstych[2][1] && znak1=="<=")
 			warunki[5]=true;
-		if(((-a2*tablicaPrzeciecOsiOXOY[1][0]+c2)/b2>=0 && (-a3*tablicaPrzeciecOsiOXOY[1][0]+c3)/b3>=0) && (znak2=="<=" && znak3=="<="))
+			}
+			else if(b2==0){
+				if(b1!=0){
+			if((tablicaPrzeciecProstych[2][1]>=tablicaPrzeciecProstych[0][1] && znak1==">=") || (tablicaPrzeciecProstych[2][1]<=tablicaPrzeciecProstych[0][1] && znak1=="<="))
+				warunki[4]=true;
+				}
+				else if(b1==0){
+					if((tab2[0][0]>=tab1[0][0] && znak1==">=") || (tab2[0][0]<=tab1[0][0] && znak1=="<="))
+						warunki[4]=true;
+				}
+		}
+		else if (b3==0){
+			if(b1!=0){
+				if((tablicaPrzeciecProstych[2][1]>=tablicaPrzeciecProstych[1][1] && znak1==">=") || (tablicaPrzeciecProstych[2][1]<=tablicaPrzeciecProstych[1][1] && znak1=="<="))
+					warunki[5]=true;
+					}
+					else if(b1==0){
+						if((tab3[0][0]>=tab1[0][0] && znak1==">=") || (tab3[0][0]<=tab1[0][0] && znak1=="<="))
+							warunki[5]=true;
+					}
+		}
+		}
+		else if(b1==0){
+			if(tablicaPrzeciecProstych[2][0]<=tab1[0][0] && znak1=="<=")
+				warunki[4]=true;
+			else if (tablicaPrzeciecProstych[2][0]>=tab1[0][0] && znak1==">=")
+			warunki[5]=true;
+		}
+		//warunki z osiami
+		if((b1!=0 &&(-a2*tablicaPrzeciecOsiOXOY[1][0]+c2)/b2>=0 && (-a3*tablicaPrzeciecOsiOXOY[1][0]+c3)/b3>=0) && (znak2=="<=" && znak3=="<="))
 			warunki[6]=true;
-		if(((-a1*tablicaPrzeciecOsiOXOY[3][0]+c1)/b1>=0 && (-a3*tablicaPrzeciecOsiOXOY[3][0]+c3)/b3>=0) && (znak1=="<=" && znak3=="<="))
+		if((b2!=0 &&(-a1*tablicaPrzeciecOsiOXOY[3][0]+c1)/b1>=0 && (-a3*tablicaPrzeciecOsiOXOY[3][0]+c3)/b3>=0) && (znak1=="<=" && znak3=="<="))
 			warunki[7]=true;
-		if((((-a1*tablicaPrzeciecOsiOXOY[5][0]+c1)/b1>=0 && (-a2*tablicaPrzeciecOsiOXOY[5][0]+c2)/b2>=0)) && (znak2=="<=" && znak1=="<="))
+		if(((b3!=0 && (-a1*tablicaPrzeciecOsiOXOY[5][0]+c1)/b1>=0 && (-a2*tablicaPrzeciecOsiOXOY[5][0]+c2)/b2>=0)) && (znak2=="<=" && znak1=="<="))
 			warunki[8]=true;
 		if(((tab1[1][0]>=tab2[1][0] && znak2==">=") && (tab1[1][0]>=tab3[1][0] && znak3==">=")) || ((tab1[1][0]<=tab2[1][0] && znak2=="<=") && (tab1[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab1[1][0]>=tab2[1][0] && znak2==">=") && (tab1[1][0]<=tab3[1][0] && znak3=="<=")) || ((tab1[1][0]>=tab3[1][0] && znak3==">=") && (tab1[1][0]<=tab2[1][0] && znak2=="<=")))
 			warunki[9]=true;
@@ -850,8 +954,132 @@ public class NewJFrame extends javax.swing.JFrame {
 			warunki[13]=true;
 		if(a1/b1==a3/b3 && ((b1>0 && b3>0) && (c1/b1>c3/b3 && znak1=="<=") || (c1/b1<c3/b3 && znak1==">=") || ((b1<0 && b3>0) && (-c1>c3/b3 && znak1=="<=") || (-c1<c3/b3 && znak1==">=")) || (b1>0 && b3<0) && (c1/b1>-c3 && znak1=="<=") || (c1/b1<-c3 && znak1==">=") || (b1<0 && b3<0) && (c1/b1<c3/b3 && znak1=="<=") || (c1/b1>c3/b3 && znak1==">=")))
 			warunki[14]=true;
-		
-		/*for(int kra=0;kra<15;kra++)
+		if(b1==0){
+			warunki[15]=true;
+			if(znak1=="<=" && tab1[0][0]>=0){
+				if(b2!=0 && b3!=0){
+					if((tab2[1][0]<=tab3[1][0] && znak3=="<=") || (tab2[1][0]>=tab3[1][0] && znak3==">=")){
+						warunki[24]=true;//osiOXOY[2][1]
+					}
+					else if((tab2[1][0]>=tab3[1][0] && znak2=="<=") || (tab2[1][0]<=tab3[1][0] && znak2==">=")){
+						warunki[25]=true;//osiOXOY[4][1]
+					}
+				}
+				else if(b2==0){
+					if(znak2=="<=" && tab2[0][0]>=0 && tab3[1][0]>=0)
+						warunki[26]=true;//osiOXOY[4][1]
+				}
+				else if(b3==0){
+					if(znak3=="<=" && tab3[0][0]>=0 && tab2[1][0]>=0){
+						warunki[26]=true;//osiOXOY[2][1]
+					}
+				}
+				
+			}
+		}
+		if(b2==0){
+			warunki[16]=true;
+			if(znak2=="<=" && tab2[0][0]>=0){
+				if(b1!=0 && b3!=0){
+					if((tab1[1][0]<=tab3[1][0] && znak3=="<=") || (tab1[1][0]>=tab3[1][0] && znak3==">=")){
+						warunki[27]=true;//osiOXOY[0][1]
+					}
+					else if((tab1[1][0]>=tab3[1][0] && znak1=="<=") || (tab1[1][0]<=tab3[1][0] && znak1==">=")){
+						warunki[28]=true;//osiOXOY[4][1]
+					}
+				}
+				else if(b1==0){
+					if(znak1=="<=" && tab1[0][0]>=0 && tab3[1][0]>=0)
+						warunki[29]=true;//osiOXOY[4][1]
+				}
+				else if(b3==0){
+					if(znak3=="<=" && tab3[0][0]>=0 && tab1[1][0]>=0){
+						warunki[29]=true;//osiOXOY[0][1]
+					}
+				}
+				
+			}
+		}
+		if(b3==0){
+			warunki[17]=true;
+			if(znak3=="<=" && tab3[0][0]>=0){
+				if(b2!=0 && b1!=0){
+					if((tab2[1][0]<=tab1[1][0] && znak1=="<=") || (tab2[1][0]>=tab1[1][0] && znak1==">=")){
+						warunki[30]=true;//osiOXOY[2][1]
+					}
+					else if((tab2[1][0]>=tab1[1][0] && znak2=="<=") || (tab2[1][0]<=tab1[1][0] && znak2==">=")){
+						warunki[31]=true;//osiOXOY[0][1]
+					}
+				}
+				else if(b2==0){
+					if(znak2=="<=" && tab2[0][0]>=0 && tab1[1][0]>=0)
+						warunki[32]=true;//osiOXOY[0][1]
+				}
+				else if(b1==0){
+					if(znak1=="<=" && tab1[0][0]>=0 && tab2[1][0]>=0){
+						warunki[32]=true;//osiOXOY[2][1]
+					}
+				}				
+			}
+		}
+		if(a1==0){
+			warunki[18]=true;
+		}
+		if(a2==0){
+			warunki[19]=true;
+		}
+		if(a3==0){
+			warunki[20]=true;
+		}
+		//warunek21
+		if(b1==0){
+			if(b2!=0 && b3!=0 && (-a3*tab1[0][0]+c3)/b3>0 && (-a2*tab1[0][0]+c2)/b2>0){
+				warunki[21]=true;
+			}
+			else if(b2==0){
+				if((tab1[0][0]>=tab2[0][0] && znak2==">=") || (tab1[0][0]<=tab2[0][0] && znak2=="<=")){
+					warunki[21]=true;
+				}
+			}
+			else if(b3==0){
+				if((tab1[0][0]>=tab3[0][0] && znak3==">=") || (tab1[0][0]<=tab3[0][0] && znak3=="<=")){
+					warunki[21]=true;
+				}
+			}
+		}
+		//warunek22
+		if(b2==0){
+			if(b1!=0 && b3!=0 && (-a3*tab2[0][0]+c3)/b3>0 && (-a1*tab2[0][0]+c1)/b1>0){
+				warunki[22]=true;
+			}
+			else if(b1==0){
+				if((tab2[0][0]>=tab1[0][0] && znak1==">=") || (tab2[0][0]<=tab1[0][0] && znak1=="<=")){
+					warunki[22]=true;
+				}
+			}
+			else if(b3==0){
+				if((tab2[0][0]>=tab3[0][0] && znak3==">=") || (tab2[0][0]<=tab3[0][0] && znak3=="<=")){
+					warunki[22]=true;
+				}
+			}
+		}
+		//warunek23
+		if(b3==0){
+			if(b2!=0 && b1!=0 && (-a1*tab3[0][0]+c1)/b1>0 && (-a2*tab3[0][0]+c2)/b2>0){
+				warunki[23]=true;
+			}
+			else if(b2==0){
+				if((tab3[0][0]>=tab2[0][0] && znak2==">=") || (tab3[0][0]<=tab2[0][0] && znak2=="<=")){
+					warunki[23]=true;
+				}
+			}
+			else if(b1==0){
+				if((tab3[0][0]>=tab1[0][0] && znak1==">=") || (tab3[0][0]<=tab1[0][0] && znak1=="<=")){
+					warunki[23]=true;
+				}
+			}
+		}
+		/*for(int kra=0;kra<33;kra++)
 			System.out.print(kra+":" + warunki[kra]+" ");*/
 		//-----------------------------------------------------------------------------------//
 		//-------------------------------------ROZWIAZANIE----------------------------------//
@@ -861,62 +1089,116 @@ public class NewJFrame extends javax.swing.JFrame {
 		int i=0;//wskazniki
 		double tablicaRozwiazan [][]= new double [9][3];
 		if(warunki[0]==true || warunki[1]==true){
+			if(b3!=0){
 		if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*ac+tablicaPrzeciecProstych[0][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
 			i+=1;
 		}}
+			else if(b3==0 && znak3=="<=" && tab3[0][0]>=tablicaPrzeciecProstych[0][0]){
+				if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
+					tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*ac+tablicaPrzeciecProstych[0][1]*bc;
+					tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
+					tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
+					i+=1;
+				}
+			}
+			else if(b3==0 && znak3==">=" && tab3[0][0]<=tablicaPrzeciecProstych[0][0]){
+				if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[0][1]>0){
+					tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[0][0]*ac+tablicaPrzeciecProstych[0][1]*bc;
+					tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[0][0];
+					tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[0][1];
+					i+=1;
+				}
+			}
+			}
 		if(warunki[2]==true || warunki[3]==true){
+			if(b2!=0){
 		if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
 			i+=1;
 		}}
-		if(warunki[3]==true || warunki[4]==true){
+			else if(b2==0 && znak2=="<=" && tab2[0][0]>=tablicaPrzeciecProstych[1][0]){
+				if(tablicaPrzeciecProstych[1][0]>0 && tablicaPrzeciecProstych[1][1]>0){
+					tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;
+					tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
+					tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
+					i+=1;
+				}
+			}
+			else if(b2==0 && znak2==">=" && tab2[0][0]<=tablicaPrzeciecProstych[1][0]){
+				if(tablicaPrzeciecProstych[0][0]>0 && tablicaPrzeciecProstych[1][1]>0){
+					tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[1][0]*ac+tablicaPrzeciecProstych[1][1]*bc;
+					tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[1][0];
+					tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[1][1];
+					i+=1;
+				}
+			}
+			}
+		if(warunki[4]==true || warunki[5]==true){
+			if(b1!=0){
 		if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*ac+tablicaPrzeciecProstych[2][1]*bc;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
 			tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
 			i+=1;
 		}}
-		if(warunki[9]==true && warunki[12]==false){
+		else if(b1==0 && znak1=="<=" && tab1[0][0]>=tablicaPrzeciecProstych[2][0]){
+			if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
+				tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*ac+tablicaPrzeciecProstych[2][1]*bc;
+				tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
+				tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
+				i+=1;
+			}
+		}
+		}
+		else if(b1==0 && znak1==">=" && tab1[0][0]<=tablicaPrzeciecProstych[2][0]){
+			if(tablicaPrzeciecProstych[2][0]>0 && tablicaPrzeciecProstych[2][1]>0){
+				tablicaRozwiazan[i][0]=tablicaPrzeciecProstych[2][0]*ac+tablicaPrzeciecProstych[2][1]*bc;
+				tablicaRozwiazan[i][1]=tablicaPrzeciecProstych[2][0];
+				tablicaRozwiazan[i][2]=tablicaPrzeciecProstych[2][1];
+				i+=1;
+			}
+		}
+		if((warunki[9]==true && warunki[12]==false && warunki[15]==false) || (warunki[27]==true || warunki[31]==true) || (warunki[32]==true && b1!=0)|| (warunki[29]==true && b1!=0)){
 		if(tablicaPrzeciecOsiOXOY[0][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[0][1]*bc; 
 			tablicaRozwiazan[i][1]=0;    //x 
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[0][1];
 			i+=1;
 		}}
-		if(warunki[6]==true){
+		if((warunki[6]==true && warunki[18]==false)|| warunki[21]==true){
 		if(tablicaPrzeciecOsiOXOY[1][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[1][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[1][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
 		}}
-		if(warunki[10]==true && warunki[13]==false){
+		if((warunki[10]==true && warunki[13]==false && warunki[16]==false) || (warunki[24]==true || warunki[30]==true)|| (warunki[32]==true && b2!=0)|| (warunki[26]==true && b2!=0)){
 		if(tablicaPrzeciecOsiOXOY[2][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[2][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[2][1];
 			i+=1;
 		}}
-		if(warunki[7]==true){
+		if((warunki[7]==true && warunki[19]==false)|| warunki[22]==true){
 		if(tablicaPrzeciecOsiOXOY[3][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[3][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[3][0];
 			tablicaRozwiazan[i][2]=0;
 			i+=1;
 		}}
-		if(warunki[11]==true && warunki[14]==false){
+		if((warunki[11]==true && warunki[14]==false && warunki[17]==false) || (warunki[25]==true || warunki[28]==true)|| (warunki[26]==true && b3!=0)|| (warunki[29]==true && b3!=0)){
 		if(tablicaPrzeciecOsiOXOY[4][1]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[4][1]*bc;
 			tablicaRozwiazan[i][1]=0;
 			tablicaRozwiazan[i][2]=tablicaPrzeciecOsiOXOY[4][1];
 			i+=1;
 		}}
-		if(warunki[8]==true){
+		if((warunki[8]==true && warunki[20]==false) || warunki[23]==true){
 		if(tablicaPrzeciecOsiOXOY[5][0]>0){
 			tablicaRozwiazan[i][0]=tablicaPrzeciecOsiOXOY[5][0]*ac;
 			tablicaRozwiazan[i][1]=tablicaPrzeciecOsiOXOY[5][0];

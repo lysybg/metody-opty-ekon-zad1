@@ -714,11 +714,11 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab1[1][4]=(-a1/b1)*tab1[0][4]+(c1/b1);
     	tab1[1][5]=(-a1/b1)*tab1[0][5]+(c1/b1);
     		if(b1<0){
-    				gradient1[0][0]=tab1[0][2];   //x dla gradientu
-    				gradient1[1][0]=-1*((-1/a1)*gradient1[0][0]+3);  //y
+    			gradient1[0][0]=tab1[0][2];   //x dla gradientu
+    			gradient1[1][0]=(-1/a1)*gradient1[0][0]+6;  //y
     		}else{
     			gradient1[0][0]=tab1[0][2];   //x dla gradientu
-				gradient1[1][0]=(-1/a1)*gradient1[0][0]+3;  //y
+    			gradient1[1][0]=-1*((-1/a1)*gradient1[0][0]+6);  //y
     		}
     	}
     	else
@@ -772,10 +772,10 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab2[1][5]=(-a2/b2)*tab2[0][5]+(c2/b2);
     		if(b2<0){
     			gradient2[0][0]=tab2[0][3];   //x dla gradientu
-    			gradient2[1][0]=-1*((-1/a2)*gradient2[0][0]+3);  //y
+    			gradient2[1][0]=-1*((-1/a2)*gradient2[0][0]+6);  //y
     		}else{
     			gradient2[0][0]=tab2[0][3];   //x dla gradientu
-    			gradient2[1][0]=(-1/a2)*gradient2[0][0]+3;  //y
+    			gradient2[1][0]=(-1/a2)*gradient2[0][0]+6;  //y
     		}
     	}
     	else{
@@ -827,10 +827,10 @@ public class NewJFrame extends javax.swing.JFrame {
     	tab3[1][5]=(-a3/b3)*tab3[0][5]+(c3/b3);
     		if(b3<0){
     			gradient3[0][0]=tab3[0][4];   //x dla gradientu
-    			gradient3[1][0]=-1*((-1/a3)*gradient3[0][0]);  //y
+    			gradient3[1][0]=-1*((-1/a3)*gradient3[0][0]+6);  //y
     		}else{
     			gradient3[0][0]=tab3[0][4];   //x dla gradientu
-    			gradient3[1][0]=(-1/a3)*gradient3[0][0];  //y
+    			gradient3[1][0]=(-1/a3)*gradient3[0][0]+6;  //y
     		}
     	}
     	else{

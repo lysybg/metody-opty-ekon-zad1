@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.text.NumberFormat;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -1315,7 +1316,12 @@ public class SimpleksOkno extends javax.swing.JFrame {
     
     public void WyswietlTabele(){
     	String tekst = new String();
-
+    	/*
+    	NumberFormat nf = NumberFormat.getInstance();
+    	nf.setMaximumFractionDigits(2);
+    	nf.setMinimumFractionDigits(2);
+    	String tekst = nf.format(1234.56789);
+*/
     	for(int k =0; k< ograniczenia; k++){
     		for(int i=0; i < produkty; i++){
     			tekst = tekst + Double.toString(tab[k][i]) + "   ";

@@ -16,10 +16,13 @@ import java.awt.Font;
  * and open the template in the editor.
  */
 public class SimpleksOkno extends javax.swing.JFrame {
-
+	int ograniczenia;
+	int produkty;
     /**
      * Creates new form SimpleksOkno
      */
+	
+	
     public SimpleksOkno() {
         initComponents();
     }
@@ -117,8 +120,24 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jComboBox7 = new javax.swing.JComboBox();
         jComboBox8 = new javax.swing.JComboBox();
         
+        
+        jComboBox8.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		if(jComboBox8.getSelectedIndex() == 0) ograniczenia=2;
+        		if(jComboBox8.getSelectedIndex() == 1) ograniczenia=3;
+        		if(jComboBox8.getSelectedIndex() == 2) ograniczenia=4;
+        		if(jComboBox8.getSelectedIndex() == 3) ograniczenia=5;
+        	}
+        });
+        
         jComboBox7.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		
+        		if(jComboBox7.getSelectedIndex() == 0) ograniczenia=1;
+        		if(jComboBox7.getSelectedIndex() == 1) ograniczenia=2;
+        		if(jComboBox7.getSelectedIndex() == 2) ograniczenia=3;
+        		if(jComboBox7.getSelectedIndex() == 3) ograniczenia=4;
+        		if(jComboBox7.getSelectedIndex() == 4) ograniczenia=5;
         		
         		//==========================  OGRALICZENIA ======================================
         		 if (jComboBox7.getSelectedIndex() == 0){  //ilosc ograniczen =1
@@ -1102,6 +1121,12 @@ public class SimpleksOkno extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+    	
+    	double[][] tab = new double[5][5];
+    	
+    	SimpleksOkno obiekt = SimpleksOkno();
+    	
+    	for(int i=0; i<= obiekt.produkt, i++){}
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

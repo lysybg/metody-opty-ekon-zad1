@@ -16,11 +16,10 @@ import java.awt.Font;
  * and open the template in the editor.
  */
 public class SimpleksOkno extends javax.swing.JFrame {
+	
 	int ograniczenia;
-	int produkty;
-    /**
-     * Creates new form SimpleksOkno
-     */
+	static int produkty;
+	double[][] tab = new double[5][6];
 	
 	
     public SimpleksOkno() {
@@ -142,6 +141,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnOblicz = new javax.swing.JButton();
+
         
         
         jComboBox8.addActionListener(new ActionListener() {
@@ -549,6 +549,47 @@ public class SimpleksOkno extends javax.swing.JFrame {
         	         }
         	}
         });
+        
+        btnOblicz.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent arg0) {
+        		
+            		tab[0][0]=Double.parseDouble(jTextField5.getText());
+            		tab[0][1]=Double.parseDouble(jTextField4.getText());
+            		tab[0][2]=Double.parseDouble(jTextField13.getText());
+            		tab[0][3]=Double.parseDouble(jTextField27.getText());
+            		tab[0][4]=Double.parseDouble(jTextField26.getText());
+            		tab[0][5]=Double.parseDouble(jTextField6.getText());
+            		
+            		tab[1][0]=Double.parseDouble(jTextField7.getText());
+            		tab[1][1]=Double.parseDouble(jTextField8.getText());
+            		tab[1][2]=Double.parseDouble(jTextField14.getText());
+            		tab[1][3]=Double.parseDouble(jTextField29.getText());
+            		tab[1][4]=Double.parseDouble(jTextField28.getText());
+            		tab[1][5]=Double.parseDouble(jTextField9.getText());
+            		
+            		tab[2][0]=Double.parseDouble(jTextField10.getText());
+            		tab[2][1]=Double.parseDouble(jTextField11.getText());
+            		tab[2][2]=Double.parseDouble(jTextField15.getText());
+            		tab[2][3]=Double.parseDouble(jTextField31.getText());
+            		tab[2][4]=Double.parseDouble(jTextField30.getText());
+            		tab[2][5]=Double.parseDouble(jTextField12.getText());
+            		
+            		tab[3][0]=Double.parseDouble(jTextField18.getText());
+            		tab[3][1]=Double.parseDouble(jTextField19.getText());
+            		tab[3][2]=Double.parseDouble(jTextField22.getText());
+            		tab[3][3]=Double.parseDouble(jTextField33.getText());
+            		tab[3][4]=Double.parseDouble(jTextField32.getText());
+            		tab[3][5]=Double.parseDouble(jTextField20.getText());
+            		
+            		tab[4][0]=Double.parseDouble(jTextField21.getText());
+            		tab[4][1]=Double.parseDouble(jTextField16.getText());
+            		tab[4][2]=Double.parseDouble(jTextField23.getText());
+            		tab[4][3]=Double.parseDouble(jTextField35.getText());
+            		tab[4][4]=Double.parseDouble(jTextField34.getText());
+            		tab[4][5]=Double.parseDouble(jTextField17.getText());
+            		
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -882,8 +923,8 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
         jComboBox7.setSelectedIndex(2);
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-        jComboBox8.setSelectedIndex(1);
+        jComboBox8.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4", "5"}));
+        jComboBox8.setSelectedIndex(0);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -1258,71 +1299,52 @@ public class SimpleksOkno extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
+    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
+    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField25ActionPerformed
+    private void jTextField25ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField27ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField27ActionPerformed
+    private void jTextField27ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField29ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField29ActionPerformed
+    private void jTextField29ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField31ActionPerformed
+    private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField33ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField33ActionPerformed
+    private void jTextField33ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void jTextField35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField35ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField35ActionPerformed
+    private void jTextField35ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+    	//===============================================================================
+    	//===============================================================================
+    	//===============================================================================
+    	//===============================================================================
     	
-    	//double[][] tab = new double[5][5];
-    	
-    	//SimpleksOkno obiekt = new SimpleksOkno();
-    	
-    	//for(int i=0; i<= obiekt.produkt, i++){}
+
+    	for(int i=0; i<=produkty; i++){
+    		
+    	}
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -25,7 +25,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	double[][] tabTemp = new double [5][5];
 	static double [] tabelaCelow = new double [8]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
-	static byte [] znaki = new byte[5];
+	static byte [] znaki = new byte[5];     //0 to >=, 1 to <=, 2 to = 
 	String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
 	String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
 	

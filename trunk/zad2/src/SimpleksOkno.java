@@ -20,7 +20,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	
 	int ograniczenia;
 	static int produkty;
-	double[][] tab = new double[5][6];
+	boolean CzyMax;
+	double[][] tab = new double[6][15];  // liczby
+	String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
+	String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
 	
 	
     public SimpleksOkno() {
@@ -38,6 +41,16 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        
+        
+        jComboBox1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		if(jComboBox1.getItemCount() == 1)  CzyMax = true;  //szukamy Maxa
+        		if(jComboBox1.getItemCount() == 0)  CzyMax = false;  //szukamy mina
+        	}
+        });
+        
+        
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -582,6 +595,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel5.setText("->");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "min", "max" }));
+        jComboBox1.setSelectedIndex(0);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Ograniczenia:");
@@ -1277,7 +1291,49 @@ public class SimpleksOkno extends javax.swing.JFrame {
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     public void UzupelnijTabele(){
+    	int liczW, liczM;
+    	//PIERWSZY WIRSZ same liczby
+    	tab[0][1]=Double.parseDouble(jTextField1.getText());  // wartosci funkcji celu
+    	tab[0][2]=Double.parseDouble(jTextField2.getText());
+    	tab[0][3]=Double.parseDouble(jTextField3.getText());
+    	tab[0][4]=Double.parseDouble(jTextField25.getText());
+    	tab[0][5]=Double.parseDouble(jTextField24.getText());
     	
+    	for(int i=produkty+2; i<=produkty*2+1; i++){
+    		tab[0][i]=0;  //wartoscji bazwoew dla f celu
+    	}
+    	
+    	if(CzyMax == true){
+    		tab[0][produkty*2+2]=-1;  //domyœlnie -1m
+    	}
+    	
+    	if(CzyMax == true){
+    		tab[0][produkty*2+2]=1;  //domyœlnie 1m
+    	}		
+    			
+    	//DRUGI WIERSZ SAME LICZBY
+    	tab[1][0]=0;
+    	tab[1][1]=Double.parseDouble(jTextField5.getText());
+    	if(produkty <=2)
+    		tab[1][2]=Double.parseDouble(jTextField4.getText());
+    	
+    	if(produkty <=3)
+    		tab[1][3]=Double.parseDouble(jTextField13.getText());
+    	
+    	if(produkty <=4)
+    		tab[1][4]=Double.parseDouble(jTextField27.getText());
+    	
+    	if(produkty <=5)
+    		tab[1][5]=Double.parseDouble(jTextField26.getText());
+    	
+    	//wypisujemy wartosc x bazowego w danym rownaniu (tu akurat 1 rownaniu  wszyedzie musza byc 0 tylko tam gdzie jedt dany x musi byc 1) naraznie nie wiem jak to zerobic wpisuje wiec same 0
+    	for(int i = produkty+1; i<= produkty*2+1; i++){
+    		//if(jComboBox2.getItemCount() == 0)
+    		//tab[1][i]=
+    		tab[1][i]=0;
+    	}
+    	
+    	/*
 		tab[0][0]=Double.parseDouble(jTextField5.getText());
 		tab[0][1]=Double.parseDouble(jTextField4.getText());
 		tab[0][2]=Double.parseDouble(jTextField13.getText());
@@ -1312,6 +1368,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		tab[4][3]=Double.parseDouble(jTextField35.getText());
 		tab[4][4]=Double.parseDouble(jTextField34.getText());
 		tab[4][5]=Double.parseDouble(jTextField17.getText());
+		*/
     }
     
     public void WyswietlTabele(){
@@ -1323,7 +1380,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	String tekst = nf.format(1234.56789);
 */
     	for(int k =0; k< ograniczenia; k++){
-    		for(int i=0; i < produkty; i++){
+    		for(int i=0; i < produkty*2+5; i++){
     			tekst = tekst + Double.toString(tab[k][i]) + "   ";
     		}
     		tekst = tekst + "\n";

@@ -22,6 +22,9 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	static int produkty;
 	boolean CzyMax;
 	double[][] tab = new double[6][15];  // liczby
+	static double [] tabelaCelow = new double [8]; //liczby x1,itp. w funkcji celu
+	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
+	static byte [] znaki = new byte[5];
 	String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
 	String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
 	
@@ -155,26 +158,68 @@ public class SimpleksOkno extends javax.swing.JFrame {
         
         jComboBox8.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		if(jComboBox8.getSelectedIndex() == 0) produkty =2;
-        		if(jComboBox8.getSelectedIndex() == 1) produkty=3;
-        		if(jComboBox8.getSelectedIndex() == 2) produkty=4;
-        		if(jComboBox8.getSelectedIndex() == 3) produkty=5;
+        		if(jComboBox8.getSelectedIndex() == 0){
+        			
+        			produkty =2;
+        			tabelaCelow[0]=Double.parseDouble(jTextField1.getText());
+        			tabelaCelow[1]=Double.parseDouble(jTextField2.getText());
+        			for(int i = produkty; i<produkty+3; i++){
+        				tabelaCelow[i]=0.0;
+        			}
+        		}
+        		if(jComboBox8.getSelectedIndex() == 1){
+        			
+        			produkty=3;
+        			tabelaCelow[0]=Double.parseDouble(jTextField1.getText());
+        			tabelaCelow[1]=Double.parseDouble(jTextField2.getText());
+        			tabelaCelow[2]=Double.parseDouble(jTextField3.getText());
+        			for(int i = produkty; i<produkty+3; i++){
+        				tabelaCelow[i]=0.0;
+        			}
+        		}
+        		if(jComboBox8.getSelectedIndex() == 2){
+        			
+        			produkty=4;
+
+        			tabelaCelow[0]=Double.parseDouble(jTextField1.getText());
+        			tabelaCelow[1]=Double.parseDouble(jTextField2.getText());
+        			tabelaCelow[2]=Double.parseDouble(jTextField3.getText());
+        			tabelaCelow[3]=Double.parseDouble(jTextField25.getText());
+        			
+        			for(int i = produkty; i<produkty+3; i++){
+        				tabelaCelow[i]=0.0;
+        			}
+        		}
+        		if(jComboBox8.getSelectedIndex() == 3){
+        			
+        			produkty=5;
+
+        			tabelaCelow[0]=Double.parseDouble(jTextField1.getText());
+        			tabelaCelow[1]=Double.parseDouble(jTextField2.getText());
+        			tabelaCelow[2]=Double.parseDouble(jTextField3.getText());
+        			tabelaCelow[3]=Double.parseDouble(jTextField25.getText());
+        			tabelaCelow[4]=Double.parseDouble(jTextField24.getText());
+        			for(int i = produkty; i<produkty+3; i++){
+        				tabelaCelow[i]=0.0;
+        			}
+        		}
         	}
         });
         
         jComboBox7.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		
-        		if(jComboBox7.getSelectedIndex() == 0) ograniczenia=1;
-        		if(jComboBox7.getSelectedIndex() == 1) ograniczenia=2;
-        		if(jComboBox7.getSelectedIndex() == 2) ograniczenia=3;
-        		if(jComboBox7.getSelectedIndex() == 3) ograniczenia=4;
-        		if(jComboBox7.getSelectedIndex() == 4) ograniczenia=5;
-        		
         		//==========================  OGRALICZENIA ======================================
         		 if (jComboBox7.getSelectedIndex() == 0){  //ilosc ograniczen =1
 
-     	         	jTextField7.setVisible(false);
+        			ograniczenia=1;
+        			
+        			wartosciOgraniczen[0]=Double.parseDouble(jTextField6.getText());
+     	         	for (byte i=0; i<3; i++){
+     	         		if(jComboBox2.getSelectedIndex() == i)
+     	         			znaki[0]=i;
+     	         	}
+        			jTextField7.setVisible(false);
      	         	jTextField8.setVisible(false);
      	         	jTextField14.setVisible(false);
      	         	jTextField29.setVisible(false);
@@ -255,6 +300,18 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		 
         		 
         		 if (jComboBox7.getSelectedIndex() == 1){  //ilosc ograniczen = 2
+        			
+        			 ograniczenia=2;
+
+         			wartosciOgraniczen[0]=Double.parseDouble(jTextField6.getText());
+        			wartosciOgraniczen[1]=Double.parseDouble(jTextField9.getText());
+        			
+        			for (byte i=0; i<3; i++){
+     	         		if(jComboBox2.getSelectedIndex() == i)
+     	         			znaki[0]=i;
+     	         		if(jComboBox3.getSelectedIndex() == i)
+     	         			znaki[1]=i;
+     	         	}
       	         	jTextField7.setVisible(true);
       	         	jTextField8.setVisible(true);
       	         	jTextField14.setVisible(true);
@@ -337,6 +394,21 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		 
 
         		 if (jComboBox7.getSelectedIndex() == 2){  //ilosc ograniczen = 3
+        			 
+        			ograniczenia=3;
+
+         			wartosciOgraniczen[0]=Double.parseDouble(jTextField6.getText());
+        			wartosciOgraniczen[1]=Double.parseDouble(jTextField9.getText());
+        			wartosciOgraniczen[2]=Double.parseDouble(jTextField12.getText());
+        			
+        			for (byte i=0; i<3; i++){
+     	         		if(jComboBox2.getSelectedIndex() == i)
+     	         			znaki[0]=i;
+     	         		if(jComboBox3.getSelectedIndex() == i)
+     	         			znaki[1]=i;
+     	         		if(jComboBox4.getSelectedIndex() == i)
+     	         			znaki[2]=i;
+     	         	}
       	         	jTextField7.setVisible(true);
       	         	jTextField8.setVisible(true);
       	         	jTextField14.setVisible(true);
@@ -417,7 +489,27 @@ public class SimpleksOkno extends javax.swing.JFrame {
       	         }
         		 
         		 if (jComboBox7.getSelectedIndex() == 3){  //ilosc ograniczen = 4
-       	         	jTextField7.setVisible(true);
+        			 
+        			ograniczenia=4;
+
+         			wartosciOgraniczen[0]=Double.parseDouble(jTextField6.getText());
+        			wartosciOgraniczen[1]=Double.parseDouble(jTextField9.getText());
+        			wartosciOgraniczen[2]=Double.parseDouble(jTextField12.getText());
+         			wartosciOgraniczen[3]=Double.parseDouble(jTextField20.getText());
+       	         	
+         			for (byte i=0; i<3; i++){
+     	         		if(jComboBox2.getSelectedIndex() == i)
+     	         			znaki[0]=i;
+     	         		if(jComboBox3.getSelectedIndex() == i)
+     	         			znaki[1]=i;
+     	         		if(jComboBox4.getSelectedIndex() == i)
+     	         			znaki[2]=i;
+     	         		if(jComboBox5.getSelectedIndex() == i)
+     	         			znaki[3]=i;
+     	         	}
+         			for( int j = 0 ; j<3; j++)
+         				System.out.println(znaki[j]+"    "+ wartosciOgraniczen[j]);
+        			jTextField7.setVisible(true);
        	         	jTextField8.setVisible(true);
        	         	jTextField14.setVisible(true);
        	         	jTextField29.setVisible(true);
@@ -498,6 +590,28 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		 
         		 
         		 if (jComboBox7.getSelectedIndex() == 4){  //ilosc ograniczen = 5
+        			 
+        			 ograniczenia=5;
+        			 
+        			 wartosciOgraniczen[0]=Double.parseDouble(jTextField6.getText());
+         			wartosciOgraniczen[1]=Double.parseDouble(jTextField9.getText());
+         			wartosciOgraniczen[2]=Double.parseDouble(jTextField12.getText());
+          			wartosciOgraniczen[3]=Double.parseDouble(jTextField20.getText());
+          			wartosciOgraniczen[4]=Double.parseDouble(jTextField17.getText());
+          			
+          			for (byte i=0; i<3; i++){
+     	         		if(jComboBox2.getSelectedIndex() == i)
+     	         			znaki[0]=i;
+     	         		if(jComboBox3.getSelectedIndex() == i)
+     	         			znaki[1]=i;
+     	         		if(jComboBox4.getSelectedIndex() == i)
+     	         			znaki[2]=i;
+     	         		if(jComboBox5.getSelectedIndex() == i)
+     	         			znaki[3]=i;
+     	         		if(jComboBox6.getSelectedIndex() == i)
+     	         			znaki[4]=i;
+     	         	}
+          			
         	         	jTextField7.setVisible(true);
         	         	jTextField8.setVisible(true);
         	         	jTextField14.setVisible(true);
@@ -525,6 +639,26 @@ public class SimpleksOkno extends javax.swing.JFrame {
         	         	jTextField35.setVisible(true);
         	         	jTextField34.setVisible(true);
         	         	jTextField17.setVisible(true);
+
+          	         	jLabel12.setVisible(true);
+         	         	jLabel21.setVisible(true);
+         	         	jLabel45.setVisible(true);
+         	         	jLabel44.setVisible(true);
+         	         	
+          	         	jLabel15.setVisible(true);
+         	         	jLabel23.setVisible(true);
+         	         	jLabel49.setVisible(true);
+         	         	jLabel48.setVisible(true);
+         	         	
+          	         	jLabel27.setVisible(true);
+         	         	jLabel25.setVisible(true);
+         	         	jLabel53.setVisible(true);
+         	         	jLabel52.setVisible(true);
+
+         	         	jLabel31.setVisible(true);
+         	         	jLabel32.setVisible(true);
+         	         	jLabel57.setVisible(true);
+         	         	jLabel56.setVisible(true);
         	         	
         	         	jLabel13.setVisible(true);
         	         	jLabel11.setVisible(true);
@@ -1429,9 +1563,6 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	//===============================================================================
     	
 
-    	for(int i=0; i<=produkty; i++){
-    		
-    	}
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -21,7 +21,8 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	int ograniczenia;
 	static int produkty;
 	boolean CzyMax;
-	double[][] tab = new double[6][15];  // liczby
+	double[][] tab = new double[6][15];  // liczby(tabela x)
+	double[][] tabTemp = new double [5][5];
 	static double [] tabelaCelow = new double [8]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
 	static byte [] znaki = new byte[5];
@@ -1426,7 +1427,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     
     public void UzupelnijTabele(){
     	int liczW, liczM;
-    	//PIERWSZY WIRSZ same liczby
+    	/*//PIERWSZY WIRSZ same liczby
     	tab[0][1]=Double.parseDouble(jTextField1.getText());  // wartosci funkcji celu
     	tab[0][2]=Double.parseDouble(jTextField2.getText());
     	tab[0][3]=Double.parseDouble(jTextField3.getText());
@@ -1465,44 +1466,42 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		//if(jComboBox2.getItemCount() == 0)
     		//tab[1][i]=
     		tab[1][i]=0;
-    	}
+    	}*/
     	
-    	/*
-		tab[0][0]=Double.parseDouble(jTextField5.getText());
-		tab[0][1]=Double.parseDouble(jTextField4.getText());
-		tab[0][2]=Double.parseDouble(jTextField13.getText());
-		tab[0][3]=Double.parseDouble(jTextField27.getText());
-		tab[0][4]=Double.parseDouble(jTextField26.getText());
-		tab[0][5]=Double.parseDouble(jTextField6.getText());
+		tabTemp[0][0]=Double.parseDouble(jTextField5.getText());
+		tabTemp[0][1]=Double.parseDouble(jTextField4.getText());
+		tabTemp[0][2]=Double.parseDouble(jTextField13.getText());
+		tabTemp[0][3]=Double.parseDouble(jTextField27.getText());
+		tabTemp[0][4]=Double.parseDouble(jTextField26.getText());
 		
-		tab[1][0]=Double.parseDouble(jTextField7.getText());
-		tab[1][1]=Double.parseDouble(jTextField8.getText());
-		tab[1][2]=Double.parseDouble(jTextField14.getText());
-		tab[1][3]=Double.parseDouble(jTextField29.getText());
-		tab[1][4]=Double.parseDouble(jTextField28.getText());
-		tab[1][5]=Double.parseDouble(jTextField9.getText());
+		tabTemp[1][0]=Double.parseDouble(jTextField7.getText());
+		tabTemp[1][1]=Double.parseDouble(jTextField8.getText());
+		tabTemp[1][2]=Double.parseDouble(jTextField14.getText());
+		tabTemp[1][3]=Double.parseDouble(jTextField29.getText());
+		tabTemp[1][4]=Double.parseDouble(jTextField28.getText());
 		
-		tab[2][0]=Double.parseDouble(jTextField10.getText());
-		tab[2][1]=Double.parseDouble(jTextField11.getText());
-		tab[2][2]=Double.parseDouble(jTextField15.getText());
-		tab[2][3]=Double.parseDouble(jTextField31.getText());
-		tab[2][4]=Double.parseDouble(jTextField30.getText());
-		tab[2][5]=Double.parseDouble(jTextField12.getText());
+		tabTemp[2][0]=Double.parseDouble(jTextField10.getText());
+		tabTemp[2][1]=Double.parseDouble(jTextField11.getText());
+		tabTemp[2][2]=Double.parseDouble(jTextField15.getText());
+		tabTemp[2][3]=Double.parseDouble(jTextField31.getText());
+		tabTemp[2][4]=Double.parseDouble(jTextField30.getText());
 		
-		tab[3][0]=Double.parseDouble(jTextField18.getText());
-		tab[3][1]=Double.parseDouble(jTextField19.getText());
-		tab[3][2]=Double.parseDouble(jTextField22.getText());
-		tab[3][3]=Double.parseDouble(jTextField33.getText());
-		tab[3][4]=Double.parseDouble(jTextField32.getText());
-		tab[3][5]=Double.parseDouble(jTextField20.getText());
+		tabTemp[3][0]=Double.parseDouble(jTextField18.getText());
+		tabTemp[3][1]=Double.parseDouble(jTextField19.getText());
+		tabTemp[3][2]=Double.parseDouble(jTextField22.getText());
+		tabTemp[3][3]=Double.parseDouble(jTextField33.getText());
+		tabTemp[3][4]=Double.parseDouble(jTextField32.getText());
 		
-		tab[4][0]=Double.parseDouble(jTextField21.getText());
-		tab[4][1]=Double.parseDouble(jTextField16.getText());
-		tab[4][2]=Double.parseDouble(jTextField23.getText());
-		tab[4][3]=Double.parseDouble(jTextField35.getText());
-		tab[4][4]=Double.parseDouble(jTextField34.getText());
-		tab[4][5]=Double.parseDouble(jTextField17.getText());
-		*/
+		tabTemp[4][0]=Double.parseDouble(jTextField21.getText());
+		tabTemp[4][1]=Double.parseDouble(jTextField16.getText());
+		tabTemp[4][2]=Double.parseDouble(jTextField23.getText());
+		tabTemp[4][3]=Double.parseDouble(jTextField35.getText());
+		tabTemp[4][4]=Double.parseDouble(jTextField34.getText());
+		for (int i1 =0; i1<produkty; i1++){
+			for (int i2 =0; i2<ograniczenia; i2++){
+				tab[i1][i2]=tabTemp[i1][i2];
+			}
+		}
     }
     
     public void WyswietlTabele(){

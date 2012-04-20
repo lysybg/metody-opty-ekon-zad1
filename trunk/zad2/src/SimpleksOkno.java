@@ -24,15 +24,17 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	double[][] tab = new double[6][15];  // liczby(tabela x)
 	double[][] tabTemp = new double [5][5];
 	double[] BiAk = new double[5];
-	double[] Ci = new double [5];
+	double[] Ci = new double [5];   //narazie nie potrzebana
 	double[]Zj = new double[10];
 	double[]CjZj = new double[10];
-	static double [] tabelaCelow = new double [8]; //liczby x1,itp. w funkcji celu
+	double[] WartosciZmiennychBazowych = new double[5];
+	static double [] tabelaCelow = new double [10]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
+	double[] Ilorazy = new double[5];
 	static byte [] znaki = new byte[5];     //0 to >=, 1 to <=, 2 to = 
 	String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
 	String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
-	
+	boolean KrtyteriumOptymalnosci = true;
 	
     public SimpleksOkno() {
         initComponents();
@@ -698,19 +700,27 @@ public class SimpleksOkno extends javax.swing.JFrame {
         	}
         });
         
-      //==========================================================================================================
-      //==========================================================================================================
-      //==========================================================================================================
-      //==========================================================================================================
+      //=====================================================================================================================================================================
+      //====================================================================================================================================================================
+      //==========================        WCISKAMI PRZYCISK           ======================================================================================================
+      //====================================================================================================================================================================
         btnOblicz.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent arg0) {
         		
+        		jTextArea1.setText("");  //czyscimy okno
         		UzupelnijTabele();
+        		WyswietlTabele();
+        		Simplels(KrtyteriumOptymalnosci);
             	WyswietlTabele();	
             		
             		
         	}
         });
+        
+        //==========================================================================================================
+        //==========================================================================================================
+        //==========================================================================================================
+        //==========================================================================================================
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
    
@@ -1501,42 +1511,214 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		tabTemp[4][2]=Double.parseDouble(jTextField23.getText());
 		tabTemp[4][3]=Double.parseDouble(jTextField35.getText());
 		tabTemp[4][4]=Double.parseDouble(jTextField34.getText());
+		
+		//Uzupe³niamy tab zmiennymi w jtextfietów które sa w tablicy tymczasowej
 		for (int i1 =0; i1<=produkty; i1++){
-			for (int i2 =0; i2<ograniczenia; i2++){
+			for (int i2 =0; i2<=ograniczenia; i2++){
 				tab[i1][i2]=tabTemp[i1][i2];
 			}
 		}
-		for(int j=0;j<=produkty+ograniczenia;j++){	
+		
+		//Uzupe³niamy tab  1 lub -1 lub 0 w zale¿noœci od znaków i tego czy dany x wystêpuje w równaniu
+		for(int j=0; j<produkty+ograniczenia; j++){	
 			opisZmiennych[j]="x"+(j+1);
-		for(int k=produkty;k<produkty+ograniczenia; k++){
-			if( j+ograniczenia-1 == k){
-				if(znaki[k]==1)
-					tab[j][k]=-1;
-				else
-					tab[j][k]=1;
+			for(int k=produkty; k<produkty+ograniczenia; k++){
+				if( j+ograniczenia-1 == k){
+					if(znaki[k]==1){
+						tab[j][k]=-1;
+						System.out.println("-1 if");
+					}else{
+						tab[j][k]=1;
+						System.out.println("1 if");
+					}
+				}else{
+					tab[j][k]=0;
+					System.out.println("0 if");
+				}
+				System.out.println(k+"k");
+				System.out.println(j+"j");
 			}
 		}
 		
+		//Uzupe³niamy "pionow¹" tablice z opisami zmiennych x3 x4 x5....
+		int a = ograniczenia;
+		for(int i=0; i<ograniczenia; i++){
+			opisZmiennychBazowych[i]="x"+(a);
+			a++;
 		}
+		
+		//Uzupe³niamy wartoœci zmiennych bazwoych
+		for(int i=0; i<ograniczenia; i++){
+			
+			WartosciZmiennychBazowych[i]=wartosciOgraniczen[i];
+		}
+		
+		//Uzupe³niamy ilorazy
+		for(int i=0; i<ograniczenia; i++){
+			Ilorazy[i]=0;
+		}
+		
     }
     
-    public void WyswietlTabele(){
-    	String tekst = new String();
-    	/*
-    	NumberFormat nf = NumberFormat.getInstance();
-    	nf.setMaximumFractionDigits(2);
-    	nf.setMinimumFractionDigits(2);
-    	String tekst = nf.format(1234.56789);
-*/
-    	for(int k =0; k< ograniczenia; k++){
-    		for(int i=0; i < produkty+ograniczenia; i++){
-    			tekst = tekst + Double.toString(tab[k][i]) + "   ";
-    			tekst = tekst + opisZmiennych[i]+"   ";
+    public void Simplels(boolean KrteriumOptymalnosci){
+    	
+    	double temp=0;
+    	int NumerMaxa=0;
+    	int NumerMina=0;
+    	
+   //sprawdzamy kryterium optymalnosci
+    	//while(KrteriumOptymalnosci){ 
+    	
+    		//SPrawdzamy kryterium optymalnosci: zgodnie z teori¹:
+    		//Je¿eli wszystkie zmienne niebazowe wystêpuj¹ce w funkcji celu maj¹ 
+    		//wspó³¬czynniki niedodatnie, to rozpatrywane rozwi¹zanie bazowe jest 
+    		//rozwi¹zaniem optymalnym. W takim wypadku koñczymy poszukiwania rozwi¹zania opty¬malnego. 
+    		for(int i =0; i<=produkty; i++){
+    			if (tabelaCelow[i] < 0 ){
+    				KrteriumOptymalnosci = false;
+    			}
     		}
-    		tekst = tekst + "\n";
+    		
+    		//wybieramy maxa z wartosci zmiennych nie bazowych w funkcji celu
+    	
+    		for(int i=0; i<=produkty; i++){
+    			if(tabelaCelow[i] > temp){
+    				NumerMaxa=i;
+    				temp = tabelaCelow[i];
+    			}
+    		}
+    		System.out.println("numer maxa "+NumerMaxa);
+    	
+    		for(int i=0; i<ograniczenia; i++){
+    			if(tab[i][NumerMaxa] > 0){
+    					System.out.println(WartosciZmiennychBazowych[i]);
+    					System.out.println(tab[i][NumerMaxa]);
+    				Ilorazy[i]=WartosciZmiennychBazowych[i] / tab[i][NumerMaxa];
+    					System.out.println(Ilorazy[i]);
+    			}else{
+    				Ilorazy[i] = -1;   // sygna³ ze to pomijamy!!!!!
+    			}
+    		}
+    		
+    		//Szukamy najmniejszego ilorazu
+    		for(int i=0; i<=ograniczenia; i++){
+    			if(Ilorazy[i] < temp  && Ilorazy[i] > 0){
+    				NumerMina=i;
+    				temp = Ilorazy[i];
+    			}
+    		}
+    		System.out.println("numer min ilorazu "+NumerMina+" "+Ilorazy[NumerMina]);
+    		
+    		//ZMIANA BAZY
+    		
+    		// co dalej?? mamy juz najmniejszy iloraz... teraz te jakies dzielanie i w ogóle...
+    		
+    	//}
+    }
+    
+    
+    public void WyswietlTabele(){
+
+    	int Spacje = 7;
+    	int ileSpacji =0;
+    	int Spacjeprzod =0;
+    	String zmiennaDoDolugosci;
+    	
+    	jTextArea1.append("Tabela SIMPLEKSOWA \n");
+    	jTextArea1.append("\n");
+    	
+    	//------------------PIWRWSZY WIERSZ---------------------
+    	jTextArea1.append("                      ");   // spacje
+    	for(int i=0; i<ograniczenia+produkty; i++){
+    		zmiennaDoDolugosci=(Double.toString(tabelaCelow[i]));
+			ileSpacji = Spacje - zmiennaDoDolugosci.length();
+			Spacjeprzod = ileSpacji/2;
+			
+			for(int z =0; z < Spacjeprzod; z++){
+				jTextArea1.append(" ");
+			}
+			
+			jTextArea1.append(Double.toString(tabelaCelow[i]));   // wyswietlamy wartosci x w funkcji celu
+			
+			for(int z =0; z < ileSpacji-Spacjeprzod; z++){
+				jTextArea1.append(" ");
+			}
     	}
-    	jTextArea1.setText(tekst);
-    	//jTextArea1.
+    	jTextArea1.append("\n");
+    	
+    	//------------------DRUGI WIERSZ TABELKI----------------
+    	
+    	jTextArea1.append(" baza     Cb      b   ");
+    	
+    	for(int i=0; i<=produkty+ograniczenia; i++){
+    		jTextArea1.append("  ");
+    		jTextArea1.append(opisZmiennych[i]);  //wyswietlamy opisy x1 x2 x3 ....
+    		jTextArea1.append("   ");
+    	}
+    	
+    	jTextArea1.append("\n");
+    	
+    	//--------------------RESZTA TABELI!--------------------
+    	
+    	for(int w=0; w<ograniczenia; w++){
+    		
+    	//---------pionowe wyœwietlanie x bazowych  x3 x4 x5 ....
+    	jTextArea1.append("  ");
+    	jTextArea1.append(opisZmiennychBazowych[w]);
+    	jTextArea1.append("   ");
+    	
+    	// Cb ---------- wyswietlamy ilorazy
+    	zmiennaDoDolugosci=(Double.toString(Ilorazy[w]));
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+	
+		for(int z =0; z < Spacjeprzod; z++){
+			jTextArea1.append(" ");
+		}
+	
+		jTextArea1.append(Double.toString(Ilorazy[w]));
+	
+		for(int z =0; z < ileSpacji-Spacjeprzod; z++){
+			jTextArea1.append(" ");
+		}
+    	
+		
+		//B ----------Wartosci zmiennych bazwoych
+		zmiennaDoDolugosci=(Double.toString(WartosciZmiennychBazowych[w]));
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+	
+		for(int z =0; z < Spacjeprzod; z++){
+			jTextArea1.append(" ");
+		}
+	
+		jTextArea1.append(Double.toString(WartosciZmiennychBazowych[w]));
+	
+		for(int z =0; z < ileSpacji-Spacjeprzod; z++){
+			jTextArea1.append(" ");
+		}
+		
+		// ---- wartosci produktów dla ograniczen (czyli wartosci z naszy jtextFildów
+    			for (int k =0; k<ograniczenia+produkty; k++){
+    				zmiennaDoDolugosci=(Double.toString(tab[w][k]));
+    				ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    				Spacjeprzod = ileSpacji/2;
+				
+    				for(int z =0; z < Spacjeprzod; z++){
+    					jTextArea1.append(" ");
+    				}
+				
+    				jTextArea1.append(Double.toString(tab[w][k]));
+				
+    				for(int z =0; z < ileSpacji-Spacjeprzod; z++){
+    					jTextArea1.append(" ");
+    				}
+    		}
+    		jTextArea1.append("\n");
+    	}
+    	
+    	jTextArea1.append("\n");
+    	jTextArea1.append("\n");
     }
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {

@@ -23,6 +23,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	boolean CzyMax;
 	double[][] tab = new double[6][15];  // liczby(tabela x)
 	double[][] tabTemp = new double [5][5];
+	double[] BiAk = new double[5];
+	double[] Ci = new double [5];
+	double[]Zj = new double[10];
+	double[]CjZj = new double[10];
 	static double [] tabelaCelow = new double [8]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
 	static byte [] znaki = new byte[5];     //0 to >=, 1 to <=, 2 to = 
@@ -1497,10 +1501,22 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		tabTemp[4][2]=Double.parseDouble(jTextField23.getText());
 		tabTemp[4][3]=Double.parseDouble(jTextField35.getText());
 		tabTemp[4][4]=Double.parseDouble(jTextField34.getText());
-		for (int i1 =0; i1<produkty; i1++){
+		for (int i1 =0; i1<=produkty; i1++){
 			for (int i2 =0; i2<ograniczenia; i2++){
 				tab[i1][i2]=tabTemp[i1][i2];
 			}
+		}
+		for(int j=0;j<=produkty+ograniczenia;j++){	
+			opisZmiennych[j]="x"+(j+1);
+		for(int k=produkty;k<produkty+ograniczenia; k++){
+			if( j+ograniczenia-1 == k){
+				if(znaki[k]==1)
+					tab[j][k]=-1;
+				else
+					tab[j][k]=1;
+			}
+		}
+		
 		}
     }
     
@@ -1513,12 +1529,14 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	String tekst = nf.format(1234.56789);
 */
     	for(int k =0; k< ograniczenia; k++){
-    		for(int i=0; i < produkty*2+5; i++){
+    		for(int i=0; i < produkty+ograniczenia; i++){
     			tekst = tekst + Double.toString(tab[k][i]) + "   ";
+    			tekst = tekst + opisZmiennych[i]+"   ";
     		}
     		tekst = tekst + "\n";
     	}
     	jTextArea1.setText(tekst);
+    	//jTextArea1.
     }
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {

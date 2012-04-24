@@ -25,7 +25,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	double[][] tabTemp = new double [25][25];
 	double[] Wejscie = new double[25];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
 	double[]roznica = new double[25];//obliczamy roznice dla kazdego elementu wg. innych tablic
-	double[]tabCelowPrim = new double[10]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
+	double[]tabCelowPrim = new double[25]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
 	double[] WartosciZmiennychBazowych = new double[25];
 	static double [] tabelaCelow = new double [25]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [25]; //liczby po <= itd.
@@ -709,20 +709,24 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		jTextArea1.setText("");  //czyscimy okno
         		
         		//czyœcimy tablice
-        		/*
-        		double[][] tab = new double[6][15];  // liczby(tabela x)
-        		double[][] tabTemp = new double [5][5];
-        		double[] Wejscie = new double[5];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
-        		double[]roznica = new double[10];//obliczamy roznice dla kazdego elementu wg. innych tablic
-        		double[]tabCelowPrim = new double[10]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
-        		double[] WartosciZmiennychBazowych = new double[5];
-        		static double [] tabelaCelow = new double [10]; //liczby x1,itp. w funkcji celu
-        		static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
-        		double[] Ilorazy = new double[5];
-        		String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
-        		String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
-        		boolean KrtyteriumOptymalnosci = true;
-        		*/
+        		for(int i=0; i<24; i++){
+        			Wejscie[i]=0;
+        			roznica[i]=0;
+        			tabCelowPrim[i]=0;
+        			WartosciZmiennychBazowych[i]=0;
+        			tabelaCelow[i]=0;
+        			wartosciOgraniczen[i]=0;
+        			Ilorazy[i]=0;
+        			for(int k=0; k<24; k++){
+        				tab[i][k]=0;
+        				tabTemp[i][k]=0;
+        			}
+        			opisZmiennych[i]="";
+        			opisZmiennychBazowych[i]="";
+        		}
+
+        		KrtyteriumOptymalnosci = true;
+        		
         		
         		//wywo³ujemy funkcje
         		UzupelnijTabele();
@@ -1673,6 +1677,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     			Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
 
     	//}
+    		
     }
     
     public void WyswietlSpacje(int a){
@@ -1688,6 +1693,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	int ileSpacji =0;
     	int Spacjeprzod =0;
     	String zmiennaDoDolugosci;
+    	double a = 0;
     	
     	jTextArea1.append("Tabela SIMPLEKSOWA \n");
     	jTextArea1.append("\n");
@@ -1696,13 +1702,19 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	
     	jTextArea1.append("              ");   // spacje
     	for(int i=0; i<produkty+ograniczenia; i++){
-    		zmiennaDoDolugosci=(Double.toString(tabelaCelow[i]));
+    		
+    		a = tabelaCelow[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+    		
+    		zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
     			
-    		jTextArea1.append(Double.toString(tabelaCelow[i]));   // wyswietlamy wartosci x w funkcji celu
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci x w funkcji celu
     			
     		WyswietlSpacje(ileSpacji-Spacjeprzod);
  
@@ -1724,12 +1736,18 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	
       //------------------TRZECI WIERSZ I RESZTA TABELI---------------------
         for(int i=0; i<ograniczenia; i++){
-        	zmiennaDoDolugosci=(Double.toString(Wejscie[i]));
+        	
+        	a = Wejscie[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+        	
+        	zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(Wejscie[i]));   // wyswietlamy wartosci garanatowa tabela po lewo
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci garanatowa tabela po lewo
     		WyswietlSpacje(ileSpacji-Spacjeprzod);
     		
     		jTextArea1.append("  ");
@@ -1737,29 +1755,46 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		jTextArea1.append("   ");
     		
         	for(int k=0; k<ograniczenia+produkty; k++){
-    				zmiennaDoDolugosci=(Double.toString(tab[i][k]));
+        		//zaokr¹glamy do 2 miejsca po przecinku
+    				a = tab[i][k];
+    				a *= 100; 
+        	        a = Math.round(a);
+        	        a /= 100; 
+        	        
+    			//Wyswietlanie zaokraglonej liczby
+    				zmiennaDoDolugosci=(Double.toString(a));
     				ileSpacji = Spacje - zmiennaDoDolugosci.length();
     				Spacjeprzod = ileSpacji/2;
     				
     				WyswietlSpacje(Spacjeprzod);
-    				jTextArea1.append(Double.toString(tab[i][k]));  //pomaranczowa tabela
+    				jTextArea1.append(Double.toString(a));  //pomaranczowa tabela
     				WyswietlSpacje(ileSpacji-Spacjeprzod);
     		}
         	
-        	zmiennaDoDolugosci=(Double.toString(WartosciZmiennychBazowych[i]));
+        	a = WartosciZmiennychBazowych[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+	        
+        	zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(WartosciZmiennychBazowych[i]));   // wyswietlamy wartosci niebieska tabela po prawo
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci niebieska tabela po prawo
     		WyswietlSpacje(ileSpacji-Spacjeprzod);
     		
-    		zmiennaDoDolugosci=(Double.toString(Ilorazy[i]));
+    		a = Ilorazy[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+	        
+    		zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(Ilorazy[i]));   // wyswietlamy wartosci fioletowa tabela
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci fioletowa tabela
     		WyswietlSpacje(ileSpacji-Spacjeprzod);
         	
         	jTextArea1.append("\n");
@@ -1770,12 +1805,18 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jTextArea1.append("              ");   // spacje
         
         for(int i=0; i<ograniczenia+produkty; i++){
-        	zmiennaDoDolugosci=(Double.toString(roznica[i]));
+        	
+        	a = roznica[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+	        
+        	zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(roznica[i]));   // wyswietlamy wartosci bronzowaa tabela
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci bronzowaa tabela
     		WyswietlSpacje(ileSpacji-Spacjeprzod);
         }
     	
@@ -1784,12 +1825,18 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	jTextArea1.append("              ");   // spacje
         
         for(int i=0; i<ograniczenia+produkty; i++){
-        	zmiennaDoDolugosci=(Double.toString(tabCelowPrim[i]));
+        	
+        	a = tabCelowPrim[i];
+			a *= 100; 
+	        a = Math.round(a);
+	        a /= 100;
+	        
+        	zmiennaDoDolugosci=(Double.toString(a));
     		ileSpacji = Spacje - zmiennaDoDolugosci.length();
     		Spacjeprzod = ileSpacji/2;
     		
     		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(tabCelowPrim[i]));   // wyswietlamy wartosci szara tabela
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci szara tabela
     		WyswietlSpacje(ileSpacji-Spacjeprzod);	
         }
         

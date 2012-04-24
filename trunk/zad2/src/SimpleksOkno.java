@@ -709,6 +709,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		jTextArea1.setText("");  //czyscimy okno
         		
         		//czyœcimy tablice
+        		/*
         		for(int i=0; i<24; i++){
         			Wejscie[i]=0;
         			roznica[i]=0;
@@ -726,7 +727,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		}
 
         		KrtyteriumOptymalnosci = true;
-        		
+        		*/
         		
         		//wywo³ujemy funkcje
         		UzupelnijTabele();
@@ -1546,7 +1547,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		for(int j=0; j<produkty+ograniczenia; j++){	
 			opisZmiennych[j]="x"+(j+1);
 			for(int k=produkty; k<produkty+ograniczenia; k++){
-				if( j+ograniczenia-1 == k){
+				if( j+ograniczenia == k){
 					if(znaki[k]==1){
 						tab[j][k]=-1;
 						//System.out.println("-1 if");
@@ -1633,33 +1634,39 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		}
     		System.out.println("numer min ilorazu "+NumerMina+" "+Ilorazy[NumerMina]);
     		
-        	Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
+    		// 	Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
     		
-        	//ZMIANA BAZY
+        	//-------------ZMIANA BAZY--------------------
     		for( int i=0; i<ograniczenia; i++){
     			for(int j=0; j<2*ograniczenia;j++){
     				roznica[j]+=tab[i][j]*Wejscie[i];//roznica ta co jest na dole u baby nad inna roznica
     			}    				
     		}
+    		
     		for(int i=0; i<2*ograniczenia; i++){
-    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
+    			tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
     		}
     		
     		//System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
+    		
     		WartosciZmiennychBazowych[NumerMina]=WartosciZmiennychBazowych[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
+    		
     		//System.out.println(WartosciZmiennychBazowych[NumerMina]);
     		for( int i=0; i<ograniczenia; i++){
-			if(i!=NumerMina){
-		WartosciZmiennychBazowych[i]=WartosciZmiennychBazowych[i]-WartosciZmiennychBazowych[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
-			}
-		}
+    			if(i!=NumerMina){
+    				WartosciZmiennychBazowych[i]=WartosciZmiennychBazowych[i]-WartosciZmiennychBazowych[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
+    			}
+    		}
 
-	//System.out.println(WartosciZmiennychBazowych[i]);
+    		//System.out.println(WartosciZmiennychBazowych[i]);
+    		
     		for( int i=0; i<2*ograniczenia; i++ ){
     			if(i!=NumerMaxa)
     			tab[NumerMina][i]=tab[NumerMina][i]/tab[NumerMina][NumerMaxa];//nie wazne
     		}
+    		
     		tab[NumerMina][NumerMaxa]=1;
+    		
     		for( int i=0; i<ograniczenia; i++){
     				for(int j=0; j<2*ograniczenia;j++){
     	    			if(i!=NumerMina && j!=NumerMaxa){
@@ -1667,17 +1674,24 @@ public class SimpleksOkno extends javax.swing.JFrame {
         			}
     			}
     		}
-    		for( int i=0; i<ograniczenia; i++){
-    				tab[i][NumerMaxa]=0;//nie wazne
-		}
-    			for(int i=0;i<ograniczenia;i++){
-    				for(int j = 0; j<2*ograniczenia;j++)
-    				System.out.println(tab[i][j]);
-        			}
-    			Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
-
-    	//}
     		
+    		for( int i=0; i<ograniczenia; i++){
+    			if(i!=NumerMina) 
+    				tab[i][NumerMaxa]=0;//nie wazne
+    		}
+    		
+    		for(int i=0;i<ograniczenia;i++){
+    			for(int j = 0; j<2*ograniczenia;j++)
+    				System.out.println(tab[i][j]);
+        	}
+    		
+    		Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
+    		
+    		double zysk =0; 
+    		for(int i=0; i<ograniczenia; i++)
+    			zysk+=WartosciZmiennychBazowych[i]*Wejscie[i];
+    		
+    		System.out.println(zysk);
     }
     
     public void WyswietlSpacje(int a){

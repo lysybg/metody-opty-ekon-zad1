@@ -1564,6 +1564,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     public void Simplels(boolean KrteriumOptymalnosci){
     	
     	double temp=0;
+    	double temp1=0;
     	int NumerMaxa=0;
     	int NumerMina=0;
     	
@@ -1589,7 +1590,6 @@ public class SimpleksOkno extends javax.swing.JFrame {
     			}
     		}
     		System.out.println("numer maxa "+NumerMaxa);
-    	Wejscie[NumerMaxa]=temp;
     		for(int i=0; i<ograniczenia; i++){
     			if(tab[i][NumerMaxa] > 0){
     					System.out.println(WartosciZmiennychBazowych[i]);
@@ -1603,29 +1603,42 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		
     		//Szukamy najmniejszego ilorazu
     		for(int i=0; i<=ograniczenia; i++){
-    			if(Ilorazy[i] < temp  && Ilorazy[i] > 0){
+    			if(Ilorazy[i] < temp1  && Ilorazy[i] > 0){
     				NumerMina=i;
-    				temp = Ilorazy[i];
+    				temp1 = Ilorazy[i];
     			}
     		}
     		System.out.println("numer min ilorazu "+NumerMina+" "+Ilorazy[NumerMina]);
     		
+        	Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
     		
     		//ZMIANA BAZY
-    		/*for( int i=0; i<2*ograniczenia; i++){
-    			for(int j=0; j<produkty;j++){
-    				roznica[i]+=tab[i][j]*Wejscie[j];
+    		for( int i=0; i<ograniczenia; i++){
+    			for(int j=0; j<2*ograniczenia;j++){
+    				roznica[j]+=tab[i][j]*Wejscie[i];//roznica ta co jest na dole u baby nad inna roznica
     			}    				
     		}
     		for(int i=0; i<2*ograniczenia; i++){
-    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];
+    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
     		}
     		for( int i=0; i<2*ograniczenia; i++ ){
-    			tab[NumerMina][i]=tab[NumerMina][i]/tab[i][NumerMaxa];
-    		}*/
-    		//System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
-    		// co dalej?? mamy juz najmniejszy iloraz... teraz te jakies dzielanie i w ogóle...
-    		//wartosciOgraniczen[NumerMina]=wartosciOgraniczen[NumerMina]/tab[NumerMina][NumerMaxa];
+    			tab[NumerMina][i]=tab[NumerMina][i]/tab[i][NumerMaxa];//nie wazne
+    		}
+    		System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
+    		wartosciOgraniczen[NumerMina]=wartosciOgraniczen[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
+    		for( int i=0; i<ograniczenia; i++){
+    			if(i!=NumerMina){
+    				for(int j=0; j<2*ograniczenia;j++){
+        				tab[i][j]=tab[i][j]-tab[NumerMina][j]*tab[i][NumerMaxa];//nie wazne
+        			}
+    			}
+        			}
+
+			for( int i=0; i<ograniczenia; i++){
+    			if(i!=NumerMina){
+			wartosciOgraniczen[i]=wartosciOgraniczen[i]-wartosciOgraniczen[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
+    			}
+    		}
     	//}
     }
     

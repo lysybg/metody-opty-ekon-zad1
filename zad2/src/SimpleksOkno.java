@@ -34,6 +34,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	String[] opisZmiennych = new String[25];   //opis x1 x2 x3 x4...   wiersz
 	String[] opisZmiennychBazowych = new String [25];   // opis tylko zmiennych bazowych kolumna
 	boolean KrtyteriumOptymalnosci = true;
+	double zysk =0;
 	
     public SimpleksOkno() {
         initComponents();
@@ -1687,7 +1688,6 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		
     		Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
     		
-    		double zysk =0; 
     		for(int i=0; i<ograniczenia; i++)
     			zysk+=WartosciZmiennychBazowych[i]*Wejscie[i];
     		
@@ -1855,6 +1855,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         }
         
         jTextArea1.append("\n");
+        jTextArea1.append("\n");
+        jTextArea1.append("Zysk wynosi : "+zysk);
+        jTextArea1.append("\n");
+        jTextArea1.append("------------------------");
         
     	/*
     	//------------------PIWRWSZY WIERSZ---------------------

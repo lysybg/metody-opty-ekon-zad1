@@ -1527,30 +1527,29 @@ public class SimpleksOkno extends javax.swing.JFrame {
 				if( j+ograniczenia-1 == k){
 					if(znaki[k]==1){
 						tab[j][k]=-1;
-						System.out.println("-1 if");
+						//System.out.println("-1 if");
 					}else{
 						tab[j][k]=1;
-						System.out.println("1 if");
+						///System.out.println("1 if");
 					}
 				}else{
 					tab[j][k]=0;
-					System.out.println("0 if");
+					//System.out.println("0 if");
 				}
-				System.out.println(k+"k");
-				System.out.println(j+"j");
+				//System.out.println(k+"k");
+				//System.out.println(j+"j");
 			}
 		}
 		
 		//Uzupe³niamy "pionow¹" tablice z opisami zmiennych x3 x4 x5....
-		int a = ograniczenia;
-		for(int i=0; i<ograniczenia; i++){
+		int a = ograniczenia+1;
+		for(int i=0; i<=ograniczenia; i++){
 			opisZmiennychBazowych[i]="x"+(a);
 			a++;
 		}
 		
 		//Uzupe³niamy wartoœci zmiennych bazwoych
 		for(int i=0; i<ograniczenia; i++){
-			
 			WartosciZmiennychBazowych[i]=wartosciOgraniczen[i];
 		}
 		
@@ -1589,7 +1588,9 @@ public class SimpleksOkno extends javax.swing.JFrame {
     				temp = tabelaCelow[i];
     			}
     		}
+    		
     		System.out.println("numer maxa "+NumerMaxa);
+    		
     		for(int i=0; i<ograniczenia; i++){
     			if(tab[i][NumerMaxa] > 0){
     					System.out.println(WartosciZmiennychBazowych[i]);
@@ -1618,28 +1619,38 @@ public class SimpleksOkno extends javax.swing.JFrame {
     				roznica[j]+=tab[i][j]*Wejscie[i];//roznica ta co jest na dole u baby nad inna roznica
     			}    				
     		}
+    		
     		for(int i=0; i<2*ograniczenia; i++){
-    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
+    			tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
     		}
+    		
     		for( int i=0; i<2*ograniczenia; i++ ){
     			tab[NumerMina][i]=tab[NumerMina][i]/tab[i][NumerMaxa];//nie wazne
     		}
+    		
     		System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
     		wartosciOgraniczen[NumerMina]=wartosciOgraniczen[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
+    		
     		for( int i=0; i<ograniczenia; i++){
     			if(i!=NumerMina){
     				for(int j=0; j<2*ograniczenia;j++){
         				tab[i][j]=tab[i][j]-tab[NumerMina][j]*tab[i][NumerMaxa];//nie wazne
         			}
     			}
-        			}
+        	}
 
 			for( int i=0; i<ograniczenia; i++){
     			if(i!=NumerMina){
-			wartosciOgraniczen[i]=wartosciOgraniczen[i]-wartosciOgraniczen[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
+    				wartosciOgraniczen[i]=wartosciOgraniczen[i]-wartosciOgraniczen[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
     			}
     		}
     	//}
+    }
+    
+    public void WyswietlSpacje(int a){
+    	for(int z = 0; z < a ; z++){
+			jTextArea1.append(" ");
+		}
     }
     
     
@@ -1653,6 +1664,110 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	jTextArea1.append("Tabela SIMPLEKSOWA \n");
     	jTextArea1.append("\n");
     	
+    	//------------------PIWRWSZY WIERSZ---------------------
+    	
+    	jTextArea1.append("              ");   // spacje
+    	for(int i=0; i<produkty+ograniczenia; i++){
+    		zmiennaDoDolugosci=(Double.toString(tabelaCelow[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    			
+    		jTextArea1.append(Double.toString(tabelaCelow[i]));   // wyswietlamy wartosci x w funkcji celu
+    			
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+ 
+        }
+    	
+        jTextArea1.append("\n");
+    	
+      //------------------DRUGI WIERSZ---------------------
+        
+        jTextArea1.append("              ");   // spacje
+        for(int i=0; i<=produkty+ograniczenia; i++){
+    		jTextArea1.append("  ");
+    		jTextArea1.append(opisZmiennych[i]);  //wyswietlamy opisy x1 x2 x3 ....
+    		jTextArea1.append("   ");
+    	}
+        
+        jTextArea1.append("\n");
+    	
+    	
+      //------------------TRZECI WIERSZ I RESZTA TABELI---------------------
+        for(int i=0; i<ograniczenia; i++){
+        	zmiennaDoDolugosci=(Double.toString(Wejscie[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(Wejscie[i]));   // wyswietlamy wartosci garanatowa tabela po lewo
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		
+    		jTextArea1.append("  ");
+    		jTextArea1.append(opisZmiennychBazowych[i]);  //wyswietlamy opisy x1 x2 x3 granatowa tabela po lewo
+    		jTextArea1.append("   ");
+    		
+        	for(int k=0; k<ograniczenia+produkty; k++){
+    				zmiennaDoDolugosci=(Double.toString(tab[i][k]));
+    				ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    				Spacjeprzod = ileSpacji/2;
+    				
+    				WyswietlSpacje(Spacjeprzod);
+    				jTextArea1.append(Double.toString(tab[i][k]));  //pomaranczowa tabela
+    				WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		}
+        	
+        	zmiennaDoDolugosci=(Double.toString(WartosciZmiennychBazowych[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(WartosciZmiennychBazowych[i]));   // wyswietlamy wartosci niebieska tabela po prawo
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		
+    		zmiennaDoDolugosci=(Double.toString(Ilorazy[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(Ilorazy[i]));   // wyswietlamy wartosci fioletowa tabela
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+        	
+        	jTextArea1.append("\n");
+        }
+        
+      //------------------OSTATNIE DWA WIERSZE---------------------
+        
+        jTextArea1.append("              ");   // spacje
+        
+        for(int i=0; i<ograniczenia+produkty; i++){
+        	zmiennaDoDolugosci=(Double.toString(roznica[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(roznica[i]));   // wyswietlamy wartosci bronzowaa tabela
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+        }
+    	
+    	jTextArea1.append("\n");
+    	
+    	jTextArea1.append("              ");   // spacje
+        
+        for(int i=0; i<ograniczenia+produkty; i++){
+        	zmiennaDoDolugosci=(Double.toString(tabCelowPrim[i]));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(tabCelowPrim[i]));   // wyswietlamy wartosci szara tabela
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);	
+        }
+        
+        jTextArea1.append("\n");
+        
+    	/*
     	//------------------PIWRWSZY WIERSZ---------------------
     	jTextArea1.append("                      ");   // spacje
     	for(int i=0; i<ograniczenia+produkty; i++){
@@ -1742,6 +1857,8 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		}
     		jTextArea1.append("\n");
     	}
+    	
+    	*/
     	
     	jTextArea1.append("\n");
     	jTextArea1.append("\n");

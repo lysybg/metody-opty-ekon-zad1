@@ -23,10 +23,9 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	boolean CzyMax;
 	double[][] tab = new double[6][15];  // liczby(tabela x)
 	double[][] tabTemp = new double [5][5];
-	double[] BiAk = new double[5];
-	double[] Ci = new double [5];   //narazie nie potrzebana
-	double[]Zj = new double[10];
-	double[]CjZj = new double[10];
+	double[] Wejscie = new double[5];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
+	double[]roznica = new double[10];//obliczamy roznice dla kazdego elementu wg. innych tablic
+	double[]tabCelowPrim = new double[10]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
 	double[] WartosciZmiennychBazowych = new double[5];
 	static double [] tabelaCelow = new double [10]; //liczby x1,itp. w funkcji celu
 	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
@@ -753,7 +752,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel7.setText("P2");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("12");
+        jTextField4.setText("4");
 
         jLabel8.setText("+");
 
@@ -761,13 +760,14 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel9.setText("P1");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("8");
+        jTextField5.setText("12");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("P2");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
-
+        jComboBox2.setSelectedIndex(1);
+        
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField6.setText("480");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
@@ -777,9 +777,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
-
+        jComboBox3.setSelectedIndex(1);
+        
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setText("4");
+        jTextField7.setText("8");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("P2");
@@ -1588,7 +1589,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     			}
     		}
     		System.out.println("numer maxa "+NumerMaxa);
-    	
+    	Wejscie[NumerMaxa]=temp;
     		for(int i=0; i<ograniczenia; i++){
     			if(tab[i][NumerMaxa] > 0){
     					System.out.println(WartosciZmiennychBazowych[i]);
@@ -1609,10 +1610,22 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		}
     		System.out.println("numer min ilorazu "+NumerMina+" "+Ilorazy[NumerMina]);
     		
+    		
     		//ZMIANA BAZY
-    		
+    		/*for( int i=0; i<2*ograniczenia; i++){
+    			for(int j=0; j<produkty;j++){
+    				roznica[i]+=tab[i][j]*Wejscie[j];
+    			}    				
+    		}
+    		for(int i=0; i<2*ograniczenia; i++){
+    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];
+    		}
+    		for( int i=0; i<2*ograniczenia; i++ ){
+    			tab[NumerMina][i]=tab[NumerMina][i]/tab[i][NumerMaxa];
+    		}*/
+    		//System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
     		// co dalej?? mamy juz najmniejszy iloraz... teraz te jakies dzielanie i w ogóle...
-    		
+    		//wartosciOgraniczen[NumerMina]=wartosciOgraniczen[NumerMina]/tab[NumerMina][NumerMaxa];
     	//}
     }
     

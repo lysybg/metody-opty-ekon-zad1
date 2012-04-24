@@ -1599,7 +1599,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		//wspó³¬czynniki niedodatnie, to rozpatrywane rozwi¹zanie bazowe jest 
     		//rozwi¹zaniem optymalnym. W takim wypadku koñczymy poszukiwania rozwi¹zania opty¬malnego. 
     		for(int i =0; i<=produkty; i++){
-    			if (tabelaCelow[i] < 0 ){
+    			if (tabelaCelow[i] <= 0 ){
     				KrteriumOptymalnosci = false;
     			}
     		}
@@ -1687,11 +1687,14 @@ public class SimpleksOkno extends javax.swing.JFrame {
         	}
     		
     		Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
+    		opisZmiennychBazowych[NumerMina]=opisZmiennych[NumerMaxa];
     		
     		for(int i=0; i<ograniczenia; i++)
     			zysk+=WartosciZmiennychBazowych[i]*Wejscie[i];
     		
     		System.out.println(zysk);
+    //}
+    	//WyswietlTabele();
     }
     
     public void WyswietlSpacje(int a){

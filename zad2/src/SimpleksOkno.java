@@ -21,18 +21,18 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	int ograniczenia;
 	static int produkty;
 	boolean CzyMax;
-	double[][] tab = new double[6][15];  // liczby(tabela x)
-	double[][] tabTemp = new double [5][5];
-	double[] Wejscie = new double[5];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
-	double[]roznica = new double[10];//obliczamy roznice dla kazdego elementu wg. innych tablic
+	double[][] tab = new double[25][25];  // liczby(tabela x)
+	double[][] tabTemp = new double [25][25];
+	double[] Wejscie = new double[25];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
+	double[]roznica = new double[25];//obliczamy roznice dla kazdego elementu wg. innych tablic
 	double[]tabCelowPrim = new double[10]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
-	double[] WartosciZmiennychBazowych = new double[5];
-	static double [] tabelaCelow = new double [10]; //liczby x1,itp. w funkcji celu
-	static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
-	double[] Ilorazy = new double[5];
-	static byte [] znaki = new byte[5];     //0 to >=, 1 to <=, 2 to = 
-	String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
-	String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
+	double[] WartosciZmiennychBazowych = new double[25];
+	static double [] tabelaCelow = new double [25]; //liczby x1,itp. w funkcji celu
+	static double [] wartosciOgraniczen = new double [25]; //liczby po <= itd.
+	double[] Ilorazy = new double[25];
+	static byte [] znaki = new byte[25];     //0 to >=, 1 to <=, 2 to = 
+	String[] opisZmiennych = new String[25];   //opis x1 x2 x3 x4...   wiersz
+	String[] opisZmiennychBazowych = new String [25];   // opis tylko zmiennych bazowych kolumna
 	boolean KrtyteriumOptymalnosci = true;
 	
     public SimpleksOkno() {
@@ -707,6 +707,24 @@ public class SimpleksOkno extends javax.swing.JFrame {
         	public void mouseClicked(MouseEvent arg0) {
         		
         		jTextArea1.setText("");  //czyscimy okno
+        		
+        		//czyœcimy tablice
+        		/*
+        		double[][] tab = new double[6][15];  // liczby(tabela x)
+        		double[][] tabTemp = new double [5][5];
+        		double[] Wejscie = new double[5];//Wejscie cz4yli to co stoi po lewej stronie, niebieska linijka
+        		double[]roznica = new double[10];//obliczamy roznice dla kazdego elementu wg. innych tablic
+        		double[]tabCelowPrim = new double[10]; //tutaj wyszukujemy maxa lub mina i wg niego idziemy dalej
+        		double[] WartosciZmiennychBazowych = new double[5];
+        		static double [] tabelaCelow = new double [10]; //liczby x1,itp. w funkcji celu
+        		static double [] wartosciOgraniczen = new double [5]; //liczby po <= itd.
+        		double[] Ilorazy = new double[5];
+        		String[] opisZmiennych = new String[11];   //opis x1 x2 x3 x4...   wiersz
+        		String[] opisZmiennychBazowych = new String [5];   // opis tylko zmiennych bazowych kolumna
+        		boolean KrtyteriumOptymalnosci = true;
+        		*/
+        		
+        		//wywo³ujemy funkcje
         		UzupelnijTabele();
         		WyswietlTabele();
         		Simplels(KrtyteriumOptymalnosci);
@@ -1613,37 +1631,47 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		
         	Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
     		
-    		//ZMIANA BAZY
+        	//ZMIANA BAZY
     		for( int i=0; i<ograniczenia; i++){
     			for(int j=0; j<2*ograniczenia;j++){
     				roznica[j]+=tab[i][j]*Wejscie[i];//roznica ta co jest na dole u baby nad inna roznica
     			}    				
     		}
-    		
     		for(int i=0; i<2*ograniczenia; i++){
-    			tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
+    		tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
     		}
     		
-    		for( int i=0; i<2*ograniczenia; i++ ){
-    			tab[NumerMina][i]=tab[NumerMina][i]/tab[i][NumerMaxa];//nie wazne
-    		}
-    		
-    		System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
-    		wartosciOgraniczen[NumerMina]=wartosciOgraniczen[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
-    		
+    		//System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
+    		WartosciZmiennychBazowych[NumerMina]=WartosciZmiennychBazowych[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
+    		//System.out.println(WartosciZmiennychBazowych[NumerMina]);
     		for( int i=0; i<ograniczenia; i++){
-    			if(i!=NumerMina){
+			if(i!=NumerMina){
+		WartosciZmiennychBazowych[i]=WartosciZmiennychBazowych[i]-WartosciZmiennychBazowych[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
+			}
+		}
+
+	//System.out.println(WartosciZmiennychBazowych[i]);
+    		for( int i=0; i<2*ograniczenia; i++ ){
+    			if(i!=NumerMaxa)
+    			tab[NumerMina][i]=tab[NumerMina][i]/tab[NumerMina][NumerMaxa];//nie wazne
+    		}
+    		tab[NumerMina][NumerMaxa]=1;
+    		for( int i=0; i<ograniczenia; i++){
     				for(int j=0; j<2*ograniczenia;j++){
-        				tab[i][j]=tab[i][j]-tab[NumerMina][j]*tab[i][NumerMaxa];//nie wazne
+    	    			if(i!=NumerMina && j!=NumerMaxa){
+        				tab[i][j]=tab[i][j]-((tab[NumerMina][j])*(tab[i][NumerMaxa]));//nie wazne
         			}
     			}
-        	}
-
-			for( int i=0; i<ograniczenia; i++){
-    			if(i!=NumerMina){
-    				wartosciOgraniczen[i]=wartosciOgraniczen[i]-wartosciOgraniczen[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
-    			}
     		}
+    		for( int i=0; i<ograniczenia; i++){
+    				tab[i][NumerMaxa]=0;//nie wazne
+		}
+    			for(int i=0;i<ograniczenia;i++){
+    				for(int j = 0; j<2*ograniczenia;j++)
+    				System.out.println(tab[i][j]);
+        			}
+    			Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
+
     	//}
     }
     

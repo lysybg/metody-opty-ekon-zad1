@@ -1832,27 +1832,27 @@ for( int j=0;j<ograniczenia;j++){
         jTextArea1.append("\n");
         for(int i=0; i<ograniczenia; i++){
         	if(opisZmiennychBazowych[i].equals("x1") && ograniczenia == 2){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+Wejscie[i]);
+        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
         		jTextArea1.append("\n");
         	}
         	
         	if(opisZmiennychBazowych[i].equals("x2") && ograniczenia == 2){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+Wejscie[i]);
+        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
         		jTextArea1.append("\n");
         	}
         	
         	if(opisZmiennychBazowych[i].equals("x1") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+Wejscie[i]);
+        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
         		jTextArea1.append("\n");
         	}
         	
         	if(opisZmiennychBazowych[i].equals("x2") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+Wejscie[i]);
+        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
         		jTextArea1.append("\n");
         	}
         	
         	if(opisZmiennychBazowych[i].equals("x3") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+Wejscie[i]);
+        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
         		jTextArea1.append("\n");
         	}
         }

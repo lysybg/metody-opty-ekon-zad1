@@ -1422,9 +1422,11 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		tabCelow[3]=Double.parseDouble(jTextField25.getText());
 		tabCelow[4]=Double.parseDouble(jTextField24.getText());
     	
-		for(int i=0;i<ograniczenia;i++)
-			tabelaCelow[i]=tabCelow[i];
-		for(int i=ograniczenia;i<2*ograniczenia;i++)
+		for(int i=0;i<produkty;i++){
+			tabelaCelow[i]=tabCelow[i];	
+			tabCelowPrim[i]=tabCelow[i];
+		}
+		for(int i=produkty;i<2*ograniczenia;i++)
 			tabelaCelow[i]=0.0;
 for( int j=0;j<ograniczenia;j++){
 			for (byte i=0; i<3; i++){
@@ -1538,7 +1540,7 @@ for( int j=0;j<ograniczenia;j++){
     }
     
     public void Simplels(boolean KrteriumOptymalnosci){
-    	
+    	for(int z=1; z<ograniczenia;z++){
     	double temp=0;
     	double temp1=0;
     	int NumerMaxa=0;
@@ -1568,13 +1570,16 @@ for( int j=0;j<ograniczenia;j++){
     //	if(KrteriumOptymalnosci){
     		//wybieramy maxa z wartosci zmiennych nie bazowych w funkcji celu
     	
-    		for(int i=0; i<=produkty; i++){
-    			if(tabelaCelow[i] > temp){
+    		if(z==1){
+    			for(int i=0; i<=produkty; i++){
+    			if(tabCelowPrim[i] > temp){
     				NumerMaxa=i;
     				temp = tabelaCelow[i];
     			}
     		}
-    		
+    		}
+    		else
+    			NumerMaxa=1;
     		System.out.println("numer maxa "+NumerMaxa);
     		
     		for(int i=0; i<ograniczenia; i++){
@@ -1587,7 +1592,7 @@ for( int j=0;j<ograniczenia;j++){
     				Ilorazy[i] = -1;   // sygna³ ze to pomijamy!!!!!
     			}
     		}
-    		
+    		temp1=Ilorazy[0];
     		//Szukamy najmniejszego ilorazu
     		for(int i=0; i<=ograniczenia; i++){
     			if(Ilorazy[i] < temp1  && Ilorazy[i] > 0){
@@ -1647,16 +1652,18 @@ for( int j=0;j<ograniczenia;j++){
     			for(int j = 0; j<2*ograniczenia;j++)
     				System.out.println(tab[i][j]);
         	}
-    		
+    		if(z==2)
+    			temp=tabelaCelow[1];
     		Wejscie[NumerMina]=temp;// ta tabelka co jest po samej lewej
     		opisZmiennychBazowych[NumerMina]=opisZmiennych[NumerMaxa];
-    		
+    		zysk=0;
     		for(int i=0; i<ograniczenia; i++)
     			zysk+=WartosciZmiennychBazowych[i]*Wejscie[i];
     		
     		System.out.println(zysk);
     		WyswietlTabele();
     	}
+    }
     //	}
     	
   //  }

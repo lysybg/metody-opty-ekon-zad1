@@ -22,9 +22,15 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	int ograniczenia;
 	static int produkty;
 	boolean CzyMax;
+	boolean CzyOptymalne;
+	boolean CzyDopuszczalne;
+	
+	
 	double[] ZjCj = new double[25];
+	double[] ZjCjPrim = new double[25];
 	double[] Cb = new double[25];
 	double[][] tab = new double[25][25];  // liczby(tabela x)
+	double[][] tabPrim = new double[25][25];  // liczby(tabela x)
 	double[][] tabTemp = new double [25][25];
 	double[] WyrazyWolneB = new double[25];//WyrazyWolneB czyli to co stoi po lewej stronie, niebieska linijka
 	double[] roznica = new double[25];//obliczamy roznice dla kazdego elementu wg. innych tablic
@@ -33,6 +39,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	double[] tabelaCelow = new double [25]; //liczby x1,itp. w funkcji celu
 	double[] tabCelow = new double[25];
 	double[] wartosciOgraniczen = new double [25]; //liczby po <= itd.
+	double[] wartosciOgraniczenPrim = new double [25]; //liczby po <= itd.
 	double[] Ilorazy = new double[25];
 	static byte [] znaki = new byte[25];     //0 to >=, 1 to <=, 2 to = 
 	String[] opisZmiennych = new String[25];   //opis x1 x2 x3 x4...   wiersz
@@ -646,7 +653,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         		
         		//wywo³ujemy funkcje
         		UzupelnijTabele();
-        		WyswietlTabele();
+        		WyswietlTabele(0,0);
         		Simplels(KrtyteriumOptymalnosci);
             	//WyswietlTabele();		
         	}
@@ -1474,23 +1481,23 @@ public class SimpleksOkno extends javax.swing.JFrame {
 		}
 		
 		//Uzupe³niamy "pionow¹" tablice z opisami zmiennych x3 x4 x5....
-		int a = ograniczenia+1;
-		for(int i=0; i<=ograniczenia; i++){
+		int a = produkty+1;
+		for(int i=0; i< ograniczenia; i++){
 			opisZmiennychBazowych[i]="x"+(a);
 			a++;
 		}
 		
 		//Uzupe³niamy wartoœci zmiennych bazwoych (kolumna Cb wyk³ady)
-		for(int i=0; i<ograniczenia; i++){
+		for(int i=0; i< ograniczenia; i++){
 			WartosciZmiennychBazowych[i]=wartosciOgraniczen[i];
 		}
 		
 		//Uzupe³niamy ilorazy
-		for(int i=0; i<ograniczenia; i++){
+		for(int i=0; i< ograniczenia; i++){
 			Ilorazy[i]=0;
 		}
 		
-		for(int i=0; i<ograniczenia; i++){
+		for(int i=0; i< ograniczenia; i++){
 			if(znaki[i]==2){
 				tabelaCelow[i+1+ograniczenia-produkty]=-1;
 				WyrazyWolneB[i]=-1;
@@ -1514,21 +1521,56 @@ public class SimpleksOkno extends javax.swing.JFrame {
 			System.out.print("     "+tabelaCelow[i]);
 		*/
     }
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     public void Simplels(boolean KrteriumOptymalnosci){
-    	for(int z=1; z<ograniczenia;z++){
-    	double temp=0;
-    	double temp1=0;
-    	int NumerMaxa=0;
-
-  
-    // 1. Wyznaczenie rozwi¹zania wyjœciowego spe³niaj¹cego warunki optymalnoœci
-    /*     Ze wszystkich wyrazów wolnych wybieramy najmniejszy. Zmienna ta jest zmienn¹
+    	int NumerMina=0;
+    	double wartoscMina;
+    	double wartoscMinaWejscie;
+    	int NumerMinaWejscie=0;
+    	CzyDopuszczalne = false;
+    	
+    while(CzyDopuszczalne == false){	
+    	
+   // 1. Sprawdzamy warunek optymalnoœci
+    /*     rozwi¹zanie jest optymalne gdzy Zj - Cj <= 0 dla ka¿dego j
+     */
+    		for(int i = 0; i < produkty; i++){
+    			if ( ZjCj[i] <= 0 ){
+    				CzyOptymalne = true;
+    			}else{
+    				CzyOptymalne = false;
+    			}	
+    		}
+    
+    //if(CzyOptymalne){
+    // 2. Sprawdzamy warunek odopuszczalnoœci
+     /*     Wrtoœci wszystkich wyrazów wolnych s¹ nie ujemne ( >= 0 )
+      *     Czy rozwi¹zanie jest dopuszczalne?  Tak - koniec  Nie - idziemy dalej
+      *     Ze wszystkich wyrazów wolnych wybieramy najmniejszy. Zmienna ta jest zmienn¹
+      *     opuszczaj¹c¹ bazê. Je¿eli jest wiêcej, ni¿ jedna najmniejsza wartoœæ, wtedy
+      *     wybieramy zmienn¹ o najni¿szym numerze.
+      */
+    	
+    	for(int i = 0; i < ograniczenia; i++){
+    		if ( wartosciOgraniczen[i] > 0){
+    			CzyDopuszczalne = true;
+    		}else{
+    			CzyDopuszczalne = false;
+    		}
+    	}
+    	
+    	
+    // 3. Kryterium Wyjœcia
+    /*     Wyznaczenie rozwi¹zania wyjœciowego spe³niaj¹cego warunki optymalnoœci
+     *     Ze wszystkich wyrazów wolnych wybieramy najmniejszy. Zmienna ta jest zmienn¹
      *     opuszczaj¹c¹ bazê. Je¿eli jest wiêcej, ni¿ jedna najmniejsza wartoœæ, wtedy
      *     wybieramy zmienn¹ o najni¿szym numerze.
      */
-    double wartoscMina = wartosciOgraniczen[0];
-    int NumerMina=0;
+    wartoscMina = wartosciOgraniczen[0];
+    NumerMina=0;
     for(int i = 1; i < ograniczenia; i++){
     	if(wartosciOgraniczen[i] < wartoscMina ){
     		wartoscMina = wartosciOgraniczen[i];
@@ -1537,9 +1579,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
     }
     //zmienna do wyeliminowania to wartoscizmiennychbazowych[NumerMina]
     
-    // 2. 
-    /*     Kryterium wejscia
-     *	   Obliczamy ilorazy wartoœci wskaŸników optymalnoœci przez odpowiadaj¹ce im
+    
+    
+    // 4. Kryterium Wejscia    
+    /*	   Obliczamy ilorazy wartoœci wskaŸników optymalnoœci przez odpowiadaj¹ce im
      *     elementy wiersza dla zmiennej opuszczaj¹cej bazê ((zj - cj) : xij)
      *     dla tych elementów rozpatrywanego wiersza, które s¹ ujemne.
      *     Do bazy wchodzi ta zmienna, dla której wartoœæ bezwzglêdna odpowiadaj¹cego jej
@@ -1547,23 +1590,35 @@ public class SimpleksOkno extends javax.swing.JFrame {
      *     Je¿eli jest wiêcej ni¿ jedna najmniejsza wartoœæ tego ilorazu,
 	 *     wtedy wybieramy zmienn¹ o najni¿szym numerze.
      */
+    
     //wyliczamy ilorazy
-    for(int i = 0; i < produkty; i++){
-    	Ilorazy[i] =Math.abs( ZjCj[i] / tab[NumerMina][i] );
+    for(int i = 0; i < produkty+ograniczenia; i++){
+    	if(ZjCj[i] == 0 ){
+    		Ilorazy[i] = 100000;
+    	}else{
+    		Ilorazy[i] =Math.abs( ZjCj[i] / tab[NumerMina][i] );
+    	}
     }
     
+    for(int i = 0; i < produkty+ograniczenia; i++){
+    	System.out.print(Ilorazy[i]+"  ");
+    }
+    
+    System.out.println();
+    
     // szukamy najmniejszego ilorazu
+    wartoscMinaWejscie = Ilorazy[0];
+    NumerMinaWejscie = 0;
     
-    double wartoscMinaWejscie = Ilorazy[0];
-    int NumerMinaWejscie = 0;
-    
-    for(int i = 1; i < ograniczenia; i++){
+    for(int i = 1; i < produkty+ograniczenia; i++){
     	if(Ilorazy[i] < wartoscMinaWejscie ){
     		wartoscMinaWejscie = Ilorazy[i];
     		NumerMinaWejscie = i;
     	}
     }
-    
+    System.out.print("Wartoœæ min ilorazu  "+wartoscMinaWejscie+"   numer kolumny "+NumerMinaWejscie+" warosc "+tab[NumerMina][NumerMinaWejscie] +"do zmianay "+tabelaCelow[NumerMinaWejscie]);
+    System.out.println();
+   /* 
     System.out.println("Ilorazy:");
     for(int i = 0; i < produkty; i++){
     	System.out.print(Ilorazy[i]+"  ");
@@ -1580,149 +1635,62 @@ public class SimpleksOkno extends javax.swing.JFrame {
     System.out.print(wartoscMinaWejscie+"  "+NumerMinaWejscie);
     System.out.println("Wartosc zmiennej wchodzacej :");
     System.out.println(tab[NumerMina][NumerMinaWejscie]);
+    System.out.println("-------------");
+    System.out.println("Wartosc zmiennej wychodz¹cej :");
+    System.out.println(opisZmiennychBazowych[NumerMina]);
+    System.out.println(Cb[NumerMina]);
+    */
     
-    
-    
-    // 2. Czy rozwi¹zanie jest dopuszczalne?  Tak - koniec  Nie - idziemy dalej
-    /*     Ze wszystkich wyrazów wolnych wybieramy najmniejszy. Zmienna ta jest zmienn¹
-     *     opuszczaj¹c¹ bazê. Je¿eli jest wiêcej, ni¿ jedna najmniejsza wartoœæ, wtedy
-     *     wybieramy zmienn¹ o najni¿szym numerze.
+    // 5. Zmiana Bazy
+    /* -----------------------------------------------------
+     * -----------------------------------------------------
+     * -----------------------------------------------------
      */
+    //zmiana Cb
+    Cb[NumerMina] = tabelaCelow[NumerMinaWejscie];
     
+    //Zmiana opisu (kolumna baza w wyk³adach)
+    opisZmiennychBazowych[NumerMinaWejscie] = "x"+(NumerMinaWejscie);
     
+    //Zmiana Zj-Cj
+    for(int i = 0; i < produkty+ograniczenia; i++){
+    	ZjCjPrim[i] = ZjCj[i] - (( tab[NumerMina][i] / tab[NumerMina][NumerMinaWejscie] ) * ZjCj[NumerMinaWejscie]);
+    }
     
-    // 3. Okreœlenie indeksu wektora wyeliminowanego z bazy
-    /*     Ze wszystkich wyrazów wolnych wybieramy najmniejszy. Zmienna ta jest zmienn¹
-     *     opuszczaj¹c¹ bazê. Je¿eli jest wiêcej, ni¿ jedna najmniejsza wartoœæ, wtedy
-     *     wybieramy zmienn¹ o najni¿szym numerze.
-     */
+    //Przepisanie tablicy ZjCjPrim do ZjCj
+    for(int i = 0; i < produkty+ograniczenia; i++){
+    	ZjCj[i] = ZjCjPrim[i];
+    }
     
-    	
- /*   	
-
-   //sprawdzamy kryterium optymalnosci
-    //	while(KrteriumOptymalnosci){ 
-    	
-    		//SPrawdzamy kryterium optymalnosci: zgodnie z teori¹:
-    		//Je¿eli wszystkie zmienne niebazowe wystêpuj¹ce w funkcji celu maj¹ 
-    		//wspó³¬czynniki niedodatnie, to rozpatrywane rozwi¹zanie bazowe jest 
-    		//rozwi¹zaniem optymalnym. W takim wypadku koñczymy poszukiwania rozwi¹zania opty¬malnego. 
-    		//if(CzyMax == false){
-
-   			for(int i =0; i<produkty; i++){
-    				if (tabCelowPrim[i] <= 0 ){
-    					KrteriumOptymalnosci = false;
-    				}
-    			}
-    		//}
-    		//if(CzyMax == true){
-    		//	for(int i =0; i<produkty; i++){
-    		//		if (tabCelowPrim[i] < 0 ){
-    		//			KrteriumOptymalnosci = false;
-    		//		}
-    		//	}
-    		//}
-    //	if(KrteriumOptymalnosci){
-    		//wybieramy maxa z wartosci zmiennych nie bazowych w funkcji celu
-    	
-    		if(z==1){
-    			for(int i=0; i<=produkty; i++){
-    			if(tabCelowPrim[i] > temp){
-    				NumerMaxa=i;
-    				temp = tabelaCelow[i];
-    			}
+    //Wyliczamy pozosta³e X 
+    for(int i = 0; i < ograniczenia; i++){
+    	for(int j = 0; j < produkty+ograniczenia; j++){
+    		//wyliczenia dla wiersza zaznaczonego do eliminacji
+    		if( i == NumerMina){
+    			 tabPrim[i][j] = tab[i][j] / tab[NumerMina][NumerMinaWejscie];
+    			 wartosciOgraniczenPrim[i] = wartosciOgraniczen[i] / tab[NumerMina][NumerMinaWejscie];  //b
+    		}else{
+    			tabPrim[i][j] = tab[i][j] - (( tab[NumerMina][j] / tab[NumerMina][NumerMinaWejscie] ) * tab[i][NumerMinaWejscie]);
+    			wartosciOgraniczenPrim[i] = wartosciOgraniczen[i] - ((wartosciOgraniczen[NumerMina] / tab[NumerMina][NumerMinaWejscie] ) * tab[i][NumerMinaWejscie]);  //b
     		}
-    		}
-    		else
-    			NumerMaxa=1;
-    		System.out.println("numer maxa "+NumerMaxa);
-    		
-    		for(int i=0; i<ograniczenia; i++){
-    			if(tab[i][NumerMaxa] > 0){
-    					System.out.println(WartosciZmiennychBazowych[i]);
-    					System.out.println(tab[i][NumerMaxa]);
-    				Ilorazy[i]=WartosciZmiennychBazowych[i] / tab[i][NumerMaxa];
-    					System.out.println(Ilorazy[i]);
-    			}else{
-    				Ilorazy[i] = -1;   // sygna³ ze to pomijamy!!!!!
-    			}
-    		}
-    		temp1=Ilorazy[0];
-    		//Szukamy najmniejszego ilorazu
-    		for(int i=0; i<=ograniczenia; i++){
-    			if(Ilorazy[i] < temp1  && Ilorazy[i] > 0){
-    				NumerMina=i;
-    				temp1 = Ilorazy[i];
-    			}
-    		}
-    		System.out.println("numer min ilorazu "+NumerMina+" "+Ilorazy[NumerMina]);
-    		
-    		// 	WyrazyWolneB[NumerMina]=temp;// ta tabelka co jest po samej lewej
-    		
-        	//-------------ZMIANA BAZY--------------------
-    		for( int i=0; i<ograniczenia; i++){
-    			for(int j=0; j<2*ograniczenia;j++){
-    				roznica[j]+=tab[i][j]*WyrazyWolneB[i];//roznica ta co jest na dole u baby nad inna roznica
-    			}    				
-    		}
-    		
-    		for(int i=0; i<2*ograniczenia; i++){
-    			tabCelowPrim[i]=tabelaCelow[i]-roznica[i];//najnizsza roznica
-    		}
-    		
-    		//System.out.println(tab[NumerMina][3]/tab[NumerMina][NumerMaxa]);
-    		
-    		WartosciZmiennychBazowych[NumerMina]=WartosciZmiennychBazowych[NumerMina]/tab[NumerMina][NumerMaxa];//nowe ograniczenia to co po prawej stronie jest
-    		
-    		//System.out.println(WartosciZmiennychBazowych[NumerMina]);
-    		for( int i=0; i<ograniczenia; i++){
-    			if(i!=NumerMina){
-    				WartosciZmiennychBazowych[i]=WartosciZmiennychBazowych[i]-WartosciZmiennychBazowych[NumerMina]*tab[i][NumerMaxa];//nowe ograniczenia
-    			}
-    		}
-
-    		//System.out.println(WartosciZmiennychBazowych[i]);
-    		
-    		for( int i=0; i<2*ograniczenia; i++ ){
-    			if(i!=NumerMaxa)
-    			tab[NumerMina][i]=tab[NumerMina][i]/tab[NumerMina][NumerMaxa];//nie wazne
-    		}
-    		
-    		tab[NumerMina][NumerMaxa]=1;
-    		
-    		for( int i=0; i<ograniczenia; i++){
-    				for(int j=0; j<2*ograniczenia;j++){
-    	    			if(i!=NumerMina && j!=NumerMaxa){
-        				tab[i][j]=tab[i][j]-((tab[NumerMina][j])*(tab[i][NumerMaxa]));//nie wazne
-        			}
-    			}
-    		}
-    		
-    		for( int i=0; i<ograniczenia; i++){
-    			if(i!=NumerMina) 
-    				tab[i][NumerMaxa]=0;//nie wazne
-    		}
-    		
-    		for(int i=0;i<ograniczenia;i++){
-    			for(int j = 0; j<2*ograniczenia;j++)
-    				System.out.println(tab[i][j]);
-        	}
-    		if(z==2)
-    			temp=tabelaCelow[1];
-    		WyrazyWolneB[NumerMina]=temp;// ta tabelka co jest po samej lewej
-    		opisZmiennychBazowych[NumerMina]=opisZmiennych[NumerMaxa];
-    		zysk=0;
-    		for(int i=0; i<ograniczenia; i++)
-    			zysk+=WartosciZmiennychBazowych[i]*WyrazyWolneB[i];
-    		
-    		System.out.println(zysk);
-    		WyswietlTabele();
-    		
-    		*/
     	}
+    }
+    
+    //Przepisanie tabPrim do tab
+    for(int i = 0; i < ograniczenia; i++){
+    	for(int j = 0; j < produkty+ograniczenia; j++){
+    		tab[i][j] = tabPrim[i][j];
+    		wartosciOgraniczen[i] = wartosciOgraniczenPrim[i];
+    	}
+    }
+     WyswietlTabele(NumerMina,NumerMinaWejscie);
+    }
+   
+  //  }
+    
+    }
+  //}
 
-    	
- }
     
     public void WyswietlSpacje(int a){
     	for(int z = 0; z < a ; z++){
@@ -1731,7 +1699,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     }
     
     
-    public void WyswietlTabele(){
+    public void WyswietlTabele(int NumerMina, int NumerMinaWejscie){
 
     	int Spacje = 7;
     	int ileSpacji =0;
@@ -1739,9 +1707,169 @@ public class SimpleksOkno extends javax.swing.JFrame {
     	String zmiennaDoDolugosci;
     	double a = 0;
     	
-    	jTextArea1.append("Tabela SIMPLEKSOWA \n");
+    	jTextArea1.append("-----Tabela SIMPLEKSOWA ----- \n");
     	jTextArea1.append("\n");
     	
+    	//------------------PIWRWSZY WIERSZ---------------------
+    	WyswietlSpacje(7);
+    	WyswietlSpacje(7);
+    	WyswietlSpacje(7);
+    	for(int i = 0; i < produkty+ograniczenia; i++){
+    		a = tabelaCelow[i];
+			a *= 1000; 
+	        a = Math.round(a);
+	        a /= 1000;
+    		
+    		zmiennaDoDolugosci=(Double.toString(a));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci x w funkcji celu
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    	}
+    	
+    	jTextArea1.append("\n");
+    	
+    	//------------------DRUGI WIERSZ---------------------
+    	zmiennaDoDolugosci=("Baza");
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+		
+		WyswietlSpacje(Spacjeprzod);
+		jTextArea1.append("Baza");   // wyswietlamy wartosci x w funkcji celu
+		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    	
+		//-----
+		
+		zmiennaDoDolugosci=("Cb");
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+		
+		WyswietlSpacje(Spacjeprzod);
+		jTextArea1.append("Cb");   // wyswietlamy wartosci x w funkcji celu
+		WyswietlSpacje(ileSpacji-Spacjeprzod);
+		
+		//-----
+		
+		zmiennaDoDolugosci=("b");
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+		
+		WyswietlSpacje(Spacjeprzod);
+		jTextArea1.append("b");   // wyswietlamy wartosci x w funkcji celu
+		WyswietlSpacje(ileSpacji-Spacjeprzod);
+		
+		//----
+		
+	     for(int i=0; i< produkty+ograniczenia; i++){
+	    		jTextArea1.append("  ");
+	    		jTextArea1.append(opisZmiennych[i]);  //wyswietlamy opisy x1 x2 x3 ....
+	    		jTextArea1.append("   ");
+	    }
+	        
+	    jTextArea1.append("\n");
+	    
+	    
+	  //------------------TRZECI WIERSZ---------------------
+	    
+	    for( int  i =0; i < ograniczenia; i++){
+	    	jTextArea1.append("  ");
+    		jTextArea1.append(opisZmiennychBazowych[i]);  //wyswietlamy opisy x1 x2 x3 granatowa tabela po lewo
+    		jTextArea1.append("   ");
+    		
+    		//----Cb---------
+    		a = Cb[i];
+			a *= 1000; 
+	        a = Math.round(a);
+	        a /= 1000;
+    		
+    		zmiennaDoDolugosci=(Double.toString(a));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(a));
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		
+    		//----b------
+    		a = wartosciOgraniczen[i];
+			a *= 1000; 
+	        a = Math.round(a);
+	        a /= 1000;
+    		
+    		zmiennaDoDolugosci=(Double.toString(a));
+    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+    		Spacjeprzod = ileSpacji/2;
+    		
+    		WyswietlSpacje(Spacjeprzod);
+    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci x w funkcji celu
+    		WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		
+    		//----x----
+    		for(int j =0; j < produkty+ograniczenia; j++){
+    			a = tab[i][j];
+				a *= 1000; 
+    	        a = Math.round(a);
+    	        a /= 1000; 
+    	        
+			//Wyswietlanie zaokraglonej liczby
+				zmiennaDoDolugosci=(Double.toString(a));
+				ileSpacji = Spacje - zmiennaDoDolugosci.length();
+				Spacjeprzod = ileSpacji/2;
+				
+				WyswietlSpacje(Spacjeprzod);
+				jTextArea1.append(Double.toString(a));  //pomaranczowa tabela
+				WyswietlSpacje(ileSpacji-Spacjeprzod);
+    		}
+    		jTextArea1.append("\n");
+	    }
+	    
+	    
+	    for( int  i =0; i < ograniczenia; i++){
+    		for(int j =0; j < produkty+ograniczenia; j++){
+    			System.out.print(tab[i][j]+"  ");
+    		}
+    		System.out.println();
+	    }
+	    
+	    
+	    //-----------------OSTATNI WIERSZ Zj-Cj-----------------
+	    WyswietlSpacje(7);
+	    
+	    zmiennaDoDolugosci=("Zj - Cj");
+		ileSpacji = Spacje - zmiennaDoDolugosci.length();
+		Spacjeprzod = ileSpacji/2;
+		WyswietlSpacje(Spacjeprzod);
+		jTextArea1.append("Zj - Cj");   // wyswietlamy wartosci x w funkcji celu
+		WyswietlSpacje(ileSpacji-Spacjeprzod);
+		
+	    WyswietlSpacje(7);
+	    
+	    for(int i = 0; i < produkty+ograniczenia; i++){
+	    	a = ZjCj[i];
+			a *= 1000; 
+	        a = Math.round(a);
+	        a /= 1000; 
+	        
+			zmiennaDoDolugosci=(Double.toString(a));
+			ileSpacji = Spacje - zmiennaDoDolugosci.length();
+			Spacjeprzod = ileSpacji/2;
+			
+			WyswietlSpacje(Spacjeprzod);
+			jTextArea1.append(Double.toString(a));
+			WyswietlSpacje(ileSpacji-Spacjeprzod);
+	    }
+	    /*
+	    jTextArea1.append("\n");
+	    jTextArea1.append("\n");
+	    jTextArea1.append("Zmienna wychodz¹ca : "+opisZmiennychBazowych[NumerMina+1]+" = "+wartosciOgraniczen[NumerMina+1]);
+	    jTextArea1.append("\n");
+	    jTextArea1.append("Zmienna wchodz¹ca : "+opisZmiennych[NumerMina+1]+" = "+tab[NumerMinaWejscie][NumerMina+1]);
+	    jTextArea1.append("\n");
+	    
+		*/
+    	/*
     	//------------------PIWRWSZY WIERSZ---------------------
     	
     	jTextArea1.append("              ");   // spacje
@@ -1917,7 +2045,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jTextArea1.append(" z(x)  =  "+zysk);
         jTextArea1.append("\n");
         jTextArea1.append("-----------------------------------------");
-        
+        */
     	/*
     	//------------------PIWRWSZY WIERSZ---------------------
     	jTextArea1.append("                      ");   // spacje

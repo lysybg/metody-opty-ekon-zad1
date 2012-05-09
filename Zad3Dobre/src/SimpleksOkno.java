@@ -48,6 +48,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
 	double zysk =0;
 	
     public SimpleksOkno() {
+    	getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
         initComponents();
     }
 
@@ -667,13 +668,13 @@ public class SimpleksOkno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
    
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Zadanie 2: Metoda Simpleks");
+        jLabel1.setText("Zadanie 3: Metoda Dualna Simpleks");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("f(P1,P2)");
+        jLabel2.setText("f(P1,P2,...,P5)");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("50");
+        jTextField1.setText("10");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("P1");
@@ -681,12 +682,12 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel4.setText("+");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setText("10");
+        jTextField2.setText("20");
 
         jLabel5.setText("->");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "min", "max" }));
-        jComboBox1.setSelectedIndex(1);
+        jComboBox1.setSelectedIndex(0);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Ograniczenia:");
@@ -695,7 +696,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel7.setText("P2");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("4");
+        jTextField4.setText("1");
 
         jLabel8.setText("+");
 
@@ -703,16 +704,16 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel9.setText("P1");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("12");
+        jTextField5.setText("3");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("P2");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
-        jComboBox2.setSelectedIndex(1);
+        jComboBox2.setSelectedIndex(0);
         
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setText("480");
+        jTextField6.setText("240");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -720,10 +721,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
-        jComboBox3.setSelectedIndex(1);
+        jComboBox3.setSelectedIndex(0);
         
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setText("8");
+        jTextField7.setText("1");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("P2");
@@ -734,10 +735,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel13.setText("P1");
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setText("8");
+        jTextField8.setText("5");
 
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField9.setText("640");
+        jTextField9.setText("300");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
@@ -745,9 +746,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox4.setSelectedIndex(0);
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField10.setText("0");
+        jTextField10.setText("4");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("P2");
@@ -758,10 +760,10 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel16.setText("P1");
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField11.setText("0");
+        jTextField11.setText("2");
 
         jTextField12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField12.setText("0");
+        jTextField12.setText("120");
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField12ActionPerformed(evt);
@@ -812,6 +814,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         });
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox5.setSelectedIndex(0);
 
         jLabel25.setText("+");
 
@@ -838,6 +841,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         });
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox6.setSelectedIndex(0);
 
         jTextField21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField21.setText("0");
@@ -997,7 +1001,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jLabel60.setText("Iloœæ produktów:");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-        jComboBox7.setSelectedIndex(1);
+        jComboBox7.setSelectedIndex(2);
 
         jComboBox8.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4", "5"}));
         jComboBox8.setSelectedIndex(0);
@@ -1007,6 +1011,9 @@ public class SimpleksOkno extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         btnOblicz.setLabel("Oblicz");
+        
+        JLabel lblNewLabel = new JLabel("P1,P2,..,P5 >= 0");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -1066,8 +1073,9 @@ public class SimpleksOkno extends javax.swing.JFrame {
         											.addPreferredGap(ComponentPlacement.RELATED)
         											.addComponent(jLabel5)
         											.addPreferredGap(ComponentPlacement.RELATED)
-        											.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        											.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        								.addComponent(lblNewLabel))
+        							.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
         							.addGroup(layout.createParallelGroup(Alignment.LEADING)
         								.addGroup(layout.createSequentialGroup()
         									.addGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -1358,7 +1366,8 @@ public class SimpleksOkno extends javax.swing.JFrame {
         						.addComponent(jLabel58)
         						.addComponent(jLabel56)
         						.addComponent(jTextField34, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(jLabel55)))
+        						.addComponent(jLabel55)
+        						.addComponent(lblNewLabel)))
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(jLabel60)
@@ -1545,7 +1554,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     			}	
     		}
     
-    //if(CzyOptymalne){
+    if(CzyOptymalne){
     // 2. Sprawdzamy warunek odopuszczalnoœci
      /*     Wrtoœci wszystkich wyrazów wolnych s¹ nie ujemne ( >= 0 )
       *     Czy rozwi¹zanie jest dopuszczalne?  Tak - koniec  Nie - idziemy dalej
@@ -1650,7 +1659,7 @@ public class SimpleksOkno extends javax.swing.JFrame {
     Cb[NumerMina] = tabelaCelow[NumerMinaWejscie];
     
     //Zmiana opisu (kolumna baza w wyk³adach)
-    opisZmiennychBazowych[NumerMinaWejscie] = "x"+(NumerMinaWejscie);
+    opisZmiennychBazowych[NumerMina] = opisZmiennych[NumerMinaWejscie];
     
     //Zmiana Zj-Cj
     for(int i = 0; i < produkty+ograniczenia; i++){
@@ -1683,10 +1692,17 @@ public class SimpleksOkno extends javax.swing.JFrame {
     		wartosciOgraniczen[i] = wartosciOgraniczenPrim[i];
     	}
     }
-     WyswietlTabele(NumerMina,NumerMinaWejscie);
+    //------------ WYLICZAMY ZYSK -------------------------
+    	zysk = 0;
+    	for(int i = 0; i < ograniczenia; i++){
+    		zysk = zysk + Cb[i] * wartosciOgraniczen[i];
+    	}
+     	WyswietlTabele(NumerMina,NumerMinaWejscie);
+    }else{
+    	jTextArea1.append("Zagadnienie sprzeczne");
     }
    
-  //  }
+    }
     
     }
   //}
@@ -1860,285 +1876,12 @@ public class SimpleksOkno extends javax.swing.JFrame {
 			jTextArea1.append(Double.toString(a));
 			WyswietlSpacje(ileSpacji-Spacjeprzod);
 	    }
-	    /*
 	    jTextArea1.append("\n");
-	    jTextArea1.append("\n");
-	    jTextArea1.append("Zmienna wychodz¹ca : "+opisZmiennychBazowych[NumerMina+1]+" = "+wartosciOgraniczen[NumerMina+1]);
-	    jTextArea1.append("\n");
-	    jTextArea1.append("Zmienna wchodz¹ca : "+opisZmiennych[NumerMina+1]+" = "+tab[NumerMinaWejscie][NumerMina+1]);
 	    jTextArea1.append("\n");
 	    
-		*/
-    	/*
-    	//------------------PIWRWSZY WIERSZ---------------------
-    	
-    	jTextArea1.append("              ");   // spacje
-    	for(int i=0; i<produkty+ograniczenia; i++){
-    		
-    		a = tabelaCelow[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-    		
-    		zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    			
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci x w funkcji celu
-    			
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);
- 
-        }
-    	
-        jTextArea1.append("\n");
-    	
-      //------------------DRUGI WIERSZ---------------------
-        
-        jTextArea1.append("              ");   // spacje
-        for(int i=0; i<=produkty+ograniczenia; i++){
-    		jTextArea1.append("  ");
-    		jTextArea1.append(opisZmiennych[i]);  //wyswietlamy opisy x1 x2 x3 ....
-    		jTextArea1.append("   ");
-    	}
-        
-        jTextArea1.append("\n");
-    	
-    	
-      //------------------TRZECI WIERSZ I RESZTA TABELI---------------------
-        for(int i=0; i<ograniczenia; i++){
-        	
-        	a = WyrazyWolneB[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-        	
-        	zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci garanatowa tabela po lewo
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);
-    		
-    		jTextArea1.append("  ");
-    		jTextArea1.append(opisZmiennychBazowych[i]);  //wyswietlamy opisy x1 x2 x3 granatowa tabela po lewo
-    		jTextArea1.append("   ");
-    		
-        	for(int k=0; k<ograniczenia+produkty; k++){
-        		//zaokr¹glamy do 2 miejsca po przecinku
-    				a = tab[i][k];
-    				a *= 100; 
-        	        a = Math.round(a);
-        	        a /= 100; 
-        	        
-    			//Wyswietlanie zaokraglonej liczby
-    				zmiennaDoDolugosci=(Double.toString(a));
-    				ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    				Spacjeprzod = ileSpacji/2;
-    				
-    				WyswietlSpacje(Spacjeprzod);
-    				jTextArea1.append(Double.toString(a));  //pomaranczowa tabela
-    				WyswietlSpacje(ileSpacji-Spacjeprzod);
-    		}
-        	
-        	a = WartosciZmiennychBazowych[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-	        
-        	zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci niebieska tabela po prawo
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);
-    		
-    		a = Ilorazy[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-	        
-    		zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci fioletowa tabela
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);
-        	
-        	jTextArea1.append("\n");
-        }
-        
-      //------------------OSTATNIE DWA WIERSZE---------------------
-        
-        jTextArea1.append("              ");   // spacje
-        
-        for(int i=0; i<ograniczenia+produkty; i++){
-        	
-        	a = roznica[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-	        
-        	zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci bronzowaa tabela
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);
-        }
-    	
-    	jTextArea1.append("\n");
-    	
-    	jTextArea1.append("              ");   // spacje
-        
-        for(int i=0; i<ograniczenia+produkty; i++){
-        	
-        	a = tabCelowPrim[i];
-			a *= 100; 
-	        a = Math.round(a);
-	        a /= 100;
-	        
-        	zmiennaDoDolugosci=(Double.toString(a));
-    		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    		Spacjeprzod = ileSpacji/2;
-    		
-    		WyswietlSpacje(Spacjeprzod);
-    		jTextArea1.append(Double.toString(a));   // wyswietlamy wartosci szara tabela
-    		WyswietlSpacje(ileSpacji-Spacjeprzod);	
-        }
-        
-        jTextArea1.append("\n");
-        jTextArea1.append("\n");
-        for(int i=0; i<ograniczenia; i++){
-        	if(opisZmiennychBazowych[i].equals("x1") && ograniczenia == 2){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
-        		jTextArea1.append("\n");
-        	}
-        	
-        	if(opisZmiennychBazowych[i].equals("x2") && ograniczenia == 2){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
-        		jTextArea1.append("\n");
-        	}
-        	
-        	if(opisZmiennychBazowych[i].equals("x1") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
-        		jTextArea1.append("\n");
-        	}
-        	
-        	if(opisZmiennychBazowych[i].equals("x2") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
-        		jTextArea1.append("\n");
-        	}
-        	
-        	if(opisZmiennychBazowych[i].equals("x3") && ograniczenia == 3){
-        		jTextArea1.append(opisZmiennychBazowych[i]+"  =  "+WartosciZmiennychBazowych[i]);
-        		jTextArea1.append("\n");
-        	}
-        }
-        jTextArea1.append("\n");
-        jTextArea1.append("Zysk wynosi : ");
+	    jTextArea1.append("Zysk wynosi : ");
         jTextArea1.append(" z(x)  =  "+zysk);
-        jTextArea1.append("\n");
-        jTextArea1.append("-----------------------------------------");
-        */
-    	/*
-    	//------------------PIWRWSZY WIERSZ---------------------
-    	jTextArea1.append("                      ");   // spacje
-    	for(int i=0; i<ograniczenia+produkty; i++){
-    		zmiennaDoDolugosci=(Double.toString(tabelaCelow[i]));
-			ileSpacji = Spacje - zmiennaDoDolugosci.length();
-			Spacjeprzod = ileSpacji/2;
-			
-			for(int z =0; z < Spacjeprzod; z++){
-				jTextArea1.append(" ");
-			}
-			
-			jTextArea1.append(Double.toString(tabelaCelow[i]));   // wyswietlamy wartosci x w funkcji celu
-			
-			for(int z =0; z < ileSpacji-Spacjeprzod; z++){
-				jTextArea1.append(" ");
-			}
-    	}
-    	jTextArea1.append("\n");
-    	
-    	//------------------DRUGI WIERSZ TABELKI----------------
-    	
-    	jTextArea1.append(" baza     Cb      b   ");
-    	
-    	for(int i=0; i<=produkty+ograniczenia; i++){
-    		jTextArea1.append("  ");
-    		jTextArea1.append(opisZmiennych[i]);  //wyswietlamy opisy x1 x2 x3 ....
-    		jTextArea1.append("   ");
-    	}
-    	
-    	jTextArea1.append("\n");
-    	
-    	//--------------------RESZTA TABELI!--------------------
-    	
-    	for(int w=0; w<ograniczenia; w++){
-    		
-    	//---------pionowe wyœwietlanie x bazowych  x3 x4 x5 ....
-    	jTextArea1.append("  ");
-    	jTextArea1.append(opisZmiennychBazowych[w]);
-    	jTextArea1.append("   ");
-    	
-    	// Cb ---------- wyswietlamy ilorazy
-    	zmiennaDoDolugosci=(Double.toString(Ilorazy[w]));
-		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-		Spacjeprzod = ileSpacji/2;
-	
-		for(int z =0; z < Spacjeprzod; z++){
-			jTextArea1.append(" ");
-		}
-	
-		jTextArea1.append(Double.toString(Ilorazy[w]));
-	
-		for(int z =0; z < ileSpacji-Spacjeprzod; z++){
-			jTextArea1.append(" ");
-		}
-    	
-		
-		//B ----------Wartosci zmiennych bazwoych
-		zmiennaDoDolugosci=(Double.toString(WartosciZmiennychBazowych[w]));
-		ileSpacji = Spacje - zmiennaDoDolugosci.length();
-		Spacjeprzod = ileSpacji/2;
-	
-		for(int z =0; z < Spacjeprzod; z++){
-			jTextArea1.append(" ");
-		}
-	
-		jTextArea1.append(Double.toString(WartosciZmiennychBazowych[w]));
-	
-		for(int z =0; z < ileSpacji-Spacjeprzod; z++){
-			jTextArea1.append(" ");
-		}
-		
-		// ---- wartosci produktów dla ograniczen (czyli wartosci z naszy jtextFildów
-    			for (int k =0; k<ograniczenia+produkty; k++){
-    				zmiennaDoDolugosci=(Double.toString(tab[w][k]));
-    				ileSpacji = Spacje - zmiennaDoDolugosci.length();
-    				Spacjeprzod = ileSpacji/2;
-				
-    				for(int z =0; z < Spacjeprzod; z++){
-    					jTextArea1.append(" ");
-    				}
-				
-    				jTextArea1.append(Double.toString(tab[w][k]));
-				
-    				for(int z =0; z < ileSpacji-Spacjeprzod; z++){
-    					jTextArea1.append(" ");
-    				}
-    		}
-    		jTextArea1.append("\n");
-    	}
-    	
-    	*/
-    	
+	   
     	jTextArea1.append("\n");
     	jTextArea1.append("\n");
     }

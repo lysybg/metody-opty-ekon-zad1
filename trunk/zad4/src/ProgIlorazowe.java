@@ -1,18 +1,31 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
 
-/**
- *
- * @author Darek
- */
+
 public class ProgIlorazowe extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ProgIlorazowe
-     */
+	int ograniczenia;
+	int produkty;
+	
+	float[][] tabOgraniczenWszystkich;
+	float[][] tabOgraniczen;
+	
+	float[] tabCeluWszystkich;
+	float[] tabCelu;
+	
+	float[] tabCelowMianownikWszystkich;
+	float[] tabCelowMianownik;
+	
+	float[] tabWartosciWszystkich;
+	float[] tabWartosci;
+	
     public ProgIlorazowe() {
         initComponents();
     }
@@ -151,6 +164,477 @@ public class ProgIlorazowe extends javax.swing.JFrame {
         jTextField41 = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         jTextField42 = new javax.swing.JTextField();
+        
+        jComboBox8.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		if(jComboBox8.getSelectedIndex() == 0){
+        			
+        			produkty =2;
+        		}
+        		if(jComboBox8.getSelectedIndex() == 1){
+        			
+        			produkty=3;
+        		}
+        		if(jComboBox8.getSelectedIndex() == 2){
+        			
+        			produkty=4;
+        		}
+        		if(jComboBox8.getSelectedIndex() == 3){
+        			
+        			produkty=5;
+        		}
+        	}
+        });
+        
+        jComboBox7.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		//==========================  OGRALICZENIA ======================================
+        		 if (jComboBox7.getSelectedIndex() == 0){  //ilosc ograniczen =1
+
+        			ograniczenia=1;
+        			
+     	         	
+        			jTextField7.setVisible(false);
+     	         	jTextField8.setVisible(false);
+     	         	jTextField14.setVisible(false);
+     	         	jTextField29.setVisible(false);
+     	         	jTextField28.setVisible(false);
+     	         	jTextField9.setVisible(false);
+     	         	
+     	         	jTextField10.setVisible(false);
+     	         	jTextField11.setVisible(false);
+     	         	jTextField15.setVisible(false);
+     	         	jTextField31.setVisible(false);
+     	         	jTextField30.setVisible(false);
+     	         	jTextField12.setVisible(false);
+     	         	
+     	         	jTextField18.setVisible(false);
+     	         	jTextField19.setVisible(false);
+     	         	jTextField22.setVisible(false);
+     	         	jTextField33.setVisible(false);
+     	         	jTextField32.setVisible(false);
+     	         	jTextField20.setVisible(false);
+     	         	
+     	         	jTextField21.setVisible(false);
+     	         	jTextField16.setVisible(false);
+     	         	jTextField23.setVisible(false);
+     	         	jTextField35.setVisible(false);
+     	         	jTextField34.setVisible(false);
+     	         	jTextField17.setVisible(false);
+     	         	
+     	         	jLabel13.setVisible(false);
+     	         	jLabel11.setVisible(false);
+     	         	jLabel22.setVisible(false);
+     	         	jLabel46.setVisible(false);
+     	         	jLabel43.setVisible(false);
+     	         	
+     	         	jLabel16.setVisible(false);
+     	         	jLabel14.setVisible(false);
+     	         	jLabel24.setVisible(false);
+     	         	jLabel50.setVisible(false);
+     	         	jLabel47.setVisible(false);
+     	         	
+     	         	jLabel12.setVisible(false);
+     	         	jLabel21.setVisible(false);
+     	         	jLabel45.setVisible(false);
+     	         	jLabel44.setVisible(false);
+     	         	
+     	         	jLabel15.setVisible(false);
+     	         	jLabel23.setVisible(false);
+     	         	jLabel49.setVisible(false);
+     	         	jLabel48.setVisible(false);
+     	         	
+     	         	jLabel27.setVisible(false);
+     	         	jLabel25.setVisible(false);
+     	         	jLabel53.setVisible(false);
+     	         	jLabel52.setVisible(false);
+     	         	
+     	         	jLabel31.setVisible(false);
+     	         	jLabel32.setVisible(false);
+     	         	jLabel57.setVisible(false);
+     	         	jLabel56.setVisible(false);
+     	         	
+     	         	jLabel28.setVisible(false);
+     	         	jLabel26.setVisible(false);
+     	         	jLabel34.setVisible(false);
+     	         	jLabel54.setVisible(false);
+     	         	jLabel51.setVisible(false);
+     	         	
+     	         	jLabel30.setVisible(false);
+     	         	jLabel29.setVisible(false);
+     	         	jLabel33.setVisible(false);
+     	         	jLabel58.setVisible(false);
+     	         	jLabel55.setVisible(false);
+     	         	
+     	         	jComboBox3.setVisible(false);
+     	         	jComboBox4.setVisible(false);
+     	         	jComboBox5.setVisible(false);
+     	         	jComboBox6.setVisible(false);
+     	         	
+     	         }
+        		 
+        		 
+        		 if (jComboBox7.getSelectedIndex() == 1){  //ilosc ograniczen = 2
+        			
+        			 ograniczenia=2;
+        			 
+      	         	jTextField7.setVisible(true);
+      	         	jTextField8.setVisible(true);
+      	         	jTextField14.setVisible(true);
+      	         	jTextField29.setVisible(true);
+      	         	jTextField28.setVisible(true);
+      	         	jTextField9.setVisible(true);
+      	         	
+      	         	jTextField10.setVisible(false);
+      	         	jTextField11.setVisible(false);
+      	         	jTextField15.setVisible(false);
+      	         	jTextField31.setVisible(false);
+      	         	jTextField30.setVisible(false);
+      	         	jTextField12.setVisible(false);
+      	         	
+      	         	jTextField18.setVisible(false);
+      	         	jTextField19.setVisible(false);
+      	         	jTextField22.setVisible(false);
+      	         	jTextField33.setVisible(false);
+      	         	jTextField32.setVisible(false);
+      	         	jTextField20.setVisible(false);
+      	         	
+      	         	jTextField21.setVisible(false);
+      	         	jTextField16.setVisible(false);
+      	         	jTextField23.setVisible(false);
+      	         	jTextField35.setVisible(false);
+      	         	jTextField34.setVisible(false);
+      	         	jTextField17.setVisible(false);
+      	         	
+
+     	         	jLabel12.setVisible(true);
+     	         	jLabel21.setVisible(true);
+     	         	jLabel45.setVisible(true);
+     	         	jLabel44.setVisible(true);
+     	         	
+      	         	jLabel15.setVisible(false);
+     	         	jLabel23.setVisible(false);
+     	         	jLabel49.setVisible(false);
+     	         	jLabel48.setVisible(false);
+     	         	
+     	         	jLabel27.setVisible(false);
+     	         	jLabel25.setVisible(false);
+     	         	jLabel53.setVisible(false);
+     	         	jLabel52.setVisible(false);
+     	         	
+     	         	jLabel31.setVisible(false);
+     	         	jLabel32.setVisible(false);
+     	         	jLabel57.setVisible(false);
+     	         	jLabel56.setVisible(false);
+      	         	
+      	         	jLabel13.setVisible(true);
+      	         	jLabel11.setVisible(true);
+      	         	jLabel22.setVisible(true);
+      	         	jLabel46.setVisible(true);
+      	         	jLabel43.setVisible(true);
+      	         	
+      	         	jLabel16.setVisible(false);
+      	         	jLabel14.setVisible(false);
+      	         	jLabel24.setVisible(false);
+      	         	jLabel50.setVisible(false);
+      	         	jLabel47.setVisible(false);
+      	         	
+      	         	jLabel28.setVisible(false);
+      	         	jLabel26.setVisible(false);
+      	         	jLabel34.setVisible(false);
+      	         	jLabel54.setVisible(false);
+      	         	jLabel51.setVisible(false);
+      	         	
+      	         	jLabel30.setVisible(false);
+      	         	jLabel29.setVisible(false);
+      	         	jLabel33.setVisible(false);
+      	         	jLabel58.setVisible(false);
+      	         	jLabel55.setVisible(false);
+      	         	
+      	         	jComboBox3.setVisible(true);
+      	         	jComboBox4.setVisible(false);
+      	         	jComboBox5.setVisible(false);
+      	         	jComboBox6.setVisible(false);
+      	         	
+      	         }
+        		 
+
+        		 if (jComboBox7.getSelectedIndex() == 2){  //ilosc ograniczen = 3
+        			 
+        			ograniczenia=3;
+      	         	jTextField7.setVisible(true);
+      	         	jTextField8.setVisible(true);
+      	         	jTextField14.setVisible(true);
+      	         	jTextField29.setVisible(true);
+      	         	jTextField28.setVisible(true);
+      	         	jTextField9.setVisible(true);
+      	         	
+      	         	jTextField10.setVisible(true);
+      	         	jTextField11.setVisible(true);
+      	         	jTextField15.setVisible(true);
+      	         	jTextField31.setVisible(true);
+      	         	jTextField30.setVisible(true);
+      	         	jTextField12.setVisible(true);
+      	         	
+      	         	jTextField18.setVisible(false);
+      	         	jTextField19.setVisible(false);
+      	         	jTextField22.setVisible(false);
+      	         	jTextField33.setVisible(false);
+      	         	jTextField32.setVisible(false);
+      	         	jTextField20.setVisible(false);
+      	         	
+      	         	jTextField21.setVisible(false);
+      	         	jTextField16.setVisible(false);
+      	         	jTextField23.setVisible(false);
+      	         	jTextField35.setVisible(false);
+      	         	jTextField34.setVisible(false);
+      	         	jTextField17.setVisible(false);
+      	         	
+      	         	jLabel12.setVisible(true);
+     	         	jLabel21.setVisible(true);
+     	         	jLabel45.setVisible(true);
+     	         	jLabel44.setVisible(true);
+     	         	
+      	         	jLabel15.setVisible(true);
+     	         	jLabel23.setVisible(true);
+     	         	jLabel49.setVisible(true);
+     	         	jLabel48.setVisible(true);
+     	         	
+      	         	jLabel27.setVisible(false);
+     	         	jLabel25.setVisible(false);
+     	         	jLabel53.setVisible(false);
+     	         	jLabel52.setVisible(false);
+     	         	
+     	         	jLabel31.setVisible(false);
+     	         	jLabel32.setVisible(false);
+     	         	jLabel57.setVisible(false);
+     	         	jLabel56.setVisible(false);
+     	         	
+      	         	jLabel13.setVisible(true);
+      	         	jLabel11.setVisible(true);
+      	         	jLabel22.setVisible(true);
+      	         	jLabel46.setVisible(true);
+      	         	jLabel43.setVisible(true);
+      	         	
+      	         	jLabel16.setVisible(true);
+      	         	jLabel14.setVisible(true);
+      	         	jLabel24.setVisible(true);
+      	         	jLabel50.setVisible(true);
+      	         	jLabel47.setVisible(true);
+      	         	
+      	         	jLabel28.setVisible(false);
+      	         	jLabel26.setVisible(false);
+      	         	jLabel34.setVisible(false);
+      	         	jLabel54.setVisible(false);
+      	         	jLabel51.setVisible(false);
+      	         	
+      	         	jLabel30.setVisible(false);
+      	         	jLabel29.setVisible(false);
+      	         	jLabel33.setVisible(false);
+      	         	jLabel58.setVisible(false);
+      	         	jLabel55.setVisible(false);
+      	         	
+      	         	jComboBox3.setVisible(true);
+      	         	jComboBox4.setVisible(true);
+      	         	jComboBox5.setVisible(false);
+      	         	jComboBox6.setVisible(false);
+      	         	
+      	         }
+        		 
+        		 if (jComboBox7.getSelectedIndex() == 3){  //ilosc ograniczen = 4
+        			 
+        			ograniczenia=4;
+         			
+        			jTextField7.setVisible(true);
+       	         	jTextField8.setVisible(true);
+       	         	jTextField14.setVisible(true);
+       	         	jTextField29.setVisible(true);
+       	         	jTextField28.setVisible(true);
+       	         	jTextField9.setVisible(true);
+       	         	
+       	         	jTextField10.setVisible(true);
+       	         	jTextField11.setVisible(true);
+       	         	jTextField15.setVisible(true);
+       	         	jTextField31.setVisible(true);
+       	         	jTextField30.setVisible(true);
+       	         	jTextField12.setVisible(true);
+       	         	
+       	         	jTextField18.setVisible(true);
+       	         	jTextField19.setVisible(true);
+       	         	jTextField22.setVisible(true);
+       	         	jTextField33.setVisible(true);
+       	         	jTextField32.setVisible(true);
+       	         	jTextField20.setVisible(true);
+       	         	
+       	         	jTextField21.setVisible(false);
+       	         	jTextField16.setVisible(false);
+       	         	jTextField23.setVisible(false);
+       	         	jTextField35.setVisible(false);
+       	         	jTextField34.setVisible(false);
+       	         	jTextField17.setVisible(false);
+
+      	         	jLabel12.setVisible(true);
+     	         	jLabel21.setVisible(true);
+     	         	jLabel45.setVisible(true);
+     	         	jLabel44.setVisible(true);
+     	         	
+      	         	jLabel15.setVisible(true);
+     	         	jLabel23.setVisible(true);
+     	         	jLabel49.setVisible(true);
+     	         	jLabel48.setVisible(true);
+     	         	
+      	         	jLabel27.setVisible(true);
+     	         	jLabel25.setVisible(true);
+     	         	jLabel53.setVisible(true);
+     	         	jLabel52.setVisible(true);
+
+     	         	jLabel31.setVisible(false);
+     	         	jLabel32.setVisible(false);
+     	         	jLabel57.setVisible(false);
+     	         	jLabel56.setVisible(false);
+     	         	
+       	         	jLabel13.setVisible(true);
+       	         	jLabel11.setVisible(true);
+       	         	jLabel22.setVisible(true);
+       	         	jLabel46.setVisible(true);
+       	         	jLabel43.setVisible(true);
+       	         	
+       	         	jLabel16.setVisible(true);
+       	         	jLabel14.setVisible(true);
+       	         	jLabel24.setVisible(true);
+       	         	jLabel50.setVisible(true);
+       	         	jLabel47.setVisible(true);
+       	         	
+       	         	jLabel28.setVisible(true);
+       	         	jLabel26.setVisible(true);
+       	         	jLabel34.setVisible(true);
+       	         	jLabel54.setVisible(true);
+       	         	jLabel51.setVisible(true);
+       	         	
+       	         	jLabel30.setVisible(false);
+       	         	jLabel29.setVisible(false);
+       	         	jLabel33.setVisible(false);
+       	         	jLabel58.setVisible(false);
+       	         	jLabel55.setVisible(false);
+       	         	
+       	         	jComboBox3.setVisible(true);
+       	         	jComboBox4.setVisible(true);
+       	         	jComboBox5.setVisible(true);
+       	         	jComboBox6.setVisible(false);
+       	         	
+       	         }
+        		 
+        		 
+        		 if (jComboBox7.getSelectedIndex() == 4){  //ilosc ograniczen = 5
+        			 
+        			 ograniczenia=5;
+          			
+          			
+        	         	jTextField7.setVisible(true);
+        	         	jTextField8.setVisible(true);
+        	         	jTextField14.setVisible(true);
+        	         	jTextField29.setVisible(true);
+        	         	jTextField28.setVisible(true);
+        	         	jTextField9.setVisible(true);
+        	         	
+        	         	jTextField10.setVisible(true);
+        	         	jTextField11.setVisible(true);
+        	         	jTextField15.setVisible(true);
+        	         	jTextField31.setVisible(true);
+        	         	jTextField30.setVisible(true);
+        	         	jTextField12.setVisible(true);
+        	         	
+        	         	jTextField18.setVisible(true);
+        	         	jTextField19.setVisible(true);
+        	         	jTextField22.setVisible(true);
+        	         	jTextField33.setVisible(true);
+        	         	jTextField32.setVisible(true);
+        	         	jTextField20.setVisible(true);
+        	         	
+        	         	jTextField21.setVisible(true);
+        	         	jTextField16.setVisible(true);
+        	         	jTextField23.setVisible(true);
+        	         	jTextField35.setVisible(true);
+        	         	jTextField34.setVisible(true);
+        	         	jTextField17.setVisible(true);
+
+          	         	jLabel12.setVisible(true);
+         	         	jLabel21.setVisible(true);
+         	         	jLabel45.setVisible(true);
+         	         	jLabel44.setVisible(true);
+         	         	
+          	         	jLabel15.setVisible(true);
+         	         	jLabel23.setVisible(true);
+         	         	jLabel49.setVisible(true);
+         	         	jLabel48.setVisible(true);
+         	         	
+          	         	jLabel27.setVisible(true);
+         	         	jLabel25.setVisible(true);
+         	         	jLabel53.setVisible(true);
+         	         	jLabel52.setVisible(true);
+
+         	         	jLabel31.setVisible(true);
+         	         	jLabel32.setVisible(true);
+         	         	jLabel57.setVisible(true);
+         	         	jLabel56.setVisible(true);
+        	         	
+        	         	jLabel13.setVisible(true);
+        	         	jLabel11.setVisible(true);
+        	         	jLabel22.setVisible(true);
+        	         	jLabel46.setVisible(true);
+        	         	jLabel43.setVisible(true);
+        	         	
+        	         	jLabel16.setVisible(true);
+        	         	jLabel14.setVisible(true);
+        	         	jLabel24.setVisible(true);
+        	         	jLabel50.setVisible(true);
+        	         	jLabel47.setVisible(true);
+        	         	
+        	         	jLabel28.setVisible(true);
+        	         	jLabel26.setVisible(true);
+        	         	jLabel34.setVisible(true);
+        	         	jLabel54.setVisible(true);
+        	         	jLabel51.setVisible(true);
+        	         	
+        	         	jLabel30.setVisible(true);
+        	         	jLabel29.setVisible(true);
+        	         	jLabel33.setVisible(true);
+        	         	jLabel58.setVisible(true);
+        	         	jLabel55.setVisible(true);
+        	         	
+        	         	jComboBox3.setVisible(true);
+        	         	jComboBox4.setVisible(true);
+        	         	jComboBox5.setVisible(true);
+        	         	jComboBox6.setVisible(true);
+        	         	
+        	         }
+        	}
+        });
+        
+      //====================================================================================================================================================================
+        //==========================        WCISKAMI PRZYCISK           ======================================================================================================
+        //====================================================================================================================================================================
+          btnOblicz.addMouseListener(new MouseAdapter() {
+          	public void mouseClicked(MouseEvent arg0) {
+          		
+          		jTextArea1.setText("");  //czyscimy okno
+          		
+          		
+          		//Algorytm(ograniczenia, produkty);
+
+          		UzupelnijTabele();
+          		//wpisz(tab, wartosciOgraniczen, tabelaCelow, produkty, ograniczenia);
+          		
+          		//jTextArea1.setText(simpTable(ograniczenia+2, ograniczenia+produkty+2));
+          		//wywo³ujemy funkcje
+          		
+          		//WyswietlTabele();
+          	//	Simplels();
+              	//WyswietlTabele();		
+          	}
+          });
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1033,9 +1517,122 @@ public class ProgIlorazowe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField40ActionPerformed
 
-    /**
-     * @param args the command line arguments
+    
+    
+    /*
+     * 
+     * 	float[][] tabOgraniczenWszystkich;
+	float[][] tabOgraniczen;
+	
+	float[][] tabCeluWszystkich;
+	float[][] tabCelu;
+	
+	float[][] tabWartosciWszystkich;
+	float[][] tabWartosci;
+     * 
+     * 
+     * 
      */
+
+    public void UzupelnijTabele(){
+      	int liczW, liczM;
+      	
+      	float[][] tabOgraniczenWszystkich = new float[6][6];
+    	float[][] tabOgraniczen = new float[ograniczenia][produkty];
+    	
+    	float[] tabCeluWszystkich = new float[6];
+    	float[] tabCelu = new float[produkty];
+    	
+    	float[] tabCelowMianownikWszystkich = new float[6];
+    	float[] tabCelowMianownik = new float[produkty];
+    	
+    	float[] tabWartosciWszystkich = new float[6];
+    	float[] tabWartosci = new float[ograniczenia];
+      	
+      	//wartosci przy x funkcji celu
+      	tabCeluWszystkich[0]=Float.parseFloat(jTextField1.getText());
+      	tabCeluWszystkich[1]=Float.parseFloat(jTextField2.getText());
+      	tabCeluWszystkich[2]=Float.parseFloat(jTextField3.getText());
+      	tabCeluWszystkich[3]=Float.parseFloat(jTextField25.getText());
+      	tabCeluWszystkich[4]=Float.parseFloat(jTextField24.getText());
+      	tabCeluWszystkich[5]=Float.parseFloat(jTextField41.getText());
+  		
+      	tabCelowMianownikWszystkich[0]=Float.parseFloat(jTextField38.getText());
+      	tabCelowMianownikWszystkich[1]=Float.parseFloat(jTextField37.getText());
+      	tabCelowMianownikWszystkich[2]=Float.parseFloat(jTextField36.getText());
+      	tabCelowMianownikWszystkich[3]=Float.parseFloat(jTextField40.getText());
+      	tabCelowMianownikWszystkich[4]=Float.parseFloat(jTextField39.getText());
+      	tabCelowMianownikWszystkich[5]=Float.parseFloat(jTextField42.getText());
+  		
+  		for(int i=0;i<produkty;i++){
+  			tabCelu[i]=tabCeluWszystkich[i];	
+  			tabCelowMianownik[i] = tabCelowMianownikWszystkich[i];
+  		}
+  		
+  		
+  		// kolumna b wyk³¹dy
+  		tabWartosciWszystkich[0]=Float.parseFloat(jTextField6.getText());
+  		tabWartosciWszystkich[1]=Float.parseFloat(jTextField9.getText());
+  		tabWartosciWszystkich[2]=Float.parseFloat(jTextField12.getText());
+  		tabWartosciWszystkich[3]=Float.parseFloat(jTextField20.getText());
+  		tabWartosciWszystkich[4]=Float.parseFloat(jTextField17.getText());
+  		
+  		for(int i=0;i<ograniczenia;i++){
+  			tabWartosci[i]=tabWartosciWszystkich[i];	
+  		}
+      	
+  		//tablica x
+  		tabOgraniczenWszystkich[0][0]=Float.parseFloat(jTextField5.getText());
+  		tabOgraniczenWszystkich[0][1]=Float.parseFloat(jTextField4.getText());
+  		tabOgraniczenWszystkich[0][2]=Float.parseFloat(jTextField13.getText());
+  		tabOgraniczenWszystkich[0][3]=Float.parseFloat(jTextField27.getText());
+  		tabOgraniczenWszystkich[0][4]=Float.parseFloat(jTextField26.getText());
+  		
+  		tabOgraniczenWszystkich[1][0]=Float.parseFloat(jTextField7.getText());
+  		tabOgraniczenWszystkich[1][1]=Float.parseFloat(jTextField8.getText());
+  		tabOgraniczenWszystkich[1][2]=Float.parseFloat(jTextField14.getText());
+  		tabOgraniczenWszystkich[1][3]=Float.parseFloat(jTextField29.getText());
+  		tabOgraniczenWszystkich[1][4]=Float.parseFloat(jTextField28.getText());
+  		
+  		tabOgraniczenWszystkich[2][0]=Float.parseFloat(jTextField10.getText());
+  		tabOgraniczenWszystkich[2][1]=Float.parseFloat(jTextField11.getText());
+  		tabOgraniczenWszystkich[2][2]=Float.parseFloat(jTextField15.getText());
+  		tabOgraniczenWszystkich[2][3]=Float.parseFloat(jTextField31.getText());
+  		tabOgraniczenWszystkich[2][4]=Float.parseFloat(jTextField30.getText());
+  		
+  		tabOgraniczenWszystkich[3][0]=Float.parseFloat(jTextField18.getText());
+  		tabOgraniczenWszystkich[3][1]=Float.parseFloat(jTextField19.getText());
+  		tabOgraniczenWszystkich[3][2]=Float.parseFloat(jTextField22.getText());
+  		tabOgraniczenWszystkich[3][3]=Float.parseFloat(jTextField33.getText());
+  		tabOgraniczenWszystkich[3][4]=Float.parseFloat(jTextField32.getText());
+  		
+  		tabOgraniczenWszystkich[4][0]=Float.parseFloat(jTextField21.getText());
+  		tabOgraniczenWszystkich[4][1]=Float.parseFloat(jTextField16.getText());
+  		tabOgraniczenWszystkich[4][2]=Float.parseFloat(jTextField23.getText());
+  		tabOgraniczenWszystkich[4][3]=Float.parseFloat(jTextField35.getText());
+  		tabOgraniczenWszystkich[4][4]=Float.parseFloat(jTextField34.getText());
+  		
+  		//Uzupe³niamy tab zmiennymi w jtextfietów które sa w tablicy tymczasowej
+  		//tablica x
+  		for (int i = 0; i< ograniczenia; i++){
+  			for (int j = 0; j< produkty; j++){
+  				tabOgraniczen[i][j]=tabOgraniczenWszystkich[i][j];
+  			}
+  		}
+  		
+  		
+  		//WYWO£ANIE KLASY ALGORYTM
+  		Algorytm f = new Algorytm(ograniczenia, produkty);
+  		
+  		f.wpisz(tabOgraniczen, tabWartosci, tabCelu, ograniczenia, produkty);  // ------tu trzeba dodac jeszzcze przest³anie tablicy  tabCelowMianownik !!! ale to zmieniajac kod w klasie algorytm
+  		
+  		jTextArea1.setText(f.simpTable(ograniczenia+2, ograniczenia+produkty+2)); 
+
+  		
+      }
+    
+    
+    
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel

@@ -967,10 +967,10 @@ public class ProgIlorazowe extends javax.swing.JFrame {
         jLabel58.setText("P4");
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel59.setText("Ilość ograniczeń:");
+        jLabel59.setText("Ilo\u015B\u0107 ogranicze\u0144");
 
         jLabel60.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel60.setText("Ilość zmiennych:");
+        jLabel60.setText("Ilo\u015B\u0107 produkt\u00F3w");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
         jComboBox7.setSelectedIndex(3);

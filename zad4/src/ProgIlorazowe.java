@@ -169,17 +169,21 @@ public class ProgIlorazowe extends javax.swing.JFrame {
         	public void actionPerformed(ActionEvent arg0) {
         		if(jComboBox8.getSelectedIndex() == 0){
         			
-        			produkty =2;
+        			produkty =1;
         		}
         		if(jComboBox8.getSelectedIndex() == 1){
         			
-        			produkty=3;
+        			produkty=2;
         		}
         		if(jComboBox8.getSelectedIndex() == 2){
         			
-        			produkty=4;
+        			produkty=3;
         		}
         		if(jComboBox8.getSelectedIndex() == 3){
+        			
+        			produkty=4;
+        		}
+        		if(jComboBox8.getSelectedIndex() == 4){
         			
         			produkty=5;
         		}
@@ -1619,8 +1623,8 @@ public class ProgIlorazowe extends javax.swing.JFrame {
   				tabOgraniczen[i][j]=tabOgraniczenWszystkich[i][j];
   			}
   		}
-  		
-  		
+  		System.out.println(produkty);
+  		System.out.println(ograniczenia);
   		//WYWO£ANIE KLASY ALGORYTM
   		Algorytm f = new Algorytm(ograniczenia, produkty);
   		

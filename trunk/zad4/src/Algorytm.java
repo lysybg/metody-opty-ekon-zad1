@@ -1,15 +1,15 @@
 
 public class Algorytm {
 
-	float[] wspCelu;
-	float[][] warunki;
-	float[] wartosci;
-	String[] znaki;
-	String cel;
+	float[] wspCelu;// to sa cele z licznika (zysk)
+	float[] wspCeluMianownik; // to sa cele z mianownika (strata)
+	float[][] warunki;//tabelka w srodku co sa wartosci ogranicznen
+	float[] wartosci; 
+	String[] znaki; // jaki znak bedzie miala dana jedynka w programie
 	float[] sigmy;
-	int iloscWarunkow, iloscZmiennych;
-	String[] baza, zmienne;
-	float[][] simplex;
+	int ileOgraniczen, ileProduktow;
+	String[] baza, zm; // do zamieniania to jest P1 itd.
+	float[][] simplex; //cala baza
 
 
 	public Algorytm(int war, int zmienne)
@@ -21,10 +21,11 @@ public class Algorytm {
 			}
 		}
 		baza = new String[war];
-		this.zmienne = new String[war+zmienne];
-		
+		this.zm = new String[war+zmienne];
+		ileOgraniczen=war;
+		ileProduktow=zmienne;
 		for (int i=0; i<war+zmienne; i++){
-			this.zmienne[i]="x"+(i+1);
+			this.zm[i]="x"+(i+1);
 			if (i<war){
 				this.baza[i]="x"+(i+zmienne+1);
 			}
@@ -68,7 +69,9 @@ public class Algorytm {
 				simplex[i][j]=0;
 			}
 		}
-		
+		/*
+		 * Wstawianie wartoœci
+		 */
 		for (int i=1; i<rows-1; i++)
 		{
 			simplex[i][0]=0;
@@ -143,8 +146,8 @@ public class Algorytm {
 	
 	public void zamienZmienne(int in, int out){
 		String tmp=baza[out];
-		baza[out]=zmienne[in];
-		zmienne[in]=tmp;
+		baza[out]=zm[in];
+		zm[in]=tmp;
 	}
 	
 	public void wstawNowaZmiennaDoBazy(float[][] simp, int i, int j){
@@ -174,20 +177,48 @@ public class Algorytm {
 		String s="";
 		for (int i=0; i<cols; i++)
 		{
-			if (i==0)
+			if (i==0 || i==1)
 			{
-				s+="cB\t";
+				s+="\t";
 			}
-			else if (i==1){
-				s+="b\t";
+			else if (i==2){
+				s+="xB\t";
+			}
+			else if(i==cols-1){
+				s+="sigma\t";
 			}
 			else
 			{
-				s+="P"+(i-1)+"\t";
+				s+="P"+(i-2)+"\t";
 			}
 		}
 		//System.out.println();
 		s+="\n";
+		for(int i=0;i<ileProduktow;i++)
+		System.out.println(wspCelu[i]);
+			for(int j=0;j<cols;j++){
+				if(j==0 || j==1){
+					s+="\t";
+				}
+				else if(j==2)
+					s+="zmienna\t";
+				else if(j>2 && j<ileProduktow+2)
+					s+=wspCelu[j-2]+"\t";
+					else
+						s+="0\t";
+				}
+			s+="\n";
+				for(int j=0;j<cols;j++){
+					if(j==0)s+="cB\t";
+					else if(j==1)s+="dB\t";
+					else if(j>2 && j<ileProduktow+2){
+						s+=wspCelu[j-2]+"\t";
+						//s+=wspCeluMianownik[j-2]+"\t";
+					}
+					else
+						s+="0\t";
+}
+				s+="\n";
 		for (int i=0; i<rows; i++)
 		{
 			for (int j=0; j<cols; j++)

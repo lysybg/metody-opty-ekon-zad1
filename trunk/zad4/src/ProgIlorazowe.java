@@ -1630,7 +1630,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
   		
   		f.wpisz(tabOgraniczen, tabWartosci, tabCelu, ograniczenia, produkty);  // ------tu trzeba dodac jeszzcze przest³anie tablicy  tabCelowMianownik !!! ale to zmieniajac kod w klasie algorytm
   																				//znaki tez trzeba przeslac bo nie maja tego w programie
-  		jTextArea1.setText(f.simpTable(ograniczenia+2, ograniczenia+produkty+4)); 
+  		jTextArea1.setText(f.simpTable(ograniczenia+3, ograniczenia+produkty+4)); 
 
   		
       }

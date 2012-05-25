@@ -62,8 +62,9 @@ public class Algorytm {
 		/*
 		 * Przygotowanie tablicy simplexowej
 		 */
+		System.out.println("rows"+rows+"cols"+cols);
 		String s="";
-		simplex = new float[rows+1][cols];
+		simplex = new float[rows][cols];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				simplex[i][j]=0;
@@ -72,23 +73,29 @@ public class Algorytm {
 		/*
 		 * Wstawianie wartoœci
 		 */
-		for (int i=1; i<rows-1; i++)
+		for (int i=0; i<rows-3; i++)
 		{
 			simplex[i][0]=0;
-			simplex[i][1]=wartosci[i-1];
-			for (int j=0; j<cols-2; j++)
+			simplex[i][1]=0;
+			simplex[1][0]=-2;
+			simplex[1][1]=-1;
+			simplex[i][2]=wartosci[i];
+			for (int j=0; j<cols-3; j++)
 			{
-				simplex[i][j+2]=warunki[i-1][j];
+				simplex[i][j+3]=warunki[i][j];
 			}
 		}
-		for (int j=2; j<cols; j++)
+		/*for (int j=2; j<cols; j++)
 		{
 			if ((j-2)<wspCelu.length)
 				simplex[0][j]=wspCelu[j-2];
-		}
+		}*/
 		s+="\n\nTabela simplexowa\n";
 		s+=wyswietl(simplex, cols, rows);
-		
+		s+="\n\nCostam cos tam\n";
+		obliczDelty(simplex,rows,cols);
+		obliczDelteB(simplex,rows,cols);
+		s+=wyswietl(simplex, cols, rows);
 		obliczZetMinusCe(simplex, rows, cols);
 		/*
 		 * SPrawdzenie pierwszego rozwi¹zania bazowego
@@ -204,19 +211,22 @@ public class Algorytm {
 					s+="zmienna\t";
 				else if(j>2 && j<ileProduktow+2)
 					s+=wspCelu[j-2]+"\t";
+				else if(j==cols-1)s+="\t";
 					else
-						s+="0\t";
+						s+="0.0\t";
 				}
 			s+="\n";
 				for(int j=0;j<cols;j++){
 					if(j==0)s+="cB\t";
 					else if(j==1)s+="dB\t";
+					else if(j==2)s+="bazowa\t";
 					else if(j>2 && j<ileProduktow+2){
 						s+=wspCelu[j-2]+"\t";
 						//s+=wspCeluMianownik[j-2]+"\t";
 					}
-					else
-						s+="0\t";
+					else if(j==cols-1) s+="\t";
+					else 
+						s+="0.0\t";
 }
 				s+="\n";
 		for (int i=0; i<rows; i++)
@@ -338,6 +348,51 @@ public class Algorytm {
 				sigmy[i-1]=simpleks[i][1]/simpleks[i][a];
 		}
 		return 0;
+	}
+	/**
+	 * Oblicza deltê L oraz M
+	 *
+	 */
+	public void obliczDelty(float[][] simpleks, int rows, int cols){
+		float a [] = new float[ileProduktow+ileOgraniczen+1];
+		float c [] = new float[ileProduktow+ileOgraniczen+1];
+		float b = 0;
+		float d = 0;
+		for (int i =0;i<ileOgraniczen;i++){
+			for(int j=0;j<ileProduktow+ileOgraniczen+1;j++){
+				if(j==0){
+					b+=simpleks[i][j+2]*simpleks[i][0];
+				d+=simpleks[i][1]*simpleks[i][j+2];
+				}
+				else{
+					a[j-1]+=simpleks[i][j+3]*simpleks[i][0];
+					c[j-1]+=simpleks[i][j+3]*simpleks[i][1];
+				}
+				
+			}
+			
+		}
+		System.out.println("bbbbbbbbbbbbbbbb  "+b+"  ddddddddddddddddddd"+d);
+		for(int i=0;i<ileProduktow+ileOgraniczen+1;i++)
+			System.out.println(i+" Delta L "+a[i]+"  Delta M "+ c[i]);
+		simpleks[rows-3][2]=b;//tutaj dodanie tego cB i dB
+		simpleks[rows-2][2]=d;//tu tez
+		for(int i =rows-3;i<rows-1;i++){
+			for(int j=3;j<cols;j++){
+				if(i==rows-2)
+				simpleks[i][j]=a[j-3];//odjecie wspCelu
+				else
+					simpleks[i][j]=c[j-3];//odjecie wspCeluMianownik
+			}
+		}
+	}
+	/**
+	 * Liczymy delteB z mianownika
+	 */
+	public void obliczDelteB(float[][] simpleks, int rows, int cols){
+		for(int i =3;i<ileOgraniczen+ileProduktow+1;i++){
+			simpleks[rows-1][i]=(simpleks[rows-3][2]*simpleks[rows-2][i])-(simpleks[rows-2][2]*simpleks[rows-3][i]);
+		}
 	}
 	/**
 	 * funkcja oblicz Zj-Cj

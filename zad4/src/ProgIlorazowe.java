@@ -25,6 +25,11 @@ public class ProgIlorazowe extends javax.swing.JFrame {
 	
 	float[] tabWartosciWszystkich;
 	float[] tabWartosci;
+	float[] prodCelu= new float[2];;
+	float[] prodCeluMianownik;
+	
+	int[] znaki;
+	int[] znakiTemp = new int[5];
 	
     public ProgIlorazowe() {
         initComponents();
@@ -685,7 +690,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("P2");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<="}));
         jComboBox2.setSelectedIndex(1);
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -696,7 +701,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<="}));
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField7.setText("1");
@@ -720,7 +725,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<="}));
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField10.setText("-3");
@@ -787,7 +792,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
             }
         });
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<="}));
 
         jLabel25.setText("+");
 
@@ -813,7 +818,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
             }
         });
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<=", "=" }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ">=", "<="}));
 
         jTextField21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField21.setText("0");
@@ -1552,6 +1557,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
     	
     	float[] tabWartosciWszystkich = new float[6];
     	float[] tabWartosci = new float[ograniczenia];
+    	znaki = new int[ograniczenia];
       	
       	//wartosci przy x funkcji celu
       	tabCeluWszystkich[0]=Float.parseFloat(jTextField1.getText());
@@ -1571,8 +1577,25 @@ public class ProgIlorazowe extends javax.swing.JFrame {
   		for(int i=0;i<produkty;i++){
   			tabCelu[i]=tabCeluWszystkich[i];	
   			tabCelowMianownik[i] = tabCelowMianownikWszystkich[i];
+  			
   		}
-  		
+  		prodCelu[0]=tabCeluWszystkich[5];
+  		prodCelu[1]=tabCelowMianownikWszystkich[5];
+  		for(int i=0;i<5;i++)
+  			znakiTemp[i]=0;
+  		if(jComboBox2.getSelectedIndex()==1)
+  			znakiTemp[0]=1;
+  		if(jComboBox3.getSelectedIndex()==1)
+  			znakiTemp[1]=1;
+  		if(jComboBox4.getSelectedIndex()==1)
+  			znakiTemp[2]=1;
+  		if(jComboBox5.getSelectedIndex()==1)
+  			znakiTemp[3]=1;
+  		if(jComboBox6.getSelectedIndex()==1)
+  			znakiTemp[4]=1;
+  		for(int i=0;i<ograniczenia;i++){
+  			znaki[i]=znakiTemp[i];
+  		}
   		
   		// kolumna b wyk³¹dy
   		tabWartosciWszystkich[0]=Float.parseFloat(jTextField6.getText());
@@ -1628,7 +1651,7 @@ public class ProgIlorazowe extends javax.swing.JFrame {
   		//WYWO£ANIE KLASY ALGORYTM
   		Algorytm f = new Algorytm(ograniczenia, produkty);
   		
-  		f.wpisz(tabOgraniczen, tabWartosci, tabCelu, ograniczenia, produkty);  // ------tu trzeba dodac jeszzcze przest³anie tablicy  tabCelowMianownik !!! ale to zmieniajac kod w klasie algorytm
+  		f.wpisz(tabOgraniczen, tabWartosci, tabCelu, ograniczenia, produkty, tabCelowMianownik, znaki, prodCelu);  // ------tu trzeba dodac jeszzcze przest³anie tablicy  tabCelowMianownik !!! ale to zmieniajac kod w klasie algorytm
   																				//znaki tez trzeba przeslac bo nie maja tego w programie
   		jTextArea1.setText(f.simpTable(ograniczenia+3, ograniczenia+produkty+4)); 
 

@@ -5,12 +5,14 @@ public class Algorytm {
 	float[] wspCeluMianownik; // to sa cele z mianownika (strata)
 	float[][] warunki;//tabelka w srodku co sa wartosci ogranicznen
 	float[] wartosci; 
-	String[] znaki; // jaki znak bedzie miala dana jedynka w programie
+	//int[] znaki; // jaki znak bedzie miala dana jedynka w programie
 	float[] sigmy;
 	int ileOgraniczen, ileProduktow;
 	String[] baza, zm; // do zamieniania to jest P1 itd.
 	float[][] simplex; //cala baza
-
+	float[] xB = new float[2];	
+	int maxik=0;
+	int minik=0;
 
 	public Algorytm(int war, int zmienne)
 	{
@@ -31,27 +33,43 @@ public class Algorytm {
 			}
 		}
 				
-		wspCelu = new float[zmienne];
-		
+		wspCelu = new float[zmienne+war];
+		wspCeluMianownik = new float[zmienne+war];
 		wartosci = new float[war];
 
-		znaki = new String[war];
+		//znaki = new int[war];
 	}
-	public void wpisz(float[][] tab, float[] tabWartosci, float[] tabFunkcjaCelu, int war, int zmienne){
+	public void wpisz(float[][] tab, float[] tabWartosci, float[] tabFunkcjaCelu, int war, int zmienne, float[] tabFunkcjaCeluMianownik, int[] znak, float[] iksB){
 		for (int i=0; i<war; i++){
 			for (int j=0; j<zmienne; j++){
 				warunki[i][j]=tab[i][j];
-				if (i==0) wspCelu[j]=tabFunkcjaCelu[j];
+				if (i==0){
+					wspCelu[j]=tabFunkcjaCelu[j];
+					wspCeluMianownik[j]=tabFunkcjaCeluMianownik[j];
+				}
 			}
 			wartosci[i]=tabWartosci[i];
+			//znaki[i]=znak[i];
 		}
 		for (int i=0; i<war; i++){
 			for (int j=0; j<war; j++){
-				if (i==j)
+				if (i==j){
+					if(znak[i]==1)
 					warunki[i][j+zmienne]=1;
+					else
+						warunki[i][j+zmienne]=-1;
+				}
+					
 			}
 		}
+		xB[0]=iksB[0];
+		xB[1]=iksB[1];
+		for(int i=zmienne;i<war+zmienne;i++){
+			wspCelu[i]=0;
+			wspCeluMianownik[i]=0;
+		}
 	}
+	
 	/**
 	 * @param rows
 	 * @param cols
@@ -77,8 +95,8 @@ public class Algorytm {
 		{
 			simplex[i][0]=0;
 			simplex[i][1]=0;
-			simplex[1][0]=-2;
-			simplex[1][1]=-1;
+			//simplex[1][0]=-2;
+			//simplex[1][1]=-1;
 			simplex[i][2]=wartosci[i];
 			for (int j=0; j<cols-3; j++)
 			{
@@ -96,52 +114,48 @@ public class Algorytm {
 		obliczDelty(simplex,rows,cols);
 		obliczDelteB(simplex,rows,cols);
 		s+=wyswietl(simplex, cols, rows);
-		obliczZetMinusCe(simplex, rows, cols);
-		/*
-		 * SPrawdzenie pierwszego rozwi¹zania bazowego
-		 */
-		while(!czyOptymalne(simplex, rows, cols)){//sprawdzenie optymalnoœci rozwi¹zania
-			s+="\n\nZ obliczonymi z-c\n";
-			s+=wyswietl(simplex, cols, rows);
-			/*
-			 * Wyznaczanie nowego s¹siedniego rozwi¹zania
-			 */
-			float[] sigmy = new float[rows-2];
-			/*
-			 * Kryterium wejœcia
-			 */
-			if (obliczSigmy(sigmy, simplex, rows, cols)==-1)
-				return s;
-			s+="\n\nZ obliczonymi sigmami\n";
-			s+=wyswietlZSigma(simplex, sigmy, cols, rows);
-			if (min(sigmy, rows, cols)==-1)
-				return s+"Nie ma dodatnich sigm";
-			/*
-			 * Kryterium wyjœcia i przekszta³cenia:
-			 */
-			podzielWiersz(simplex, min(sigmy, rows, cols), max(simplex, rows, cols), rows, cols);
-
-			zamienZmienne(max(simplex, rows, cols)-2, min(sigmy, rows, cols)-1);
-			
-			s+="\n\nZ podzielonym wierszem\n";
-			s+=wyswietlZSigma(simplex, sigmy, cols, rows);
-			
-			float[] tmp=pobierzWiersz(simplex, cols, rows, min(sigmy, rows, cols));
-			
-			wyzeruj(simplex, cols, rows, tmp, min(sigmy, rows, cols), max(simplex, rows, cols));
-			
-			s+="\n\nZ wyzerowanymi poza jedynk¹ w wybranej kolumnie\n";
-			s+=wyswietlZSigma(simplex, sigmy, cols, rows);
-			
-			wstawNowaZmiennaDoBazy(simplex, min(sigmy, rows, cols), max(simplex, rows, cols));
-
-			s+="\n\nPo wstawieniu do bazy\n";
-			s+=wyswietlZSigma(simplex, sigmy, cols, rows);
-			
-			obliczZetMinusCe(simplex, rows, cols);
-		}
-		s+="\npo pêtli\n";
+		System.out.println("maximum"+max(simplex,cols,rows));
+		System.out.println("minimum"+min(simplex,cols,rows));
+		maxik=max(simplex,cols,rows);
+		minik=min(simplex,cols,rows);
+		obliczWiersz(simplex,cols);
+		oblicz(simplex,cols,rows);
+		obliczKolumne(simplex,rows);
+		s+="\n\n obliczmy sobie simpleksa numer 1\n";
 		s+=wyswietl(simplex, cols, rows);
+		simplex[1][0]=-2;
+		simplex[1][1]=-1;
+		s+="\n\n po pierwszej rundzie";
+		obliczDelty(simplex,rows, cols);
+		obliczDelteB(simplex,rows,cols);
+		s+=wyswietl(simplex,cols,rows);
+		maxik=max(simplex,cols,rows);
+		minik=min(simplex,cols,rows);
+		System.out.println("minimum"+minik+"maksimum"+maxik);
+		obliczWiersz(simplex,cols);
+		oblicz(simplex,cols,rows);
+		obliczKolumne(simplex,rows);
+		s+="\n\n obliczmy sobie simpleksa numer 2\n";
+		s+=wyswietl(simplex, cols, rows);
+		s+="\n\n po wszystkim";
+		obliczDelty(simplex,rows, cols);
+		obliczDelteB(simplex,rows,cols);
+		s+=wyswietl(simplex,cols,rows);
+		simplex[1][0]=0;
+		maxik=max(simplex,cols,rows);
+		minik=min(simplex,cols,rows);
+		System.out.println("minimum"+minik+"maksimum"+maxik);
+		obliczWiersz(simplex,cols);
+		oblicz(simplex,cols,rows);
+		obliczKolumne(simplex,rows);
+		s+="\n\n obliczmy sobie simpleksa numer 2\n";
+		s+=wyswietl(simplex, cols, rows);
+		s+="\n\n po wszystkim";
+		obliczDelty(simplex,rows, cols);
+		obliczDelteB(simplex,rows,cols);
+		s+=wyswietl(simplex,cols,rows);
+		//s+="\npo pêtli\n";
+		//s+=wyswietl(simplex, cols, rows);
 		s+="Minimum funkcji jest równe " + simplex[rows-1][1];
 		for(int i=0;i<baza.length;i++){
 			s+="\n"+baza[i]+" ";
@@ -208,9 +222,9 @@ public class Algorytm {
 					s+="\t";
 				}
 				else if(j==2)
-					s+="zmienna\t";
-				else if(j>2 && j<ileProduktow+2)
-					s+=wspCelu[j-2]+"\t";
+					s+=xB[0]+"\t";
+				else if(j>2 && j<ileProduktow+3)
+					s+=wspCelu[j-3]+"\t";
 				else if(j==cols-1)s+="\t";
 					else
 						s+="0.0\t";
@@ -219,10 +233,10 @@ public class Algorytm {
 				for(int j=0;j<cols;j++){
 					if(j==0)s+="cB\t";
 					else if(j==1)s+="dB\t";
-					else if(j==2)s+="bazowa\t";
-					else if(j>2 && j<ileProduktow+2){
-						s+=wspCelu[j-2]+"\t";
-						//s+=wspCeluMianownik[j-2]+"\t";
+					else if(j==2)s+=xB[1]+"\t";
+					else if(j>2 && j<ileProduktow+3){
+						//s+=wspCelu[j-3]+"\t";
+						s+=wspCeluMianownik[j-3]+"\t";
 					}
 					else if(j==cols-1) s+="\t";
 					else 
@@ -240,54 +254,7 @@ public class Algorytm {
 			s+="\n";
 		}
 		return s;
-	}
-	public String wyswietlZSigma(float[][] simp, float[] sigmy, int cols, int rows){
-		String s="";
-		for (int i=0; i<cols; i++)
-			{
-				if (i==0)
-				{
-					s+="cB\t";
-				}
-				else if (i==1){
-					s+="b\t";
-				}
-				else
-				{
-					s+="P"+(i-1)+"\t";
-				}
-			}
-		//System.out.print("sigma\n");
-		s+="sigma\n";
-		for (int i=0; i<rows; i++)
-		{
-			for (int j=0; j<cols; j++)
-			{
-				//System.out.print(simp[i][j]+"\t");
-				s+=simp[i][j]+"\t";
-			}
-			if (i>=1 && i<rows-1 && sigmy[i-1]>0)
-			{
-				//System.out.print(sigmy[i-1]);
-				s+=sigmy[i-1];
-			}
-			else if (i>0 && i<rows-1)
-			{
-				//System.out.print("-");
-				s+="-";
-			}
-			s+="\n";
-			//System.out.println();
-		}
-		return s;
-	}
-	public void podzielWiersz(float[][] simp, int i, int j, int rows, int cols){
-		float wartNaPrzecieciu=simp[i][j];
-		for (int k=1; k<cols; k++){
-			simp[i][k]=simp[i][k]/wartNaPrzecieciu;
-		}
-	}
-	
+	}	
 	/**
 	 * sprawdza któr¹ kolumnê wybraæ
 	 * @param simpleks
@@ -296,13 +263,13 @@ public class Algorytm {
 	 * @return -1 jeœli nie ma maxa >=0
 	 * >=0 Jeœli jest jakiœ max (jest to numer kolumny)
 	 */
-	public int max(float[][] simpleks, int rows, int cols)
+	public int max(float[][] simpleks, int cols, int rows)
 	{
 		float max=-1;
-		for (int i=1; i<cols; i++)
+		for (int i=3; i<8; i++)
 			if (simpleks[rows-1][i]>max && simpleks[rows-1][i]>=0)
 				max=simpleks[rows-1][i];
-		for (int i=1; i<cols; i++)
+		for (int i=3; i<8; i++)
 			if(simpleks[rows-1][i]==max)
 				return i;
 		return -1;
@@ -315,15 +282,15 @@ public class Algorytm {
 	 * @param cols
 	 * @return 
 	 */
-	public int min(float[] sigma, int rows, int cols)
+	public int min(float[][] simpleks, int cols, int rows)
 	{
 		float min=1000000000.0f;
-		for (int i=0; i<sigma.length; i++)
-			if (sigma[i]<min && sigma[i]>=0)
-				min=sigma[i];
-		for (int i=0; i<sigma.length; i++)
-			if (sigma[i]==min)
-				return i+1;
+		for (int i=0; i<4; i++)
+			if(simpleks[i][2]<min && simpleks[i][2]>=0)
+				min=simpleks[i][2];
+		for (int i=0; i<4; i++)
+			if (simpleks[i][2]==min)
+				return i;
 		return -1;
 	}
 	
@@ -336,6 +303,31 @@ public class Algorytm {
 	 * @param cols
 	 * @return
 	 */
+
+	public void obliczWiersz(float[][] simpleks, int cols){
+		for(int i =2; i<cols-1; i++){
+			if(i!=maxik)
+			simpleks[minik][i]=simpleks[minik][i]/simpleks[minik][maxik];
+		}
+			
+	}
+	public void oblicz(float[][] simpleks, int cols, int rows){
+		System.out.println("minimum  "+minik+"maks  "+maxik);
+		for(int i=0;i<rows-3;i++){
+			for(int j=2;j<cols;j++){
+				if((i!=minik) && (j!=maxik)){
+					simpleks[i][j]=simpleks[i][j]-simpleks[minik][j]*simpleks[i][maxik];
+				}
+			}
+		}
+	}
+	public void obliczKolumne(float[][] simpleks, int rows){
+		for(int i =0; i<rows-3;i++){
+			if(i!=minik)
+				simpleks[i][maxik]=0;
+		}
+	}
+	
 	public int obliczSigmy(float[] sigmy, float[][] simpleks, int rows, int cols)
 	{
 		int a=max(simpleks, rows, cols);
@@ -365,24 +357,21 @@ public class Algorytm {
 				d+=simpleks[i][1]*simpleks[i][j+2];
 				}
 				else{
-					a[j-1]+=simpleks[i][j+3]*simpleks[i][0];
-					c[j-1]+=simpleks[i][j+3]*simpleks[i][1];
+					a[j-1]+=simpleks[i][j+2]*simpleks[i][0];
+					c[j-1]+=simpleks[i][j+2]*simpleks[i][1];
 				}
 				
 			}
 			
 		}
-		System.out.println("bbbbbbbbbbbbbbbb  "+b+"  ddddddddddddddddddd"+d);
-		for(int i=0;i<ileProduktow+ileOgraniczen+1;i++)
-			System.out.println(i+" Delta L "+a[i]+"  Delta M "+ c[i]);
-		simpleks[rows-3][2]=b;//tutaj dodanie tego cB i dB
-		simpleks[rows-2][2]=d;//tu tez
+		simpleks[rows-3][2]=b+xB[0];//tutaj dodanie tego cB i dB
+		simpleks[rows-2][2]=d+xB[1];//tu tez
 		for(int i =rows-3;i<rows-1;i++){
-			for(int j=3;j<cols;j++){
-				if(i==rows-2)
-				simpleks[i][j]=a[j-3];//odjecie wspCelu
+			for(int j=3;j<cols-1;j++){
+				if(i==rows-3)
+				simpleks[i][j]=a[j-3]-wspCelu[j-3];//odjecie wspCelu
 				else
-					simpleks[i][j]=c[j-3];//odjecie wspCeluMianownik
+					simpleks[i][j]=c[j-3]-wspCeluMianownik[j-3];//odjecie wspCeluMianownik
 			}
 		}
 	}
@@ -393,6 +382,7 @@ public class Algorytm {
 		for(int i =3;i<ileOgraniczen+ileProduktow+1;i++){
 			simpleks[rows-1][i]=(simpleks[rows-3][2]*simpleks[rows-2][i])-(simpleks[rows-2][2]*simpleks[rows-3][i]);
 		}
+		simpleks[rows-1][2]=simpleks[rows-3][2]/simpleks[rows-2][2];
 	}
 	/**
 	 * funkcja oblicz Zj-Cj
@@ -401,26 +391,12 @@ public class Algorytm {
 	 * @param rows
 	 * @param cols
 	 */
-	public void obliczZetMinusCe(float[][] simpleks, int rows, int cols)
-	{
-		//czyszczenie ostatniego wiersza
-			for (int j=1; j<cols; j++)
-				simpleks[rows-1][j]=0;
-		//obliczanie
-		for (int i=1; i<cols; i++)
-		{
-			for (int j=1; j<rows; j++){
-				simpleks[rows-1][i]+=simpleks[j][0]*simpleks[j][i]; // w ostatnim wierszu suma
-			}
-			simpleks[rows-1][i]-=simpleks[0][i];
-		}
-	}
 	
 	public boolean czyOptymalne(float[][] simpleks, int rows, int cols){
-		boolean czyNieDodatnie=true;
-		for (int i = 0; i < simpleks.length; i++) {
+		boolean czyNieDodatnie=false;
+		for (int i = 3; i < simpleks.length; i++) {
 			if (simpleks[rows-1][i]>0)
-				czyNieDodatnie&= false;
+				czyNieDodatnie&= true;
 		}
 		return czyNieDodatnie;
 	}

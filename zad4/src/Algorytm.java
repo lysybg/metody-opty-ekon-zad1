@@ -95,87 +95,32 @@ public class Algorytm {
 		{
 			simplex[i][0]=0;
 			simplex[i][1]=0;
-			//simplex[1][0]=-2;
-			//simplex[1][1]=-1;
 			simplex[i][2]=wartosci[i];
 			for (int j=0; j<cols-3; j++)
 			{
 				simplex[i][j+3]=warunki[i][j];
 			}
 		}
-		/*for (int j=2; j<cols; j++)
-		{
-			if ((j-2)<wspCelu.length)
-				simplex[0][j]=wspCelu[j-2];
-		}*/
 		s+="\n\nTabela simplexowa\n";
 		s+=wyswietl(simplex, cols, rows);
-		s+="\n\nCostam cos tam\n";
+		s+="\n\nPierwsze przekszta³cenie\n";
 		obliczDelty(simplex,rows,cols);
 		obliczDelteB(simplex,rows,cols);
 		s+=wyswietl(simplex, cols, rows);
-		//System.out.println("maximum"+max(simplex,cols,rows));
-		//System.out.println("minimum"+min(simplex,cols,rows));
-		/*maxik=max(simplex,cols,rows);
-		minik=min(simplex,cols,rows);
-		obliczWiersz(simplex,cols);
-		oblicz(simplex,cols,rows);
-		obliczKolumne(simplex,rows);
-		s+="\n\n obliczmy sobie simpleksa numer 1\n";
-		s+=wyswietl(simplex, cols, rows);
-		simplex[1][0]=-2;
-		simplex[1][1]=-1;
-		s+="\n\n po pierwszej rundzie";
-		obliczDelty(simplex,rows, cols);
-		obliczDelteB(simplex,rows,cols);
-		s+=wyswietl(simplex,cols,rows);
-		maxik=max(simplex,cols,rows);
-		minik=min(simplex,cols,rows);
-		System.out.println("minimum"+minik+"maksimum"+maxik);
-		obliczWiersz(simplex,cols);
-		oblicz(simplex,cols,rows);
-		obliczKolumne(simplex,rows);
-		s+="\n\n obliczmy sobie simpleksa numer 2\n";
-		s+=wyswietl(simplex, cols, rows);
-		s+="\n\n po wszystkim";
-		obliczDelty(simplex,rows, cols);
-		obliczDelteB(simplex,rows,cols);
-		s+=wyswietl(simplex,cols,rows);
-		simplex[1][0]=0;
-		maxik=max(simplex,cols,rows);
-		minik=min(simplex,cols,rows);
-		System.out.println("minimum"+minik+"maksimum"+maxik);
-		obliczWiersz(simplex,cols);
-		oblicz(simplex,cols,rows);
-		obliczKolumne(simplex,rows);
-		s+="\n\n obliczmy sobie simpleksa numer 2\n";
-		s+=wyswietl(simplex, cols, rows);
-		s+="\n\n po wszystkim";
-		obliczDelty(simplex,rows, cols);
-		obliczDelteB(simplex,rows,cols);
-		s+=wyswietl(simplex,cols,rows);*/
-		//s+="\npo pêtli\n";
-		//s+=wyswietl(simplex, cols, rows);
 		while(!czyOptymalne(simplex,rows,cols)){
 			maxik=max(simplex,cols,rows);
 			minik=min(simplex,cols,rows);
 			obliczWiersz(simplex,cols);
 			oblicz(simplex,cols,rows);
 			obliczKolumne(simplex,rows);
-			s+="\n\n obliczmy sobie simpleksa numer 1\n";
-			s+=wyswietl(simplex, cols, rows);
+			s+="\n\n Kolejne przekszta³cenie\n";
 			zamienProdukty(simplex,rows,cols);
-			s+="\n\n po pierwszej rundzie";
 			obliczDelty(simplex,rows, cols);
 			obliczDelteB(simplex,rows,cols);
 			s+=wyswietl(simplex,cols,rows);
 		}
-		s+="Minimum funkcji jest równe " + simplex[rows-1][1];
-		for(int i=0;i<baza.length;i++){
-			s+="\n"+baza[i]+" ";
-			s+="= "+Math.floor(simplex[i+1][1]);
-		}
-		
+		s+="Minimum funkcji jest równe " + simplex[rows-1][2]+"\n";
+		s+="x1="+simplex[1][2]+"\n"+"x2="+0.0+"\n"+"x3="+simplex[0][2]+"\n"+"x4="+simplex[3][2]+"\n"+"x5="+simplex[2][2]+"\n"+"x6="+0.0;
 		return s;
 	}
 	

@@ -114,9 +114,9 @@ public class Algorytm {
 		obliczDelty(simplex,rows,cols);
 		obliczDelteB(simplex,rows,cols);
 		s+=wyswietl(simplex, cols, rows);
-		System.out.println("maximum"+max(simplex,cols,rows));
-		System.out.println("minimum"+min(simplex,cols,rows));
-		maxik=max(simplex,cols,rows);
+		//System.out.println("maximum"+max(simplex,cols,rows));
+		//System.out.println("minimum"+min(simplex,cols,rows));
+		/*maxik=max(simplex,cols,rows);
 		minik=min(simplex,cols,rows);
 		obliczWiersz(simplex,cols);
 		oblicz(simplex,cols,rows);
@@ -153,9 +153,23 @@ public class Algorytm {
 		s+="\n\n po wszystkim";
 		obliczDelty(simplex,rows, cols);
 		obliczDelteB(simplex,rows,cols);
-		s+=wyswietl(simplex,cols,rows);
+		s+=wyswietl(simplex,cols,rows);*/
 		//s+="\npo pêtli\n";
 		//s+=wyswietl(simplex, cols, rows);
+		while(!czyOptymalne(simplex,rows,cols)){
+			maxik=max(simplex,cols,rows);
+			minik=min(simplex,cols,rows);
+			obliczWiersz(simplex,cols);
+			oblicz(simplex,cols,rows);
+			obliczKolumne(simplex,rows);
+			s+="\n\n obliczmy sobie simpleksa numer 1\n";
+			s+=wyswietl(simplex, cols, rows);
+			zamienProdukty(simplex,rows,cols);
+			s+="\n\n po pierwszej rundzie";
+			obliczDelty(simplex,rows, cols);
+			obliczDelteB(simplex,rows,cols);
+			s+=wyswietl(simplex,cols,rows);
+		}
 		s+="Minimum funkcji jest równe " + simplex[rows-1][1];
 		for(int i=0;i<baza.length;i++){
 			s+="\n"+baza[i]+" ";
@@ -391,12 +405,16 @@ public class Algorytm {
 	 * @param rows
 	 * @param cols
 	 */
+	public void zamienProdukty(float[][] simpleks, int rows, int cols){
+		simpleks[minik][0]=wspCelu[maxik-3];
+		simpleks[minik][1]=wspCeluMianownik[maxik-3];
+	}
 	
 	public boolean czyOptymalne(float[][] simpleks, int rows, int cols){
-		boolean czyNieDodatnie=false;
-		for (int i = 3; i < simpleks.length; i++) {
-			if (simpleks[rows-1][i]>0)
-				czyNieDodatnie&= true;
+		boolean czyNieDodatnie=true;
+		for (int i = 2; i < 9; i++) {
+			if (simpleks[rows-1][i]<0)
+				czyNieDodatnie&= false;
 		}
 		return czyNieDodatnie;
 	}

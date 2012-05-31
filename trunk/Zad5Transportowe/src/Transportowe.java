@@ -1,3 +1,6 @@
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -13,7 +16,8 @@
  * @author student
  */
 public class Transportowe extends javax.swing.JFrame {
-
+	int tabela[][];
+	int ilosc;
     /** Creates new form Transportowe */
     public Transportowe() {
         initComponents();
@@ -50,6 +54,7 @@ public class Transportowe extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +107,9 @@ public class Transportowe extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3", "4" }));
         jComboBox1.setSelectedIndex(1);
 
-        jLabel3.setText("Ilosc");
+        jLabel3.setText("Iloœæ");
+
+        jButton1.setText("Oblicz");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,24 +146,28 @@ public class Transportowe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68))
+                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(71, 71, 71)
+                        .addComponent(jButton1)))
+                .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -195,9 +206,12 @@ public class Transportowe extends javax.swing.JFrame {
                                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2)))
@@ -205,7 +219,29 @@ public class Transportowe extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        if(jComboBox1.getSelectedIndex()==0)
+        	ilosc=3;
+        else
+        	ilosc=4;
+        jButton1.addMouseListener(new MouseAdapter() {
+          	public void mouseClicked(MouseEvent arg0) {
+          		
+          		jTextArea1.setText("");  //czyscimy okno
+          		
+          		
+          		//Algorytm(ograniczenia, produkty);
 
+          		uzupelnijTabele();
+          		//wpisz(tab, wartosciOgraniczen, tabelaCelow, produkty, ograniczenia);
+          		
+          		//jTextArea1.setText(simpTable(ograniczenia+2, ograniczenia+produkty+2));
+          		//wywo³ujemy funkcje
+          		
+          		//WyswietlTabele();
+          	//	Simplels();
+              	//WyswietlTabele();		
+          	}
+          });
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,9 +249,36 @@ private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 // TODO add your handling code here:
 }//GEN-LAST:event_jTextField8ActionPerformed
 
+
     /**
      * @param args the command line arguments
      */
+
+public void uzupelnijTabele(){
+	tabela = new int [ilosc][ilosc];
+	tabela[0][0]=Integer.parseInt(jTextField1.getText());
+	tabela[0][1]=Integer.parseInt(jTextField2.getText());
+	tabela[0][2]=Integer.parseInt(jTextField3.getText());
+	tabela[0][3]=Integer.parseInt(jTextField4.getText());
+	tabela[1][0]=Integer.parseInt(jTextField5.getText());
+	tabela[1][1]=Integer.parseInt(jTextField6.getText());
+	tabela[1][2]=Integer.parseInt(jTextField7.getText());
+	tabela[1][3]=Integer.parseInt(jTextField8.getText());
+	tabela[2][0]=Integer.parseInt(jTextField9.getText());
+	tabela[2][1]=Integer.parseInt(jTextField10.getText());
+	tabela[2][2]=Integer.parseInt(jTextField11.getText());
+	tabela[2][3]=Integer.parseInt(jTextField12.getText());
+	tabela[3][0]=Integer.parseInt(jTextField13.getText());
+	tabela[3][1]=Integer.parseInt(jTextField14.getText());
+	tabela[3][2]=Integer.parseInt(jTextField15.getText());
+	tabela[3][3]=Integer.parseInt(jTextField16.getText());
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			jTextArea1.append(tabela[i][j]+"\t");
+		}
+		jTextArea1.append("\n");
+	}
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -271,5 +334,6 @@ private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,7 +17,11 @@ import java.awt.event.MouseEvent;
  */
 public class Transportowe extends javax.swing.JFrame {
 	int tabela[][];
+	int tabelaTMP[][];
+	int tabelaMin[];
 	int ilosc;
+	boolean czyMax;
+	
     /** Creates new form Transportowe */
     public Transportowe() {
         initComponents();
@@ -250,12 +254,59 @@ private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_jTextField8ActionPerformed
 
 
-    /**
-     * @param args the command line arguments
-     */
+public void wyœwietlTabele(){
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			jTextArea1.append(tabelaTMP[i][j]+"\t");
+		}
+		jTextArea1.append("\n");
+	}
+	jTextArea1.append("\n");
+	jTextArea1.append("\n");
+}
+
+public void wyœwietlTabeleZMinamiW(){
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			jTextArea1.append(tabelaTMP[i][j]+"\t");
+		}
+		jTextArea1.append("|  "+tabelaMin[i]+"\t");
+		jTextArea1.append("\n");
+	}
+	jTextArea1.append("\n");
+	jTextArea1.append("\n");
+}
+
+public void wyœwietlTabeleZMinamiK(){
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			jTextArea1.append(tabelaTMP[i][j]+"\t");
+		}
+		jTextArea1.append("\n");
+	}
+	for(int i=0; i< ilosc*20; i++){
+		jTextArea1.append("-");
+	}
+	jTextArea1.append("\n");
+	for(int i=0; i< ilosc; i++){
+		jTextArea1.append(tabelaMin[i]+"\t");
+	}
+	jTextArea1.append("\n");
+	jTextArea1.append("\n");
+}
 
 public void uzupelnijTabele(){
 	tabela = new int [ilosc][ilosc];
+	tabelaTMP = new int [ilosc][ilosc];
+	tabelaMin = new int [ilosc];
+	
+	int[] zeraWWierszach = new int[ilosc];
+	int[] zeraWKolumnach = new int[ilosc];
+	
+	czyMax = false;   // ZMIENIC JAK ZOSTANIE DODANY COMBOBOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	boolean czyKoniecPrzeksztalcen = true;
+	
+	
 	tabela[0][0]=Integer.parseInt(jTextField1.getText());
 	tabela[0][1]=Integer.parseInt(jTextField2.getText());
 	tabela[0][2]=Integer.parseInt(jTextField3.getText());
@@ -272,12 +323,114 @@ public void uzupelnijTabele(){
 	tabela[3][1]=Integer.parseInt(jTextField14.getText());
 	tabela[3][2]=Integer.parseInt(jTextField15.getText());
 	tabela[3][3]=Integer.parseInt(jTextField16.getText());
+	
+	
 	for(int i=0;i<ilosc;i++){
 		for(int j=0;j<ilosc;j++){
-			jTextArea1.append(tabela[i][j]+"\t");
+			if(czyMax == false){
+				tabelaTMP[i][j] = -1 * tabela[i][j];
+			}
+			if(czyMax == true){
+				tabelaTMP[i][j] =  tabela[i][j];
+			}
 		}
-		jTextArea1.append("\n");
 	}
+	
+	
+	//WYŒWIETLAMY
+	jTextArea1.append("Pierwsza Tabela \n\n");
+	wyœwietlTabele();
+	
+	//SZUKAMY MINA W WIERSZACH
+	int Min;
+	
+	
+	for(int i=0;i<ilosc;i++){
+		Min = tabelaTMP[i][0];
+			for(int j=0;j<ilosc;j++){
+				if( Min >= tabelaTMP[i][j]){
+					tabelaMin[i] = tabelaTMP[i][j];
+					Min = tabelaTMP[i][j];
+				}
+			}
+	}
+	//WYŒWIETLAMY
+	jTextArea1.append("Wyszukane minimów w wierszach \n\n");
+		wyœwietlTabeleZMinamiW();
+	
+	//PRZEKSZTA£CAMY TABELE
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			tabelaTMP[i][j] = tabelaTMP[i][j] - tabelaMin[i];		
+		}
+	}
+	//WYŒWIETLAMY
+	jTextArea1.append("Przekszta³cona tabela \n\n");
+		wyœwietlTabele();
+		
+	//Sprawdzamy czy w ka¿dej kolumnie i w ka¿dym wierszu jest choæ jedno zero
+	//1. sprawdzamy zera w wierszach	
+	for(int i=0; i<ilosc; i++){
+		for(int j=0; j<ilosc; j++){
+			if(tabelaTMP[i][j] == 0){
+				zeraWWierszach[i]++;
+			}
+		}
+	}
+	
+	//2. sprawdzamy zera w kolumnachy	
+		for(int j=0; j<ilosc; j++){
+			for(int i=0; i<ilosc; i++){
+				if(tabelaTMP[i][j] == 0){
+					zeraWKolumnach[j]++;
+				}
+			}
+		}
+		
+			/*
+			 * WYSWUETLANIE TESTOWE
+				for(int j=0; j<ilosc; j++){
+					System.out.println("Zera w kolumnach ="+zeraWKolumnach[j]);
+				}
+				
+				for(int i=0; i<ilosc; i++){
+					System.out.println("Zera w wierszach ="+zeraWWierszach[i]);
+				}
+			 */
+		for(int j=0; j<ilosc; j++){
+			if( (zeraWKolumnach[j] == 0) & (zeraWWierszach[j] == 0) ){
+				czyKoniecPrzeksztalcen = false;
+			}
+		}
+		
+		//JEŒLI NIE W KADEJ KOLUMNIE I NIE W KADYM WIERSZU JEST ZERO TO PRZEKSZTA£CAMY JESZCZE RAZ ALE PO KOLUMNACH
+		if(czyKoniecPrzeksztalcen == true){
+			//SZUKAMY MINA W KOLUMNACH
+			for(int i=0;i<ilosc;i++){
+				Min = tabelaTMP[0][i];
+					for(int j=0;j<ilosc;j++){
+						if( Min >= tabelaTMP[j][i]){
+							tabelaMin[i] = tabelaTMP[j][i];
+							Min = tabelaTMP[j][i];
+						}
+					}
+			}
+			
+			//WYŒWIETLAMY
+			jTextArea1.append("Wyszukane minimów w kolumnach \n\n");
+			wyœwietlTabeleZMinamiK();
+			
+			//PRZEKSZTA£CAMY TABELE PO KOLUMNACH
+			for(int i=0;i<ilosc;i++){
+				for(int j=0;j<ilosc;j++){
+					tabelaTMP[j][i] = tabelaTMP[j][i] - tabelaMin[i];		
+				}
+			}
+			//WYŒWIETLAMY
+			jTextArea1.append("Przekszta³cona tabela \n\n");
+			wyœwietlTabele();
+			
+		}
 }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

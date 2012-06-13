@@ -469,7 +469,7 @@ public void uzupelnijTabele(){
 			
 			while(CzyKoniec != true){
 				
-				System.out.println("Ilosc linii "+iloscLini);
+
 				for(int i=0; i<ilosc; i++){
 					zeraWiersze[i]=0;
 					zeraKolumny[i]=0;
@@ -616,10 +616,9 @@ public void uzupelnijTabele(){
 			}else{
 				jTextArea1.append("Iloœæ linii potrzbna do skreœlenia wszystkoch zer: "+iloscLini+"\n\n");
 				jTextArea1.append("Nale¿y przekszta³ciæ tabele wyszukuj¹c nieskreœlone minimum.\n\n");
-				jTextArea1.append("\n\n");
 			}
 			
-			System.out.println(iloscLini);
+
 			//JESLI ILOSC LINI POTZREBNYCH DO WYKREŒLENIA JEST MNIEJSZA OD ROZMIARU TABLICY TO PRZEKSZTA£CAMY TABLICE
 			if(iloscLini < ilosc){
 				CzyKoniec = false;
@@ -633,6 +632,8 @@ public void uzupelnijTabele(){
 						}
 					}
 				}
+				
+				jTextArea1.append("Nieskreœlone minimum wynosi: "+MinNieSkreslony+"\n\n");
 				
 				for(int i=0; i<ilosc; i++){
 					for(int j=0; j<ilosc; j++){

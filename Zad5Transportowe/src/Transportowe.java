@@ -21,6 +21,7 @@ public class Transportowe extends javax.swing.JFrame {
 	int tabela[][];
 	int tabelaTMP[][];
 	int tabelaMin[];
+	int[][] zeroJedynkowa;
 	int ilosc = 4;
 	boolean czyMax = false;
 	
@@ -327,6 +328,17 @@ public void wyœwietlTabeleZMinamiK(){
 	jTextArea1.append("\n");
 }
 
+public void wyœwietlTabeleZeroJedynkowa(){
+	for(int i=0;i<ilosc;i++){
+		for(int j=0;j<ilosc;j++){
+			jTextArea1.append(zeroJedynkowa[i][j]+"\t");
+		}
+		jTextArea1.append("\n");
+	}
+	jTextArea1.append("\n");
+	jTextArea1.append("\n");
+}
+
 public void uzupelnijTabele(){
 	tabela = new int [ilosc][ilosc];
 	tabelaTMP = new int [ilosc][ilosc];
@@ -545,8 +557,6 @@ public void uzupelnijTabele(){
 				System.out.println();
 			*/
 			//SZUKAMY maksymaln¹ ilosc zer w kolumnach i w wierszach
-
-			
 			// WIERSZE
 				Max = zeraWiersze[0];
 				maxWiersze = zeraWiersze[0];
@@ -686,7 +696,149 @@ public void uzupelnijTabele(){
 				jTextArea1.append("Przekszta³cona tabela po wykreœlaniu \n\n");
 				wyœwietlTabele();
 			} //koniec whila wykreslajacego
-		}
+		}//koniec whila  do lnii
+		
+		//-----------------------------------------------------------------------------------------
+		//=========================================================================================
+		//---------------    WYLICZANKA ROZWIAZANIA    ------------------
+		//-----------------------------------------------------------------------------------------
+		//=========================================================================================
+			zeroJedynkowa = new int[ilosc][ilosc];
+			int[] iloscZer = new int[ilosc];
+			boolean czyJednoRozwiazanie = false;
+			//int[] zablokowaneKolumny = new int[ilosc];
+			int[][] zablokowaneWiersze = new int[ilosc][2];
+		
+		//Tworzymy tablice zero-jedynkow¹
+			for(int i=0; i<ilosc; i++){
+				for(int j=0; j<ilosc; j++){
+					if(tabelaTMP[i][j] == 0){
+						zeroJedynkowa[i][j] = 1;
+					}else{
+						zeroJedynkowa[i][j] = 0;
+					}
+				}
+			}
+			jTextArea1.append("TABELA DOPUSZCZALNYCH ROZWIAZÑ \n\n");
+			//WYŒWIETLAMY
+			wyœwietlTabeleZeroJedynkowa();
+		
+			//Zliczamy ilosc 1 (tak naprawde 1 reprezentujacych 0) w wierszach
+			for(int i=0; i<ilosc; i++){
+				for(int j=0; j<ilosc; j++){
+					if(zeroJedynkowa[i][j] == 1){
+						iloscZer[i]++;
+					}
+				}
+			}
+			
+			
+			
+			//Sprawdzamy czy rozwiazanie jest jedno
+			for(int i=0; i<ilosc; i++){
+				if(iloscZer[i] == 1){
+					czyJednoRozwiazanie = true;
+				}
+			}
+			
+			
+			if(czyJednoRozwiazanie){
+				
+			//---------------ROZWIAZUJEMY---------------------
+			//=================================================
+			boolean czyRozwiazane = false;
+			//szukamy kolumn do zablokowania
+			int zapetlam =0;
+			boolean czyZapetone = false;
+			
+				while(czyRozwiazane != true){
+					zapetlam++;
+					for(int i=0; i<ilosc; i++){
+						iloscZer[i]=0;
+					}
+					
+					for(int i=0; i<ilosc; i++){
+						for(int j=0; j<ilosc; j++){
+							if(zeroJedynkowa[i][j] == 1){
+								iloscZer[i]++;
+							}
+						}
+					}
+				
+					for(int i=0; i<ilosc; i++){
+						if(iloscZer[i] == 1){
+							zablokowaneWiersze[i][0] = 1;
+						}
+					}
+				
+					//musimy znaleŸæ numer kolumny dla zablokowanych wierszy
+					int blokada=0;
+					for(int i=0; i<ilosc; i++){
+						if(zablokowaneWiersze[i][0] == 1){
+							for(int j=0; j<ilosc; j++){
+								if(zeroJedynkowa[i][j] == 1){
+									zablokowaneWiersze[i][1] = j;  //numery kolumn
+								}
+							}
+						}
+					}
+					/*
+						for(int i=0; i<ilosc; i++){
+							System.out.println("W0 " +zablokowaneWiersze[i][0]);
+						}
+							System.out.println();
+						for(int i=0; i<ilosc; i++){
+							System.out.println("W1" +zablokowaneWiersze[i][1]);
+						}
+					*/
+				
+				//czyscimy 1 w zablokowanych kolumnach
+					for(int i=0; i<ilosc; i++){
+						if(zablokowaneWiersze[i][0] == 1){
+							for(int j=0; j<ilosc; j++ ){
+								if(j != i)
+									zeroJedynkowa[j][zablokowaneWiersze[i][1]] = 0;
+							}
+						}
+					}
+					
+				//WARUNEK KONCZACY PETLE sprawdzamy czy wszystkie wiersze zblokowane
+					int sumuj =0;
+					for(int i=0; i<ilosc;i++){
+						if(zablokowaneWiersze[i][0] != 0) 
+							sumuj++;
+					}
+					if(sumuj == ilosc){
+						czyRozwiazane = true;
+					}
+					
+					if(zapetlam == 20){
+						czyRozwiazane = true;
+						czyZapetone = true;
+					}
+				}//koniec whila!!
+				
+				if(czyZapetone != true){
+					jTextArea1.append("Tablica poœrednia, przekszta³coana.\n\n");
+					wyœwietlTabeleZeroJedynkowa();
+				
+					//=====================WYŒWIETLAMY ROZWIAZANIE =======================================
+					int Rozwiazanie=0;
+					for(int i=0; i<ilosc; i++){
+						for(int j=0; j<ilosc; j++){
+							if(zeroJedynkowa[i][j] == 1){
+								Rozwiazanie=Rozwiazanie + tabela[i][j];
+								jTextArea1.append("x"+(i+1)+" = "+tabela[i][j]+"\n");
+							}
+						}
+					}
+					jTextArea1.append("Wartoœæ funkcji wynosi : "+Rozwiazanie+"\n");
+				}else{
+					jTextArea1.append("Zadanie nie posiada jednego rozwi¹zania.\n\n");
+				}
+			}
+
+		
 		}
 }
     public static void main(String args[]) {

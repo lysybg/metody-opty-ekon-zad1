@@ -21,8 +21,8 @@ public class Transportowe extends javax.swing.JFrame {
 	int tabela[][];
 	int tabelaTMP[][];
 	int tabelaMin[];
-	int ilosc;
-	boolean czyMax;
+	int ilosc = 4;
+	boolean czyMax = false;
 	
     /** Creates new form Transportowe */
     public Transportowe() {
@@ -119,6 +119,7 @@ public class Transportowe extends javax.swing.JFrame {
         jButton1.setText("Oblicz");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Max", "Min" }));
+        jComboBox2.setSelectedIndex(1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,11 +335,12 @@ public void uzupelnijTabele(){
 	int[] zeraWWierszach = new int[ilosc];
 	int[] zeraWKolumnach = new int[ilosc];
 	
-	if(jComboBox2.getSelectedIndex()==0){
-		czyMax=false;
-	}
-	else
+	if(jComboBox2.getSelectedIndex()==0)
 		czyMax=true;
+
+	if(jComboBox2.getSelectedIndex()==1)
+		czyMax=false;
+		
 	boolean czyKoniecPrzeksztalcen = true;
 	
 	

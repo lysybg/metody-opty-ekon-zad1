@@ -430,6 +430,225 @@ public void uzupelnijTabele(){
 			jTextArea1.append("Przekszta³cona tabela \n\n");
 			wyœwietlTabele();
 			
+			//-----------------------------------------------------------------------------------------
+			//=========================================================================================
+			//---------------WYKREŒLANKA------------------
+			//-----------------------------------------------------------------------------------------
+			//=========================================================================================
+			
+			int[][] doWykreslania = new int[ilosc][ilosc];
+			int[][] wykreslanka = new int[ilosc][ilosc];
+			
+			int[] zeraWiersze = new int[ilosc];
+			int[] zeraKolumny = new int[ilosc];
+			int iloscLini = 0;
+			boolean CzyKoniec = false;
+			
+			int licznikW=0, licznikK=0;
+			
+			int maxWiersze=0, maxKolumny=0, kolumna, wiersz;
+			int Max;
+			
+			int MinNieSkreslony;
+			
+			
+//------------------------------------------------------------------------------------
+//====================================================================================
+		while(iloscLini != ilosc){
+			iloscLini = 0;
+			
+			for(int i=0;i<ilosc;i++){
+				for(int j=0;j<ilosc;j++){
+					if(tabelaTMP[i][j] == 0){
+						doWykreslania[i][j] = 0;
+					}else{
+						doWykreslania[i][j] = 1;
+					}
+				}
+			}
+			
+			while(CzyKoniec != true){
+				
+				System.out.println("Ilosc linii "+iloscLini);
+				for(int i=0; i<ilosc; i++){
+					zeraWiersze[i]=0;
+					zeraKolumny[i]=0;
+				}
+			
+
+			//Zliczamy iloœci zer w wierszach 
+				for(int i=0;i<ilosc;i++){
+					Min = tabelaTMP[i][0];
+						for(int j=0;j<ilosc;j++){
+							if( doWykreslania[i][j] == 0){
+								zeraWiersze[i]=zeraWiersze[i]+1;
+							}
+						}
+				}
+			
+			//Zliczamy zera w kolumnach
+				for(int i=0;i<ilosc;i++){
+						for(int j=0;j<ilosc;j++){
+							if(  doWykreslania[j][i] == 0){
+								zeraKolumny[i]=zeraKolumny[i]+1;
+							}
+						}
+				}
+			/*
+				System.out.println();
+				System.out.print("K  ");
+				for(int i=0;i<ilosc;i++){
+					System.out.print(" "+zeraKolumny[i]);
+				}
+				System.out.println();
+
+				for(int i=0;i<ilosc;i++){
+					System.out.println("W "+zeraWiersze[i]);
+				}
+				System.out.println();
+			*/
+			//SZUKAMY maksymaln¹ ilosc zer w kolumnach i w wierszach
+
+			
+			// WIERSZE
+				Max = zeraWiersze[0];
+				maxWiersze = zeraWiersze[0];
+				wiersz = 0;
+				
+				for(int i=1;i<ilosc;i++){
+					if(Max < zeraWiersze[i]){
+						maxWiersze = zeraWiersze[i];
+						Max = zeraWiersze[i];
+						wiersz = i;
+					}
+				}
+			
+			//KOLUMNY
+				Max = zeraKolumny[0];
+				maxKolumny = zeraKolumny[0];
+				kolumna = 0;
+				
+				for(int i=1;i<ilosc;i++){
+					if(Max < zeraKolumny[i]){
+							maxKolumny = zeraKolumny[i];
+							Max = zeraKolumny[i];
+							kolumna = i;
+					}
+				}
+			
+			//System.out.println("Max wieszy "+maxWiersze+" numer "+wiersz);
+			//System.out.println("Max kolumn "+maxKolumny+" numer "+kolumna);
+			
+			//SPRAWDZAMY CO SKREŒLIÆ KOLUMNE CZY WIERSZ, domyœlnie wiersz
+			//skreœlamy wiersz
+				/*
+				System.out.println();
+				System.out.println("DOWYKRESLENIA PRZED");
+			
+				for(int i=0;i<ilosc;i++){
+					for(int j=0;j<ilosc;j++){
+						System.out.print(doWykreslania[i][j]+"  ");
+					}
+					System.out.println();
+				}
+				 */
+			//doWykreslania
+			if(maxWiersze !=0 & maxKolumny != 0){
+				if(maxWiersze >= maxKolumny){
+					for(int i=0; i<ilosc; i++){
+						wykreslanka[wiersz][i]++;
+						doWykreslania[wiersz][i]++;
+					}
+					iloscLini++;
+				}else{
+				//skreslamy kolumne
+					for(int i=0; i<ilosc; i++){
+						wykreslanka[i][kolumna]++;
+						doWykreslania[i][kolumna]++;
+					}
+					iloscLini++;
+				}
+			}
+			/*
+			System.out.println();
+			System.out.println("SKRESLENIA");
+			
+			for(int i=0;i<ilosc;i++){
+				for(int j=0;j<ilosc;j++){
+					System.out.print(wykreslanka[i][j]+"  ");
+				}
+				System.out.println();
+			}
+			
+			System.out.println();
+			System.out.println("DOWYKRESLENIA");
+			
+			for(int i=0;i<ilosc;i++){
+				for(int j=0;j<ilosc;j++){
+					System.out.print(doWykreslania[i][j]+"  ");
+				}
+				System.out.println();
+			}
+			*/
+			
+			
+			//WARUNEK DO ZATRZYMANIA SKREŒLANIA, przestajemy skreslac jeœli nie zosta³o ju¿ zer
+				licznikW=0; licznikK=0;
+			
+				for(int i=0; i<ilosc; i++){
+					if(zeraWiersze[i] == 0){
+						licznikW++;
+					}
+					if(zeraKolumny[i] == 0){
+						licznikK++;
+					}
+				}
+
+				
+				if(licznikK == ilosc & licznikW == ilosc){
+					CzyKoniec = true;
+				}
+			}
+			
+			if(iloscLini == ilosc){
+				jTextArea1.append("Iloœæ linii potrzbna do skreœlenia wszystkich zer: "+iloscLini+"\n");
+				jTextArea1.append("Iloœæ linii = rozmierowi tablicy.\nNie przekszta³camy tablicy.\n\n--------------------------------------------------------------------\nKolejny krok: szukamy rozwi¹zania.\n\n");
+			}else{
+				jTextArea1.append("Iloœæ linii potrzbna do skreœlenia wszystkoch zer: "+iloscLini+"\n\n");
+				jTextArea1.append("Nale¿y przekszta³ciæ tabele wyszukuj¹c nieskreœlone minimum.\n\n");
+				jTextArea1.append("\n\n");
+			}
+			
+			System.out.println(iloscLini);
+			//JESLI ILOSC LINI POTZREBNYCH DO WYKREŒLENIA JEST MNIEJSZA OD ROZMIARU TABLICY TO PRZEKSZTA£CAMY TABLICE
+			if(iloscLini < ilosc){
+				CzyKoniec = false;
+				//szumamy mina nie skreœlonego
+				MinNieSkreslony = 100000; //bardzo duza liczba poczatkowa która zapewne nie znjadzie sie macierzy C g³ównej
+				
+				for(int i=0; i<ilosc; i++){
+					for(int j=0; j<ilosc; j++){
+						if(wykreslanka[i][j] == 0 & tabelaTMP[i][j] < MinNieSkreslony){
+							MinNieSkreslony = tabelaTMP[i][j];
+						}
+					}
+				}
+				
+				for(int i=0; i<ilosc; i++){
+					for(int j=0; j<ilosc; j++){
+						if(wykreslanka[i][j] == 0){
+							tabelaTMP[i][j] = tabelaTMP[i][j] - MinNieSkreslony;
+						}
+						if(wykreslanka[i][j] == 2){
+							tabelaTMP[i][j] = tabelaTMP[i][j] + MinNieSkreslony;
+						}
+					}
+				}
+				
+				jTextArea1.append("Przekszta³cona tabela po wykreœlaniu \n\n");
+				wyœwietlTabele();
+			} //koniec whila wykreslajacego
+		}
 		}
 }
     public static void main(String args[]) {
